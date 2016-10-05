@@ -23,7 +23,7 @@ class connectionVC: UIViewController {
             @IBOutlet weak var signupBtn: UIButton!
     
             @IBAction func signupClicked(sender: AnyObject) {
-                // ACTION HERE
+                
                 // ACTION HERE
             }
     
@@ -31,13 +31,13 @@ class connectionVC: UIViewController {
         // Facebook & LinkedIn  btn outlets and actions -----------
             @IBOutlet weak var facebookConnectionBtn: UIButton!
             @IBAction func facebookConnectionClicked(sender: AnyObject) {
-                // ACTION HERE
+                
                 // ACTION HERE
             }
     
             @IBOutlet weak var linkedInConnectionBtn: UIButton!
             @IBAction func linkedInConnectionClicked(sender: AnyObject) {
-                // ACTION HERE
+                
                 // ACTION HERE
             }
     
@@ -50,13 +50,13 @@ class connectionVC: UIViewController {
         // Login & forgot btns actions & outlets ------------------
             @IBOutlet weak var loginBtn: UIButton!
             @IBAction func loginClicked(sender: AnyObject) {
-                // ACTION HERE
+                
                 // ACTION HERE
             }
     
             @IBOutlet weak var forgotBtn: UIButton!
             @IBAction func forgotClicked(sender: AnyObject) {
-                // ACTION HERE
+                
                 // ACTION HERE
             }
     
@@ -68,6 +68,7 @@ class connectionVC: UIViewController {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -75,6 +76,7 @@ class connectionVC: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -82,7 +84,40 @@ class connectionVC: UIViewController {
     
     
     // -----------------------------------------------------------------------------------
-    // ******************************* OTHER THINKS **************************************
+    // ******************************* HELPER METHODS ************************************
+    
+    
+    
+    // Method to end the editing and hide the Keyboard
+    func hideKeyboard(){
+        
+        self.view.endEditing(true)
+    }
+    
+    
+    // Method to hide the keyboard when the screen is touched
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        hideKeyboard()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
     

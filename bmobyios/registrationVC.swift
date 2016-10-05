@@ -32,7 +32,7 @@ class registrationVC: UIViewController {
         @IBOutlet weak var nextBtn: UIButton!
     
         @IBAction func nextClicked(sender: AnyObject) {
-            // ACTION HERE
+            
             // ACTION HERE
         }
 
@@ -50,9 +50,30 @@ class registrationVC: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    // -----------------------------------------------------------------------------------
+    // ******************************* HELPER METHODS ************************************
+    
+    
+    
+    // Method to end the editing and hide the Keyboard
+    func hideKeyboard(){
+        
+        self.view.endEditing(true)
+    }
+    
+    
+    // Method to hide the keyboard when the screen is touched
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        hideKeyboard()
+    }
 
 }
