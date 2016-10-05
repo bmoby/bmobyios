@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MapKit
+import Parse
 
 
 class connectionVC: UIViewController {
