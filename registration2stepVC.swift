@@ -8,7 +8,7 @@
 
 import UIKit
 
-class registration2stepVC: UIViewController, UITextFieldDelegate {
+class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
 
@@ -70,7 +70,14 @@ class registration2stepVC: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        // Avatar picker & photo corner settings
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.addImg(_:)))
+        imageTap.numberOfTapsRequired = 1
+        
+        self.avatarImg.userInteractionEnabled = true
+        self.avatarImg.addGestureRecognizer(imageTap)
+        self.avatarImg.layer.cornerRadius = self.avatarImg.frame.size.width / 2
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,6 +112,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate {
     // ******************************* DATE SELECTION ************************************
     
     
+    
     // Method to change the input type of the date text field view
     func textFieldDidBeginEditing(textField: UITextField) {
         
@@ -137,8 +145,25 @@ class registration2stepVC: UIViewController, UITextFieldDelegate {
     
     
     
+    // -----------------------------------------------------------------------------------
+    // ****************************** AVATAR SELECTION ***********************************
     
     
     
+    // Method that lets the user to click on the avatar default photo and select a custom one
+    func addImg(recognizer :UITapGestureRecognizer){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .PhotoLibrary
+        picker.allowsEditing = true
+        presentViewController(picker, animated: true, completion: nil)
+    }
     
+    
+    // Method to hide the library ones the desired picture was selected
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        self.avatarImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 }
