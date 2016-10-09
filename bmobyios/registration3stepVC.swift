@@ -8,18 +8,18 @@
 
 import UIKit
 
-class registration3stepVC: UIViewController, UITextFieldDelegate {
+class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var selectedLanguages = [language]()
     
     
     
     // -----------------------------------------------------------------------------------
     //****************************** OUTLETS & ACTIONS ***********************************
     
+    
+    
     @IBOutlet weak var titleLbl: UILabel!
-    
-    
-    // Search bar  --------------------------------------------
-    @IBOutlet weak var searchBar: UISearchBar!
     
     
     // Avatar outlet ------------------------------------------
@@ -44,16 +44,21 @@ class registration3stepVC: UIViewController, UITextFieldDelegate {
     }
     
     
+    
     // -----------------------------------------------------------------------------------
     //******************************* DEFAULT METHODS ************************************
     
     
     
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
+        print(self.selectedLanguages)
         
-    }
+        self.languagesCollection.delegate = self
+        self.languagesCollection.dataSource = self
+    
+     }
     
     override func didReceiveMemoryWarning() {
         
@@ -85,26 +90,50 @@ class registration3stepVC: UIViewController, UITextFieldDelegate {
     
         
     // -----------------------------------------------------------------------------------
-    // ******************************* DATE SELECTION ************************************
+    // ***************************** COLLECTION LANGUAGES ********************************
     
     
     
     // Method to change the input type of the date text field view
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! languageCellVC
+        
+        cell.langueLbl.text = self.selectedLanguages[indexPath.row].name
+        cell.flag.image = self.selectedLanguages[indexPath.row].flag
+        
+        return cell
+    }
     
+    // Defining the number of items in a section
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return self.selectedLanguages.count
+    }
     
-    // Method to show the date instantly when selecting it
+    // Method to remove a selected language
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        // But we need a long press "Methode have to be changed"
+        self.selectedLanguages.removeAtIndex(indexPath.row)
+        collectionView.reloadData()
+    }
     
     
     
     // -----------------------------------------------------------------------------------
-    // ****************************** AVATAR SELECTION ***********************************
+    // ***************************** PREPARE FOR SEGUE ***********************************
     
     
     
-    // Method that lets the user to click on the avatar default photo and select a custom one
-    
-    
-    // Method to hide the library ones the desired picture was selected
-    
+    // Passing data from current view controller to the languageTVC controller to complete the array
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "backToLanguageSelection" {
+            
+            let languageTable :languageTVC = segue.destinationViewController as! languageTVC
+            languageTable.receivedLanguagesArray = self.selectedLanguages
+        }
+        
+    }
 
 }

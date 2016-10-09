@@ -12,6 +12,8 @@ import Parse
 
 class connectionVC: UIViewController {
     
+    
+    
     // -----------------------------------------------------------------------------------
     //**************************** OUTLETS & ACTIONS *************************************
     
@@ -24,7 +26,7 @@ class connectionVC: UIViewController {
     
             @IBAction func signupClicked(sender: AnyObject) {
                 
-                // ACTION HERE
+                // ACTION
             }
     
     
@@ -32,13 +34,13 @@ class connectionVC: UIViewController {
             @IBOutlet weak var facebookConnectionBtn: UIButton!
             @IBAction func facebookConnectionClicked(sender: AnyObject) {
                 
-                // ACTION HERE
+                // ACTION
             }
     
             @IBOutlet weak var linkedInConnectionBtn: UIButton!
             @IBAction func linkedInConnectionClicked(sender: AnyObject) {
                 
-                // ACTION HERE
+                // ACTION
             }
     
     
@@ -51,13 +53,13 @@ class connectionVC: UIViewController {
             @IBOutlet weak var loginBtn: UIButton!
             @IBAction func loginClicked(sender: AnyObject) {
                 
-                // ACTION HERE
+                // ACTION
             }
     
             @IBOutlet weak var forgotBtn: UIButton!
             @IBAction func forgotClicked(sender: AnyObject) {
                 
-                // ACTION HERE
+                // ACTION
             }
     
     

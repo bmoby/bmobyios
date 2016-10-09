@@ -38,13 +38,11 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         @IBAction func manClicked(sender: AnyObject) {
             
             // ACTION
-            // ACTION
         }
     
         @IBOutlet weak var womanBtn: UIButton!
         @IBAction func womanClicked(sender: AnyObject) {
             
-            // ACTION
             // ACTION
         }
     
@@ -57,8 +55,8 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         @IBAction func nextClicked(sender: AnyObject) {
             
             // ACTION
-            // ACTION
         }
+    
     
     
     // -----------------------------------------------------------------------------------
@@ -101,11 +99,11 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     
     // Method to hide the keyboard when the screen is touched
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         hideKeyboard()
     }
+    
     
     
     // -----------------------------------------------------------------------------------
