@@ -11,6 +11,9 @@ import UIKit
 class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
+    var userStep2 = user()
+    
+    
 
     // -----------------------------------------------------------------------------------
     //****************************** OUTLETS & ACTIONS ***********************************
@@ -49,12 +52,24 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         @IBOutlet weak var separatorLbl: UILabel!
     
     
-    // Next button ----------------------------------------
+    // Next & back buttons ------------------------------------
     
         @IBOutlet weak var nextBtn: UIButton!
         @IBAction func nextClicked(sender: AnyObject) {
             
-            // ACTION
+            self.userStep2.firstName = self.firstNameTxtF.text
+            self.userStep2.lastName = self.lastNameTxtF.text
+            self.userStep2.avatar = self.avatarImg
+            self.userStep2.birthDate = self.birthDateTxtF.text
+        }
+    
+        @IBOutlet weak var backBtn: UIButton!
+        @IBAction func backClicked(sender: AnyObject) {
+            
+            self.userStep2.firstName = self.firstNameTxtF.text
+            self.userStep2.lastName = self.lastNameTxtF.text
+            self.userStep2.avatar = self.avatarImg
+            self.userStep2.birthDate = self.birthDateTxtF.text
         }
     
     
@@ -69,13 +84,10 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         
         // Avatar picker & photo corner settings
-        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.addImg(_:)))
-        imageTap.numberOfTapsRequired = 1
-        
-        self.avatarImg.userInteractionEnabled = true
-        self.avatarImg.addGestureRecognizer(imageTap)
         self.avatarImg.layer.cornerRadius = self.avatarImg.frame.size.width / 2
-
+        self.avatarImg.layer.masksToBounds = true
+        setAvatar()
+        setValuesIfExist()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +96,31 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    // -----------------------------------------------------------------------------------
+    //***************************** RESET FIELDS VALUES **********************************
+    
+    
+    
+    // If the user completed some info & commed back this function will display all info
+    func setValuesIfExist(){
+        
+        if self.userStep2.firstName != nil {
+            self.firstNameTxtF.text = self.userStep2.firstName
+        }
+        if self.userStep2.lastName != nil {
+            self.lastNameTxtF.text = self.userStep2.lastName
+        }
+        if self.userStep2.avatar != nil {
+            self.avatarImg.image = self.userStep2.avatar?.image
+        }
+        if self.userStep2.birthDate != nil {
+            self.birthDateTxtF.text = self.userStep2.birthDate
+        }
+        
+    }
+
 
 
     // -----------------------------------------------------------------------------------
@@ -117,13 +154,14 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         // Declaring the variables
         let datePicker = UIDatePicker()
         let date = NSDateComponents()
+            date.year = 1998
+            date.month = 01
+            date.day = 01
+
         let calendar = NSCalendar.currentCalendar()
         let minDate :NSDate = calendar.dateFromComponents(date)!
         
         // Setting the values
-        date.year = 1998
-        date.month = 01
-        date.day = 01
         datePicker.datePickerMode = UIDatePickerMode.Date
         datePicker.date = minDate
         
@@ -148,6 +186,16 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     
     
+    // Avatar set func
+    func setAvatar(){
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.addImg(_:)))
+        imageTap.numberOfTapsRequired = 1
+        
+        self.avatarImg.userInteractionEnabled = true
+        self.avatarImg.addGestureRecognizer(imageTap)
+    }
+    
+    
     // Method that lets the user to click on the avatar default photo and select a custom one
     func addImg(recognizer :UITapGestureRecognizer){
         let picker = UIImagePickerController()
@@ -162,6 +210,33 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         self.avatarImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.dismissViewControllerAnimated(true, completion: nil)
+        self.userStep2.avatar?.image = info[UIImagePickerControllerEditedImage] as? UIImage
     }
+    
+    
+    
+    // -----------------------------------------------------------------------------------
+    //***************************** PREPARE FOR SEGUE ************************************
+    
+    
+    
+    
+    // This guy takes some information in the actual controller and send it to another one
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "backStep1" {
+            let registration :registrationVC = segue.destinationViewController as! registrationVC
+            registration.userStep1 = self.userStep2
+            
+        } else if segue.identifier == "goStep3" {
+            
+            let registration3 :registration3stepVC = segue.destinationViewController as! registration3stepVC
+            registration3.userStep3 = self.userStep2
+
+            
+        }
+        
+    }
+
 
 }

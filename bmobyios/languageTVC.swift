@@ -12,6 +12,7 @@ import UIKit
 
 class languageTVC: UITableViewController, UISearchResultsUpdating {
     
+    var userStep3 = user()
     
     // -----------------------------------------------------------------------------------
     //********************************** VARIBLES  ***************************************
@@ -114,6 +115,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     //***************************** TABLE VIEW METHODS ***********************************
     
     
+    
     // Method to specify the number of sections in the table view
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -142,7 +144,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         
         if tableView != self.resultsController.tableView {
             
-        self.performSegueWithIdentifier("languageSelected", sender: nil)
+            self.performSegueWithIdentifier("languageSelected", sender: nil)
             
         } else {
             
@@ -152,7 +154,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     }
     
     
-    // This function creates the cells and put info to it 
+    // This function creates the cells and put info into it
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         if tableView == self.tableView {
@@ -178,8 +180,8 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         if segue.identifier == "languageSelected" {
             
         let registration3step :registration3stepVC = segue.destinationViewController as! registration3stepVC
-        self.receivedLanguagesArray.append(self.langue)
-        registration3step.selectedLanguages = self.receivedLanguagesArray
+        self.userStep3.languages.append(self.langue)
+        registration3step.userStep3 = self.userStep3
             
         }
         
