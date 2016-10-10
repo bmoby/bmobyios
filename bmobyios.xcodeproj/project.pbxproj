@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93CB1DA6551400FB5457 /* languageCellVC.swift */; };
+		F27C93D21DA6917E00FB5457 /* languageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93D11DA6917E00FB5457 /* languageTVC.swift */; };
+		F27C93D41DA6BA2C00FB5457 /* language.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93D31DA6BA2C00FB5457 /* language.swift */; };
+		F27C93D61DAA9D9800FB5457 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93D51DAA9D9800FB5457 /* user.swift */; };
 		F2EF89031DA4F76F0099F1EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EF89021DA4F76F0099F1EE /* AppDelegate.swift */; };
 		F2EF89081DA4F76F0099F1EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2EF89061DA4F76F0099F1EE /* Main.storyboard */; };
 		F2EF890A1DA4F76F0099F1EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2EF89091DA4F76F0099F1EE /* Assets.xcassets */; };
@@ -22,9 +26,18 @@
 		F2EF89271DA4FB530099F1EE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EF89261DA4FB530099F1EE /* AudioToolbox.framework */; };
 		F2EF892B1DA4FCE80099F1EE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EF89291DA4FCE80099F1EE /* Bolts.framework */; };
 		F2EF892C1DA4FCE80099F1EE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EF892A1DA4FCE80099F1EE /* Parse.framework */; };
+		F2EF892E1DA516890099F1EE /* registrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EF892D1DA516890099F1EE /* registrationVC.swift */; };
+		F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EF892F1DA536CD0099F1EE /* registration2stepVC.swift */; };
+		F2EF89321DA542D10099F1EE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EF89311DA542D10099F1EE /* libz.tbd */; };
+		F2EF89341DA542EA0099F1EE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EF89331DA542EA0099F1EE /* libsqlite3.tbd */; };
+		F2EF89361DA56DCE0099F1EE /* registration3stepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EF89351DA56DCE0099F1EE /* registration3stepVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F27C93CB1DA6551400FB5457 /* languageCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageCellVC.swift; sourceTree = "<group>"; };
+		F27C93D11DA6917E00FB5457 /* languageTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageTVC.swift; sourceTree = "<group>"; };
+		F27C93D31DA6BA2C00FB5457 /* language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = language.swift; sourceTree = "<group>"; };
+		F27C93D51DAA9D9800FB5457 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		F2EF88FF1DA4F76E0099F1EE /* bmobyios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bmobyios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EF89021DA4F76F0099F1EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2EF89071DA4F76F0099F1EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,6 +55,11 @@
 		F2EF89261DA4FB530099F1EE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2EF89291DA4FCE80099F1EE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		F2EF892A1DA4FCE80099F1EE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		F2EF892D1DA516890099F1EE /* registrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registrationVC.swift; sourceTree = "<group>"; };
+		F2EF892F1DA536CD0099F1EE /* registration2stepVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = registration2stepVC.swift; path = ../registration2stepVC.swift; sourceTree = "<group>"; };
+		F2EF89311DA542D10099F1EE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F2EF89331DA542EA0099F1EE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		F2EF89351DA56DCE0099F1EE /* registration3stepVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registration3stepVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2EF89341DA542EA0099F1EE /* libsqlite3.tbd in Frameworks */,
+				F2EF89321DA542D10099F1EE /* libz.tbd in Frameworks */,
 				F2EF89271DA4FB530099F1EE /* AudioToolbox.framework in Frameworks */,
 				F2EF89251DA4FB390099F1EE /* CFNetwork.framework in Frameworks */,
 				F2EF89231DA4FB2E0099F1EE /* CoreGraphics.framework in Frameworks */,
@@ -98,7 +118,14 @@
 		F2EF89171DA4F9CF0099F1EE /* ms */ = {
 			isa = PBXGroup;
 			children = (
+				F2EF89351DA56DCE0099F1EE /* registration3stepVC.swift */,
+				F2EF892F1DA536CD0099F1EE /* registration2stepVC.swift */,
+				F2EF892D1DA516890099F1EE /* registrationVC.swift */,
 				F2EF89141DA4F94B0099F1EE /* connectionVC.swift */,
+				F27C93CB1DA6551400FB5457 /* languageCellVC.swift */,
+				F27C93D11DA6917E00FB5457 /* languageTVC.swift */,
+				F27C93D31DA6BA2C00FB5457 /* language.swift */,
+				F27C93D51DAA9D9800FB5457 /* user.swift */,
 			);
 			name = ms;
 			sourceTree = "<group>";
@@ -106,6 +133,8 @@
 		F2EF89281DA4FC6E0099F1EE /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				F2EF89331DA542EA0099F1EE /* libsqlite3.tbd */,
+				F2EF89311DA542D10099F1EE /* libz.tbd */,
 				F2EF89291DA4FCE80099F1EE /* Bolts.framework */,
 				F2EF892A1DA4FCE80099F1EE /* Parse.framework */,
 				F2EF89261DA4FB530099F1EE /* AudioToolbox.framework */,
@@ -193,8 +222,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F27C93D21DA6917E00FB5457 /* languageTVC.swift in Sources */,
 				F2EF89151DA4F94B0099F1EE /* connectionVC.swift in Sources */,
+				F2EF892E1DA516890099F1EE /* registrationVC.swift in Sources */,
+				F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */,
+				F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */,
+				F27C93D61DAA9D9800FB5457 /* user.swift in Sources */,
+				F27C93D41DA6BA2C00FB5457 /* language.swift in Sources */,
 				F2EF89031DA4F76F0099F1EE /* AppDelegate.swift in Sources */,
+				F2EF89361DA56DCE0099F1EE /* registration3stepVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +390,7 @@
 				F2EF89131DA4F76F0099F1EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

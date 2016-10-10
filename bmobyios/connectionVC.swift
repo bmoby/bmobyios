@@ -7,32 +7,119 @@
 //
 
 import UIKit
-import MapKit
+import Parse
 
 
 class connectionVC: UIViewController {
+    
+    
+    
+    // -----------------------------------------------------------------------------------
+    //**************************** OUTLETS & ACTIONS *************************************
+    
+    
+    
+        @IBOutlet weak var titleLbl: UILabel!
+    
+        // SignUp btn outlet and action ---------------------------
+            @IBOutlet weak var signupBtn: UIButton!
+    
+            @IBAction func signupClicked(sender: AnyObject) {
+                
+                // ACTION
+            }
+    
+    
+        // Facebook & LinkedIn  btn outlets and actions -----------
+            @IBOutlet weak var facebookConnectionBtn: UIButton!
+            @IBAction func facebookConnectionClicked(sender: AnyObject) {
+                
+                // ACTION
+            }
+    
+            @IBOutlet weak var linkedInConnectionBtn: UIButton!
+            @IBAction func linkedInConnectionClicked(sender: AnyObject) {
+                
+                // ACTION
+            }
+    
+    
+        // Login & password text fields ---------------------------
+            @IBOutlet weak var loginTxtF: UITextField!
+            @IBOutlet weak var passwordTxtF: UITextField!
+    
+    
+        // Login & forgot btns actions & outlets ------------------
+            @IBOutlet weak var loginBtn: UIButton!
+            @IBAction func loginClicked(sender: AnyObject) {
+                
+                // ACTION
+            }
+    
+            @IBOutlet weak var forgotBtn: UIButton!
+            @IBAction func forgotClicked(sender: AnyObject) {
+                
+                // ACTION
+            }
+    
+    
+    
+    // -----------------------------------------------------------------------------------
+    //****************************** DEFAULT ACTIONS *************************************
 
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    // -----------------------------------------------------------------------------------
+    // ******************************* HELPER METHODS ************************************
+    
+    
+    
+    // Method to end the editing and hide the Keyboard
+    func hideKeyboard(){
+        
+        self.view.endEditing(true)
     }
-    */
+    
+    
+    // Method to hide the keyboard when the screen is touched
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        hideKeyboard()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
+    
 }
