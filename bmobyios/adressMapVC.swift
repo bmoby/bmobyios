@@ -33,6 +33,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     var latitude = String()
     
     
+    
     //--------------------------------------------------------------------------------------------------------------
     //****************************************** Outlets ***********************************************************
     @IBOutlet weak var adressTitleLbl: UILabel!
