@@ -111,8 +111,8 @@
 				F2EF89091DA4F76F0099F1EE /* Assets.xcassets */,
 				F2EF890B1DA4F76F0099F1EE /* LaunchScreen.storyboard */,
 				F2EF890E1DA4F76F0099F1EE /* Info.plist */,
-				F2EF89281DA4FC6E0099F1EE /* Framework */,
 				F2EF89171DA4F9CF0099F1EE /* ms */,
+				F2EF89281DA4FC6E0099F1EE /* Framework */,
 			);
 			path = bmobyios;
 			sourceTree = "<group>";
