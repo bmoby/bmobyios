@@ -14,6 +14,8 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     var keyboard = CGRect()
     var userStep3 = user()
     
+    
+    
     // -----------------------------------------------------------------------------------
     //****************************** OUTLETS & ACTIONS ***********************************
     
@@ -40,6 +42,7 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     
     @IBOutlet weak var submitBtn: UIButton!
     @IBAction func submitClicked(sender: AnyObject) {
+        
         self.userStep3.nationality = self.nationalityTxtF.text
         self.userStep3.profession = self.professionTxtF.text
         self.userStep3.music = self.musicTxtF.text
@@ -47,11 +50,11 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         
         // Saving all in DB
         self.userStep3.save()
-
     }
     
     @IBOutlet weak var backBtn: UIButton!
     @IBAction func backClicked(sender: AnyObject) {
+        
         self.userStep3.nationality = self.nationalityTxtF.text
         self.userStep3.profession = self.professionTxtF.text
         self.userStep3.music = self.musicTxtF.text
@@ -69,8 +72,9 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         self.userStep3.profession = self.professionTxtF.text
         self.userStep3.music = self.musicTxtF.text
         self.userStep3.aboutMe = self.aboutMeTxtV.text
-        
     }
+    
+    
     
     // -----------------------------------------------------------------------------------
     //******************************* DEFAULT METHODS ************************************
@@ -107,6 +111,7 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(registration3stepVC.setScrollHeightOnHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
+        // Show the existing values in text fields if exist a record in the user variable
         setValuesIfExist()
         
      }
@@ -144,8 +149,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             languagesCollection.reloadData()
             
         }
-
-        
     }
 
     
@@ -162,8 +165,9 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             self.scrollRegistration3step.frame.size.height = self.scrollViewHeight - self.keyboard.height
             self.scrollRegistration3step.setContentOffset(CGPoint(x:0, y:110), animated: true)
         }
-        
     }
+    
+    
     // Method for set the scroll height on keyboard hide
     func setScrollHeightOnHide(notification :NSNotification){
         
@@ -171,7 +175,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             self.scrollRegistration3step.frame.size.height = self.view.frame.height
             self.scrollRegistration3step.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
         }
-        
     }
     
     
@@ -187,7 +190,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     
     
     // Method to hide the keyboard when the screen is touched
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         hideKeyboard()
@@ -210,10 +212,7 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             
             self.userStep3.languages.removeAtIndex(index.row)
             self.languagesCollection.reloadData()
-            
         }
-        
-        
     }
     
     
@@ -221,19 +220,18 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! languageCellVC
-        
-        cell.langueLbl.text = self.userStep3.languages[indexPath.row].name
-        cell.flag.image = self.userStep3.languages[indexPath.row].flag
+            cell.langueLbl.text = self.userStep3.languages[indexPath.row].name
+            cell.flag.image = self.userStep3.languages[indexPath.row].flag
         let longPressDelete = UILongPressGestureRecognizer(target: self, action: #selector(registration3stepVC.deleteCell(_:)))
-        longPressDelete.minimumPressDuration = 0.5
-        longPressDelete.delaysTouchesBegan = true
-        longPressDelete.delegate = self
-        
-        cell.userInteractionEnabled = true
-        cell.addGestureRecognizer(longPressDelete)
+            longPressDelete.minimumPressDuration = 0.5
+            longPressDelete.delaysTouchesBegan = true
+            longPressDelete.delegate = self
+            cell.userInteractionEnabled = true
+            cell.addGestureRecognizer(longPressDelete)
         
         return cell
     }
+    
     
     // Defining the number of items in a section
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -262,11 +260,8 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             
         } else if segue.identifier == "backStep2" {
             
-            
             let registration2step :registration2stepVC = segue.destinationViewController as! registration2stepVC
-            
-            registration2step.userStep2 = self.userStep3
-            
+                registration2step.userStep2 = self.userStep3
         }
         
     }
@@ -281,7 +276,4 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     func setTextView(recognizer: UITapGestureRecognizer){
         self.aboutMeTxtV.becomeFirstResponder()
     }
-    
-    
-
 }

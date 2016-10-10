@@ -39,17 +39,17 @@ class user{
         let object = PFObject(className: "users")
         let image = UIImageJPEGRepresentation(self.avatar!.image!, 0.5)
         let imageFile = PFFile(name: "img1", data: image!)
-        object["email"] = self.email
-        object["password"] = self.password
-        object["phone"] = self.phone
-        object["firstName"] = self.firstName
-        object["lastName"] = self.lastName
-        object["birthDate"] = self.birthDate
-        object["avatar"] = imageFile
-        object["nationality"] = self.nationality
-        object["profession"] = self.profession
-        object["music"] = self.music
-        object["aboutMe"] = self.aboutMe
+            object["email"] = self.email
+            object["password"] = self.password
+            object["phone"] = self.phone
+            object["firstName"] = self.firstName
+            object["lastName"] = self.lastName
+            object["birthDate"] = self.birthDate
+            object["avatar"] = imageFile
+            object["nationality"] = self.nationality
+            object["profession"] = self.profession
+            object["music"] = self.music
+            object["aboutMe"] = self.aboutMe
         
         
         // Saving the selected languages by the user
@@ -85,6 +85,7 @@ class user{
         }
 
         
+        // saving the object in the DB
         object.saveInBackgroundWithBlock { (success:Bool, error:NSError?) in
             if error == nil {
                 print("User was saved in DB with success")
@@ -93,7 +94,4 @@ class user{
             }
         }
     }
-    
-    
-
 }

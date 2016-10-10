@@ -118,7 +118,6 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         if self.userStep2.birthDate != nil {
             self.birthDateTxtF.text = self.userStep2.birthDate
         }
-        
     }
 
 
@@ -175,7 +174,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     func showDate(sender: UIDatePicker){
         
         let dateConverter = NSDateFormatter()
-        dateConverter.dateStyle = .LongStyle
+            dateConverter.dateStyle = .LongStyle
         self.birthDateTxtF.text = dateConverter.stringFromDate(sender.date)
     }
     
@@ -189,7 +188,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     // Avatar set func
     func setAvatar(){
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.addImg(_:)))
-        imageTap.numberOfTapsRequired = 1
+            imageTap.numberOfTapsRequired = 1
         
         self.avatarImg.userInteractionEnabled = true
         self.avatarImg.addGestureRecognizer(imageTap)
@@ -199,9 +198,9 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     // Method that lets the user to click on the avatar default photo and select a custom one
     func addImg(recognizer :UITapGestureRecognizer){
         let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .PhotoLibrary
-        picker.allowsEditing = true
+            picker.delegate = self
+            picker.sourceType = .PhotoLibrary
+            picker.allowsEditing = true
         presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -226,17 +225,12 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         
         if segue.identifier == "backStep1" {
             let registration :registrationVC = segue.destinationViewController as! registrationVC
-            registration.userStep1 = self.userStep2
+                registration.userStep1 = self.userStep2
             
         } else if segue.identifier == "goStep3" {
             
             let registration3 :registration3stepVC = segue.destinationViewController as! registration3stepVC
-            registration3.userStep3 = self.userStep2
-
-            
+                registration3.userStep3 = self.userStep2
         }
-        
     }
-
-
 }

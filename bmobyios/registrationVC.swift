@@ -12,6 +12,8 @@ class registrationVC: UIViewController {
     
     var userStep1 = user()
     
+    
+    
     // -----------------------------------------------------------------------------------
     //****************************** OUTLETS & ACTIONS ***********************************
     
@@ -114,14 +116,7 @@ class registrationVC: UIViewController {
         if segue.identifier == "goStep2" {
             
             let registration2step :registration2stepVC = segue.destinationViewController as! registration2stepVC
-            
-            registration2step.userStep2 = self.userStep1
-            
+                registration2step.userStep2 = self.userStep1
         }
-        
     }
-
-    
-    
-
 }

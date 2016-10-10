@@ -14,8 +14,12 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     var userStep3 = user()
     
+    
+    
     // -----------------------------------------------------------------------------------
     //********************************** VARIBLES  ***************************************
+    
+    
     
     var receivedLanguagesArray = [language]()
     
@@ -31,9 +35,12 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     var resultsController = UITableViewController()
     var langue = language()
 
+    
 
     // -----------------------------------------------------------------------------------
     //****************************** DEFAULT METHODS ***********************************
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +65,8 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     // -----------------------------------------------------------------------------------
     //****************************** TEMPORAIRE METHOD ***********************************
+    
+    
     
     func createLanguages(){
         self.francais.name = "Français"
@@ -87,6 +96,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     // -----------------------------------------------------------------------------------
     //*************************** SEARCH RESULT METHOD ***********************************
+    
     
     
     // This method fires when the user tape something in the searchBar at the top
