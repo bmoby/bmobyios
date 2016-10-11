@@ -15,8 +15,8 @@ protocol HandleMapSearch: class {
 
 class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    //--------------------------------------------------------------------------------------------------------------
-    //****************************************** Local Variables ***************************************************
+//--------------------------------------------------------------------------------------------------------------
+//****************************************** Local Variables ***************************************************
     
     var selectedPin: MKPlacemark?
     var resultSearchController: UISearchController!
@@ -34,8 +34,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     
     
-    //--------------------------------------------------------------------------------------------------------------
-    //****************************************** Outlets ***********************************************************
+//--------------------------------------------------------------------------------------------------------------
+//****************************************** Outlets ***********************************************************
     @IBOutlet weak var adressTitleLbl: UILabel!
     @IBOutlet weak var adressTxt: UITextView!
     
@@ -43,8 +43,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     
     
-    //--------------------------------------------------------------------------------------------------------------
-    //****************************************** Default function **************************************************
+//--------------------------------------------------------------------------------------------------------------
+//****************************************** Default function **************************************************
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         
         
         //Calling the addressSearchTC - table controller
-        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("adressSearchTC") as! adressSearchTC
+        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("adressSearchTVC") as! adressSearchTVC
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController.searchResultsUpdater = locationSearchTable
         
@@ -83,16 +83,9 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     }
     
     
-    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if (motion == .MotionShake) {
-            
-        }
-    }
     
-    
-    
-    //--------------------------------------------------------------------------------------------------------------
-    //****************************************** Core Location methods *********************************************
+//--------------------------------------------------------------------------------------------------------------
+//****************************************** Core Location methods *********************************************
     
     //Requesting the user's permission and if permitted getteng user's location
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -101,6 +94,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         }
     }
     
+    
+    // Core location manager updating
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         let span = MKCoordinateSpanMake(0.05, 0.05)
@@ -114,7 +109,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         print(latitude, longitude)
         
         
-        //Getting the info from geolocation
+        //getting the info from geolocation
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error) in
             if (error != nil) {
                 print("Reverse geocoder failed with error" + error!.localizedDescription)
@@ -129,10 +124,15 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
                 
             }
             
-            //attributing the informations to the text view
+            //attributing the informations to the text view when geolocation finds adress
             self.fullAdress = self.street + ", " + self.postalCode + " " + self.city + ", " + self.country
             self.adressTxt.text = self.fullAdress
             print(self.street, self.city, self.postalCode, self.country)
+            
+            //adding title and subtitle to current location
+            let currentLocation: MKUserLocation = self.mapView.userLocation
+            currentLocation.title = self.street
+            currentLocation.subtitle = self.postalCode + " " + self.city + ", " + self.country
             
         })
         
@@ -145,8 +145,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     
     
-    //--------------------------------------------------------------------------------------------------------------
-    //****************************************** Map Kit Methods ***************************************************
+//--------------------------------------------------------------------------------------------------------------
+//****************************************** Map Kit Methods ***************************************************
     
     // When location is updated
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
@@ -157,22 +157,23 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 5000, 5000)
         self.mapView.setRegion(region, animated: true)
         
-        let currentLocation: MKUserLocation = mapView.userLocation
-        currentLocation.title = "Im here"
-        currentLocation.subtitle = "Hello there"
-        
     }
     
     
     // Annotation View
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
-        
-        guard !(annotation is MKUserLocation) else { return nil } //the annotation view does not change
-        
+
         //Custom annotation view
         var annotationView = self.mapView?.dequeueReusableAnnotationViewWithIdentifier("annotationIdentifier")
         annotationView = adressAnnotView(annotation: annotation, reuseIdentifier: "annotationIdentifier")
         annotationView!.canShowCallout = true
+        
+        
+        //hide the current location when searching manually the adress
+        if self.mapView.annotations.count > 1 {
+            self.mapView.showsUserLocation = false
+        }
+        
         return annotationView
     }
     
@@ -208,6 +209,7 @@ extension adressMapVC: HandleMapSearch {
                 self.city = city
                 self.country = country
                 
+                //attributing the informations to the text view when manually adress found
                 self.fullAdress = self.street + ", " + self.postalCode + " " + self.city + ", " + self.country
                 self.adressTxt.text = self.fullAdress
                 print(self.street, self.city, self.postalCode, self.country)
@@ -225,6 +227,5 @@ extension adressMapVC: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
-    
 }
 
