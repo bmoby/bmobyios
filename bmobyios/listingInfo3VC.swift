@@ -34,6 +34,9 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var minute:String = ""
     var checkinPicker: UIPickerView!
     var checkinData = [["any hour","00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"], ["any minute","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"] ]
+    var hourRestriction = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+    var minRestriction = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"]
+    var checkinRestriction = [String]()
     
     
 //-------------------------------------------------------------------------------------------------------------
@@ -103,6 +106,20 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         checkinPicker.backgroundColor = UIColor.groupTableViewBackgroundColor()
         checkinPicker.showsSelectionIndicator = true
         checkinTxt.inputView = checkinPicker
+        
+        
+        // checkin restriction array
+        checkinRestriction.append("any time")
+        for h in hourRestriction {
+            for min in minRestriction {
+                checkinRestriction.append(h + ":" + min)
+            }
+        }
+        
+        for object in checkinRestriction {
+            print(object)
+        }
+        print(checkinRestriction)
         
 
     }
@@ -186,18 +203,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
     
-    
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** REGULAR EXPRESSIONS ***********************************************
-    /*
-    func validatePrice(price: String) -> Bool {
-        let regex = "[0-9]+,[0-9]"
-        let range = price.rangeOfString(regex, options: .RegularExpressionSearch)
-        let result = range != nil ? true : false
-        return result
-    } */
-    
 
+    
 //-------------------------------------------------------------------------------------------------------------
 //***************************************** GOING TO THE NEXT CONTROLLER **************************************
     
@@ -209,13 +216,18 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    
+    // list the place
     @IBAction func listBtn_clicked(sender: AnyObject) {
-        /*
-        if !validatePrice(priceTxt.text!) {
-            alert("Incorrect price format", message: "Pleas, fill the price as 22.22")
+        
+        //restrictions on checkin text field
+        if checkinRestriction.contains(checkinTxt.text!) {
+            print(checkinTxt.text)
+        }
+        else {
+            alert("Incorrect checkin time", message: "Pleas, choose your checkin time from picker")
             return
-        }*/
-        print("hi")
+        }
     }
     
 }
