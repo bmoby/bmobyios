@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60C5E2ABC7763779DC608094 /* Pods_bmobyios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B230A8913B718AD508D7447 /* Pods_bmobyios.framework */; };
 		870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B6DAF1DABA060004F193A /* adressMapVC.swift */; };
 		87E74B331DABA1070058B281 /* createListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E74B321DABA1070058B281 /* createListing.storyboard */; };
 		87E74B351DABA1A70058B281 /* adressSearchTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTC.swift */; };
 		87E74B371DABA1E20058B281 /* annotationNSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B361DABA1E20058B281 /* annotationNSO.swift */; };
 		87E74B391DABA2150058B281 /* adressAnnotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B381DABA2150058B281 /* adressAnnotView.swift */; };
+		F2438D331DAFD2D800E41044 /* homePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2438D321DAFD2D800E41044 /* homePage.swift */; };
 		F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93CB1DA6551400FB5457 /* languageCellVC.swift */; };
 		F27C93D21DA6917E00FB5457 /* languageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93D11DA6917E00FB5457 /* languageTVC.swift */; };
 		F27C93D41DA6BA2C00FB5457 /* language.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93D31DA6BA2C00FB5457 /* language.swift */; };
@@ -40,11 +42,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B230A8913B718AD508D7447 /* Pods_bmobyios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmobyios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870B6DAF1DABA060004F193A /* adressMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressMapVC.swift; sourceTree = "<group>"; };
 		87E74B321DABA1070058B281 /* createListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = createListing.storyboard; sourceTree = "<group>"; };
 		87E74B341DABA1A70058B281 /* adressSearchTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTC.swift; sourceTree = "<group>"; };
 		87E74B361DABA1E20058B281 /* annotationNSO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = annotationNSO.swift; sourceTree = "<group>"; };
 		87E74B381DABA2150058B281 /* adressAnnotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressAnnotView.swift; sourceTree = "<group>"; };
+		B77D994D97BC0913A4E441A9 /* Pods-bmobyios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmobyios.release.xcconfig"; path = "Pods/Target Support Files/Pods-bmobyios/Pods-bmobyios.release.xcconfig"; sourceTree = "<group>"; };
+		D9CA30C652E1F3BE47C1DE8C /* Pods-bmobyios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmobyios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmobyios/Pods-bmobyios.debug.xcconfig"; sourceTree = "<group>"; };
+		F2438D2F1DAFC73100E41044 /* bmobyios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bmobyios-Bridging-Header.h"; sourceTree = "<group>"; };
+		F2438D321DAFD2D800E41044 /* homePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homePage.swift; sourceTree = "<group>"; };
 		F27C93CB1DA6551400FB5457 /* languageCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageCellVC.swift; sourceTree = "<group>"; };
 		F27C93D11DA6917E00FB5457 /* languageTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageTVC.swift; sourceTree = "<group>"; };
 		F27C93D31DA6BA2C00FB5457 /* language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = language.swift; sourceTree = "<group>"; };
@@ -91,12 +98,22 @@
 				F2EF892B1DA4FCE80099F1EE /* Bolts.framework in Frameworks */,
 				F2EF891B1DA4FAE00099F1EE /* StoreKit.framework in Frameworks */,
 				F2EF89191DA4FACC0099F1EE /* SystemConfiguration.framework in Frameworks */,
+				60C5E2ABC7763779DC608094 /* Pods_bmobyios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84B6C7AE9E98FC51B77C2BDE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D9CA30C652E1F3BE47C1DE8C /* Pods-bmobyios.debug.xcconfig */,
+				B77D994D97BC0913A4E441A9 /* Pods-bmobyios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		870B6DAC1DAB9FD1004F193A /* createListing */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,11 +126,21 @@
 			name = createListing;
 			sourceTree = "<group>";
 		};
+		979162E87EDE717863B21B9C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B230A8913B718AD508D7447 /* Pods_bmobyios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F2EF88F61DA4F76D0099F1EE = {
 			isa = PBXGroup;
 			children = (
 				F2EF89011DA4F76F0099F1EE /* bmobyios */,
 				F2EF89001DA4F76E0099F1EE /* Products */,
+				84B6C7AE9E98FC51B77C2BDE /* Pods */,
+				979162E87EDE717863B21B9C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +163,7 @@
 				F2EF890E1DA4F76F0099F1EE /* Info.plist */,
 				F2EF89171DA4F9CF0099F1EE /* ms */,
 				F2EF89281DA4FC6E0099F1EE /* Framework */,
+				F2438D2F1DAFC73100E41044 /* bmobyios-Bridging-Header.h */,
 			);
 			path = bmobyios;
 			sourceTree = "<group>";
@@ -152,6 +180,7 @@
 				F27C93D11DA6917E00FB5457 /* languageTVC.swift */,
 				F27C93D31DA6BA2C00FB5457 /* language.swift */,
 				F27C93D51DAA9D9800FB5457 /* user.swift */,
+				F2438D321DAFD2D800E41044 /* homePage.swift */,
 			);
 			name = ms;
 			sourceTree = "<group>";
@@ -183,9 +212,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2EF89111DA4F76F0099F1EE /* Build configuration list for PBXNativeTarget "bmobyios" */;
 			buildPhases = (
+				A2EF653F5EDD2E2433BC67E2 /* [CP] Check Pods Manifest.lock */,
 				F2EF88FB1DA4F76E0099F1EE /* Sources */,
 				F2EF88FD1DA4F76E0099F1EE /* Resources */,
 				F2EF88FC1DA4F76E0099F1EE /* Frameworks */,
+				F85FF794AAFA4EBBA15BE620 /* [CP] Embed Pods Frameworks */,
+				EF7DF51B303A1D8495FFE578 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,6 +277,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A2EF653F5EDD2E2433BC67E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EF7DF51B303A1D8495FFE578 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bmobyios/Pods-bmobyios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F85FF794AAFA4EBBA15BE620 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bmobyios/Pods-bmobyios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F2EF88FB1DA4F76E0099F1EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -263,6 +343,7 @@
 				F2EF89031DA4F76F0099F1EE /* AppDelegate.swift in Sources */,
 				87E74B391DABA2150058B281 /* adressAnnotView.swift in Sources */,
 				F2EF89361DA56DCE0099F1EE /* registration3stepVC.swift in Sources */,
+				F2438D331DAFD2D800E41044 /* homePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +454,9 @@
 		};
 		F2EF89121DA4F76F0099F1EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9CA30C652E1F3BE47C1DE8C /* Pods-bmobyios.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -383,12 +466,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = os.bmobyios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "bmobyios/bmobyios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F2EF89131DA4F76F0099F1EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B77D994D97BC0913A4E441A9 /* Pods-bmobyios.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -398,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = os.bmobyios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "bmobyios/bmobyios-Bridging-Header.h";
 			};
 			name = Release;
 		};

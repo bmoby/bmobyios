@@ -8,13 +8,14 @@
 
 import UIKit
 import Parse
+import ParseUI
+import ParseFacebookUtilsV4
 
 
 class connectionVC: UIViewController {
     
     
-    
-    // -----------------------------------------------------------------------------------
+       // -----------------------------------------------------------------------------------
     //**************************** OUTLETS & ACTIONS *************************************
     
     
@@ -31,17 +32,30 @@ class connectionVC: UIViewController {
     
     
         // Facebook & LinkedIn  btn outlets and actions -----------
-            @IBOutlet weak var facebookConnectionBtn: UIButton!
-            @IBAction func facebookConnectionClicked(sender: AnyObject) {
+ 
+        @IBAction func facebookLoginBtnClicked(sender: AnyObject) {
+            
+            if PFUser.currentUser() == nil {
+                PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (currentUser:PFUser?, error:NSError?) in
+                    if error != nil {
+                    print(error!.localizedDescription)
+                    }
                 
-                // ACTION
+                    print(currentUser)
+                
+                }
             }
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
+                let homepage = UINavigationController(rootViewController: protectedPage)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                appDelegate.window?.rootViewController = protectedPage
+                
+            }
+            
+        }
     
-            @IBOutlet weak var linkedInConnectionBtn: UIButton!
-            @IBAction func linkedInConnectionClicked(sender: AnyObject) {
-                
-                // ACTION
-            }
     
     
         // Login & password text fields ---------------------------
