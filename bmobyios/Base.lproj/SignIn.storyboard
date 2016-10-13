@@ -27,18 +27,22 @@
                                 <color key="textColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hH2-Wu-usf" customClass="FBSDKLoginButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hH2-Wu-usf">
                                 <rect key="frame" x="79" y="299" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="logoutFacebookClicked:" destination="laM-Ue-eUG" eventType="touchUpInside" id="ME2-9E-qvW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="MMm-JC-ThV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLn-mS-rmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-588" y="1353"/>
+            <point key="canvasLocation" x="-56" y="1353"/>
         </scene>
         <!--ConnectionVC-->
         <scene sceneID="hks-ZD-W1I">
@@ -97,7 +101,7 @@
                                     <segue destination="B88-pK-SqI" kind="push" id="Usp-KJ-NnL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxM-Y3-1ad" customClass="FBSDKLoginButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxM-Y3-1ad">
                                 <rect key="frame" x="75" y="342" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -574,6 +578,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8F-bF-Tqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1094" y="2220"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nmw-1T-MtK">
+            <objects>
+                <navigationController storyboardIdentifier="homePage" automaticallyAdjustsScrollViewInsets="NO" id="o87-bY-Uet" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLX-Nj-CVY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="laM-Ue-eUG" kind="relationship" relationship="rootViewController" id="SKN-KS-qyI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="scA-RE-Cgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-588" y="1353"/>
         </scene>
     </scenes>
     <resources>

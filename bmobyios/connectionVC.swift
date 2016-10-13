@@ -8,14 +8,14 @@
 
 import UIKit
 import Parse
-import ParseUI
 import ParseFacebookUtilsV4
 
 
 class connectionVC: UIViewController {
     
     
-       // -----------------------------------------------------------------------------------
+    
+    // -----------------------------------------------------------------------------------
     //**************************** OUTLETS & ACTIONS *************************************
     
     
@@ -31,31 +31,36 @@ class connectionVC: UIViewController {
             }
     
     
-        // Facebook & LinkedIn  btn outlets and actions -----------
- 
-        @IBAction func facebookLoginBtnClicked(sender: AnyObject) {
-            
-            if PFUser.currentUser() == nil {
-                PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (currentUser:PFUser?, error:NSError?) in
-                    if error != nil {
-                    print(error!.localizedDescription)
+        // Facebook & Twitter  btn outlets and actions -----------
+            @IBAction func facebookLoginBtnClicked(sender: AnyObject) {
+                
+                // Check if the current user is signed in or not to act
+                if PFUser.currentUser() == nil {
+                    
+                    // If he/she is not yet connected loginwith facebook and request thous informations
+                    PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) {
+                        
+                        (currentUser:PFUser?, error:NSError?) in
+                        // If error print the error
+                        if error != nil {
+                            
+                            print(error!.localizedDescription)
+                        }
                     }
+                }
                 
-                    print(currentUser)
+                // If he/she is connected redirect them to the home page or what ever
+                else {
+                    
+                    // Creating copy of the nextviewcontroller and push to it vie Navigation
+                    let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
+                    let homepages = UINavigationController(rootViewController: protectedPage)
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
+                    // set the rootView to the home page or whatever if the user is connected
+                    appDelegate.window?.rootViewController = homepages
                 }
             }
-            if FBSDKAccessToken.currentAccessToken() != nil {
-                let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
-                let homepage = UINavigationController(rootViewController: protectedPage)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                
-                appDelegate.window?.rootViewController = protectedPage
-                
-            }
-            
-        }
-    
     
     
         // Login & password text fields ---------------------------
@@ -83,11 +88,23 @@ class connectionVC: UIViewController {
 
     
     
+    // At this point we wonts to redirect the user who left the application and relaunch it beeing connected
+    override func viewDidAppear(animated: Bool) {
+        
+        if PFUser.currentUser() != nil {
+            
+            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
+            let homepages = UINavigationController(rootViewController: protectedPage)
+            presentViewController(homepages, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,26 +131,7 @@ class connectionVC: UIViewController {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        // Call function to hide the keyboard when touch began
         hideKeyboard()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
 }
