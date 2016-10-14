@@ -14,24 +14,29 @@ class homePage: UIViewController {
     
     // ############### THIS PAGE IS NOT THE REAL HOME PAGE THE CODE MOST TO BE COPIED ###############
     
-    @IBAction func logoutFacebookClicked(sender: AnyObject) {
-        
-        PFUser.logOutInBackgroundWithBlock { (error:NSError?) in
-            if error != nil {
-                print(error!.localizedDescription)
-            }else {
-                let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("loginPage") as! connectionVC
-                let homepages = UINavigationController(rootViewController: protectedPage)
-                self.navigationController?.presentViewController(homepages, animated: true, completion: nil)
-            }
-        }
-    }
-        
-    override func viewDidLoad() {
+    
+        override func viewDidLoad() {
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
-       
+        requestInfo()
+        getUserInfoNormal()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    
+    // -----------------------------------------------------------------------------------
+    //******************************* GET USER LOGIN FACE ********************************
+
+    
+    
+    func requestInfo(){
+        
         let requestParameters = ["fields": "id, email, first_name, last_name"]
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
         
@@ -89,21 +94,52 @@ class homePage: UIViewController {
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    // -----------------------------------------------------------------------------------
+    //******************************* GET USER LOGIN NORM ********************************
+    
+    @IBOutlet weak var logOutNormallyBtn: UIButton!
+    
+    func getUserInfoNormal() {
+        if PFUser.currentUser() != nil && FBSDKProfile.currentProfile() == nil{
+            print(PFUser.currentUser()?.email)
+            print(PFUser.currentUser()?.username)
+        }
     }
-    */
+    
+    
+    // LOG OUT NORMALLY PROCESS
+    @IBAction func logOutNormallyBtnClicked(sender: AnyObject) {
+        
+        PFUser.logOut()
+        print("User loged out with success")
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("loginPage")
+            let navigation = UINavigationController(rootViewController: viewController)
+            self.presentViewController(navigation, animated: true, completion: nil)
+        })
 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

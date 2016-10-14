@@ -27,18 +27,21 @@
                                 <color key="textColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hH2-Wu-usf">
-                                <rect key="frame" x="79" y="299" width="163" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tyV-0L-JTL">
+                                <rect key="frame" x="133" y="315" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log out"/>
+                                <state key="normal" title="Log out "/>
                                 <connections>
-                                    <action selector="logoutFacebookClicked:" destination="laM-Ue-eUG" eventType="touchUpInside" id="ME2-9E-qvW"/>
+                                    <action selector="logOutNormallyBtnClicked:" destination="laM-Ue-eUG" eventType="touchUpInside" id="vXC-c8-P7E"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="MMm-JC-ThV"/>
+                    <connections>
+                        <outlet property="logOutNormallyBtn" destination="tyV-0L-JTL" id="S2x-DE-dB9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLn-mS-rmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -63,7 +66,7 @@
                                 <rect key="frame" x="20" y="198" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                 <connections>
                                     <outlet property="delegate" destination="T8C-xe-dfF" id="BgS-sl-QOw"/>
                                 </connections>
@@ -72,31 +75,29 @@
                                 <rect key="frame" x="20" y="236" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="T8C-xe-dfF" id="IaT-cy-5ch"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Atj-28-kmM">
-                                <rect key="frame" x="27" y="267" width="56" height="30"/>
+                                <rect key="frame" x="236" y="269" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="connect"/>
+                                <state key="normal" title="connect">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="loginClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="lQZ-Kt-WKN"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D4v-v6-kiO">
-                                <rect key="frame" x="258" y="267" width="42" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="forgot"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0st-zb-BdX">
                                 <rect key="frame" x="204" y="510" width="96" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="sign up"/>
+                                <state key="normal" title="sign up">
+                                    <color key="titleColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="forgotClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="H4f-0T-q31"/>
                                     <action selector="signupClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="UuQ-rG-dAp"/>
                                     <segue destination="B88-pK-SqI" kind="push" id="Usp-KJ-NnL"/>
                                 </connections>
@@ -108,6 +109,13 @@
                                 <connections>
                                     <action selector="facebookLoginBtnClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="5sX-U3-6BE"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D4v-v6-kiO">
+                                <rect key="frame" x="27" y="269" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="forgot">
+                                    <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,7 +146,7 @@
                                 <rect key="frame" x="20" y="194" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                 <connections>
                                     <outlet property="delegate" destination="B88-pK-SqI" id="xZX-cP-87c"/>
                                 </connections>
@@ -147,7 +155,7 @@
                                 <rect key="frame" x="20" y="232" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="B88-pK-SqI" id="wog-DJ-Y5g"/>
                                 </connections>
@@ -156,7 +164,7 @@
                                 <rect key="frame" x="20" y="270" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="B88-pK-SqI" id="XvK-XC-hHY"/>
                                 </connections>
@@ -165,7 +173,7 @@
                                 <rect key="frame" x="20" y="319" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="B88-pK-SqI" id="L5y-qx-lMt"/>
                                 </connections>
@@ -226,7 +234,7 @@
                                 <rect key="frame" x="20" y="220" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="iya-ew-NSl" id="UB4-GI-com"/>
                                 </connections>
@@ -235,17 +243,17 @@
                                 <rect key="frame" x="20" y="258" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="iya-ew-NSl" id="veH-lm-AoL"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="birth date" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" id="fdB-qy-W4T">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="birth date" clearsOnBeginEditing="YES" minimumFontSize="17" disabledBackground="adressIcon" clearButtonMode="always" id="fdB-qy-W4T">
                                 <rect key="frame" x="20" y="296" width="165" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                 <connections>
                                     <outlet property="delegate" destination="iya-ew-NSl" id="481-Vj-8ro"/>
                                 </connections>
@@ -430,7 +438,7 @@
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="6cF-3Q-l15" id="132-Ss-3Le"/>
                                         </connections>
@@ -505,29 +513,6 @@
             </objects>
             <point key="canvasLocation" x="785" y="2220"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="e4g-Fd-Cne">
-            <objects>
-                <viewController id="m8B-DW-x1i" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pV0-Zl-ClS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HAHAHAHAA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YMm-IZ-X6u">
-                                <rect key="frame" x="90" y="245" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DmW-Fl-hr1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1122" y="2218"/>
-        </scene>
         <!--LanguageTVC-->
         <scene sceneID="eTN-nv-foL">
             <objects>
@@ -599,11 +584,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="adressIcon" width="700" height="700"/>
         <image name="profile" width="210" height="210"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m8T-Sk-YDb"/>
         <segue reference="NLM-Zw-hOf"/>
-        <segue reference="Usp-KJ-NnL"/>
+        <segue reference="m8T-Sk-YDb"/>
+        <segue reference="aXg-T3-uXg"/>
     </inferredMetricsTieBreakers>
 </document>

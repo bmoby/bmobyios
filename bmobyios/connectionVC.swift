@@ -10,7 +10,6 @@ import UIKit
 import Parse
 import ParseFacebookUtilsV4
 
-
 class connectionVC: UIViewController {
     
     
@@ -31,7 +30,7 @@ class connectionVC: UIViewController {
             }
     
     
-        // Facebook & Twitter  btn outlets and actions -----------
+        // Facebook  btn outlets and actions ----------------------
             @IBAction func facebookLoginBtnClicked(sender: AnyObject) {
                 
                 // Check if the current user is signed in or not to act
@@ -46,9 +45,17 @@ class connectionVC: UIViewController {
                             
                             print(error!.localizedDescription)
                         }else{
-                            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
-                            let homepages = UINavigationController(rootViewController: protectedPage)
-                            self.navigationController?.presentViewController(homepages, animated: true, completion: nil)
+                            if (PFUser.currentUser() != nil) {
+                                
+                                print("User loged in with success")
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+                                    let navigation = UINavigationController(rootViewController: viewController)
+                                    self.presentViewController(navigation, animated: true, completion: nil)
+                                })
+                                
+                            }
+
                         }
                     }
                 }
@@ -56,16 +63,20 @@ class connectionVC: UIViewController {
                 // If he/she is connected redirect them to the home page or what ever
                 else {
                     
-                    // Creating copy of the nextviewcontroller and push to it vie Navigation
-                    let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
-                    let homepages = UINavigationController(rootViewController: protectedPage)
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                
-                    // set the rootView to the home page or whatever if the user is connected
-                    appDelegate.window?.rootViewController = homepages
+                    if (PFUser.currentUser() != nil) {
+                        
+                        print("User loged in with success")
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+                            let navigation = UINavigationController(rootViewController: viewController)
+
+                            self.presentViewController(navigation, animated: true, completion: nil)
+                        })
+                        
+                    }
                 }
             }
-    
+
     
         // Login & password text fields ---------------------------
             @IBOutlet weak var loginTxtF: UITextField!
@@ -76,7 +87,40 @@ class connectionVC: UIViewController {
             @IBOutlet weak var loginBtn: UIButton!
             @IBAction func loginClicked(sender: AnyObject) {
                 
-                // ACTION
+                let username = self.loginTxtF.text
+                let password = self.passwordTxtF.text
+                
+                // Validate the text fields
+                if username!.characters.count < 5 {
+                    print("username must be longer thant 5 chars")
+                } else if password!.characters.count < 8 {
+                    print("password must be longer than 8 chars")
+                    
+                } else {
+                    // Run a spinner to show a task in progress
+                    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
+                    spinner.startAnimating()
+                    
+                    // Send a request to login
+                    PFUser.logInWithUsernameInBackground(username!, password: password!, block: { (user, error) -> Void in
+                        
+                        // Stop the spinner
+                        spinner.stopAnimating()
+                        
+                        if ((user) != nil) {
+                            print("User loged in with success")
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.presentViewController(navigation, animated: true, completion: nil)
+                            })
+                            
+                        } else {
+                            print(error!.localizedDescription)
+                        }
+                    })
+                }
+                
             }
     
             @IBOutlet weak var forgotBtn: UIButton!
@@ -100,23 +144,17 @@ class connectionVC: UIViewController {
         self.reloadInputViews()
         // Do any additional setup after loading the view.
         
+        if PFUser.currentUser() != nil {
+            print(PFUser.currentUser()?.email)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        if (PFUser.currentUser() != nil) {
-            
-            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
-            let homepages = UINavigationController(rootViewController: protectedPage)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            // set the rootView to the home page or whatever if the user is connected
-            appDelegate.window?.rootViewController = homepages
-            self.navigationController!.presentViewController(homepages, animated: true, completion: nil)
-        }
-
+        
     }
     
     

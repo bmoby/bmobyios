@@ -50,6 +50,8 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         
         // Saving all in DB
         self.userStep3.save()
+        
+        
     }
     
     @IBOutlet weak var backBtn: UIButton!
