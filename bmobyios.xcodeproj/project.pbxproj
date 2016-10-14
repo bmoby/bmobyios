@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */; };
 		870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B6DAF1DABA060004F193A /* adressMapVC.swift */; };
 		87E74B331DABA1070058B281 /* createListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E74B321DABA1070058B281 /* createListing.storyboard */; };
 		87E74B351DABA1A70058B281 /* adressSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTVC.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = listingAmenitiesVC.swift; path = /Users/Lors/bmobyios/bmobyios/listingAmenitiesVC.swift; sourceTree = "<absolute>"; };
 		870B6DAF1DABA060004F193A /* adressMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressMapVC.swift; sourceTree = "<group>"; };
 		87E74B321DABA1070058B281 /* createListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = createListing.storyboard; sourceTree = "<group>"; };
 		87E74B341DABA1A70058B281 /* adressSearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTVC.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				87E74B521DAE12250058B281 /* listingInfo2VC.swift */,
 				87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */,
 				87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */,
+				87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */,
 			);
 			name = createListing;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */,
 				F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */,
 				87E74B371DABA1E20058B281 /* annotationNSO.swift in Sources */,
+				87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */,
 				87E74B4B1DAD33790058B281 /* propertyTypeCell.swift in Sources */,
 				870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */,
 				87E74B551DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift in Sources */,
