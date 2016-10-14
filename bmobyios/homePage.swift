@@ -9,7 +9,6 @@
 import UIKit
 import ParseFacebookUtilsV4
 import FBSDKLoginKit
-import Parse
 
 class homePage: UIViewController {
     
@@ -23,8 +22,7 @@ class homePage: UIViewController {
             }else {
                 let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("loginPage") as! connectionVC
                 let homepages = UINavigationController(rootViewController: protectedPage)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.window?.rootViewController = homepages
+                self.navigationController?.presentViewController(homepages, animated: true, completion: nil)
             }
         }
     }
@@ -41,33 +39,51 @@ class homePage: UIViewController {
             if error != nil {
                 print(error!.localizedDescription)
             } else {
-                let userId = result.valueForKey("id")
+                
                 let userFirstName = result.valueForKey("first_name")
                 let userLastName = result.valueForKey("last_name")
                 let userEmail = result.valueForKey("email")
                 
-                print(userId)
-                print(userFirstName)
-                print(userEmail)
-                
-               
-                let thisUser = PFUser.currentUser()
-                if (userEmail != nil)  {
-                    thisUser!.setObject(userEmail!, forKey: "email")
-                }
-                if (userFirstName != nil)  {
-                    thisUser!.setObject(userFirstName!, forKey: "firstName")
-                }
-                if (userLastName != nil)  {
-                    thisUser!.setObject(userLastName!, forKey: "lastName")
-                }
-                        
-                thisUser!.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                // Check if current user info exists in our DB
+                let query = PFQuery(className: "_User")
+                let verifyUser = user()
+                query.whereKey("email", equalTo: userEmail!)
+                query.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) in
                     if error == nil {
-                    
-                        print("user was saved and updated")
-                    } else {
-                        print(error!.localizedDescription)
+                        for object in objects! {
+                            verifyUser.email = object.valueForKey("email") as? String
+                            verifyUser.firstName = object.valueForKey("firstName") as? String
+                            verifyUser.lastName = object.valueForKey("lastName") as?  String
+                        }
+                        
+                        print(verifyUser.email)
+                        print(verifyUser.firstName)
+                        print(verifyUser.lastName)
+                        
+                        // THERE IS THE BEGIN OF THE UPDATING USER INFO PROCESS
+                        if (verifyUser.email == nil || verifyUser.firstName == nil || verifyUser.lastName == nil) {
+                            
+                            let thisUser = PFUser.currentUser()
+                            if (userEmail != nil && verifyUser.email == nil)  {
+                                thisUser!.setObject(userEmail!, forKey: "email")
+                            }
+                            if (userFirstName != nil && verifyUser.firstName == nil )  {
+                                thisUser!.setObject(userFirstName!, forKey: "firstName")
+                            }
+                            if (userLastName != nil && verifyUser.lastName == nil)  {
+                                thisUser!.setObject(userLastName!, forKey: "lastName")
+                            }
+                            
+                            thisUser!.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                                if error == nil {
+                                    
+                                    print("user was saved and updated")
+                                } else {
+                                    print(error!.localizedDescription)
+                                }
+                            })
+                            
+                        }// THERE IS THE END OF UPDATE PROCESS
                     }
                 })
             }

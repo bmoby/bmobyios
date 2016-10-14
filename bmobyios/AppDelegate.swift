@@ -30,6 +30,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initializeWithConfiguration(parseConfig)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
+        if PFUser.currentUser() == nil {
+            
+            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+            let protectedPage = storyboard.instantiateViewControllerWithIdentifier("loginPage") as! connectionVC
+            let homepages = UINavigationController(rootViewController: protectedPage)
+            self.window?.rootViewController = homepages
+        } else {
+            
+            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+            let protectedPage = storyboard.instantiateViewControllerWithIdentifier("Home") as! homePage
+            let homepages = UINavigationController(rootViewController: protectedPage)
+            self.window?.rootViewController = homepages
+
+        }
+        
             return true
     }
     

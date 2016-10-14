@@ -45,6 +45,10 @@ class connectionVC: UIViewController {
                         if error != nil {
                             
                             print(error!.localizedDescription)
+                        }else{
+                            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
+                            let homepages = UINavigationController(rootViewController: protectedPage)
+                            self.navigationController?.presentViewController(homepages, animated: true, completion: nil)
                         }
                     }
                 }
@@ -88,21 +92,12 @@ class connectionVC: UIViewController {
 
     
     
-    // At this point we wonts to redirect the user who left the application and relaunch it beeing connected
-    override func viewDidAppear(animated: Bool) {
-        
-        if PFUser.currentUser() != nil {
-            
-            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
-            let homepages = UINavigationController(rootViewController: protectedPage)
-            presentViewController(homepages, animated: true, completion: nil)
-        }
-    }
+
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        self.reloadInputViews()
         // Do any additional setup after loading the view.
         
     }
@@ -111,6 +106,17 @@ class connectionVC: UIViewController {
         
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        if (PFUser.currentUser() != nil) {
+            
+            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("Home") as! homePage
+            let homepages = UINavigationController(rootViewController: protectedPage)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            // set the rootView to the home page or whatever if the user is connected
+            appDelegate.window?.rootViewController = homepages
+            self.navigationController!.presentViewController(homepages, animated: true, completion: nil)
+        }
+
     }
     
     

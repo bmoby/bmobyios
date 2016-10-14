@@ -8,7 +8,7 @@
         <!--Home Page-->
         <scene sceneID="lqt-JY-6pz">
             <objects>
-                <viewController storyboardIdentifier="Home" id="laM-Ue-eUG" customClass="homePage" customModule="bmobyios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="laM-Ue-eUG" customClass="homePage" customModule="bmobyios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hJX-ck-iA5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hH2-Wu-usf">
                                 <rect key="frame" x="79" y="299" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Log out"/>
                                 <connections>
                                     <action selector="logoutFacebookClicked:" destination="laM-Ue-eUG" eventType="touchUpInside" id="ME2-9E-qvW"/>
                                 </connections>
@@ -104,7 +104,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxM-Y3-1ad">
                                 <rect key="frame" x="75" y="342" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Login with Facebook"/>
                                 <connections>
                                     <action selector="facebookLoginBtnClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="5sX-U3-6BE"/>
                                 </connections>
