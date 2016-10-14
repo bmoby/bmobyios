@@ -564,6 +564,37 @@
             </objects>
             <point key="canvasLocation" x="-1094" y="2220"/>
         </scene>
+        <!--Email Not VerifiedVC-->
+        <scene sceneID="utr-MV-I8s">
+            <objects>
+                <viewController storyboardIdentifier="NotVerified" id="wkn-il-f0d" customClass="emailNotVerifiedVC" customModule="bmobyios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yDF-tc-2O9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email adress is not verified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="asT-rs-PGR">
+                                <rect key="frame" x="39" y="185" width="243" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pdJ-y9-dfE">
+                                <rect key="frame" x="72" y="214" width="177" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Already verified click here"/>
+                                <connections>
+                                    <action selector="alreadyVerifiedBtnClicked:" destination="wkn-il-f0d" eventType="touchUpInside" id="09o-ef-7iV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="POM-6V-0w0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1022" y="1353"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Nmw-1T-MtK">
             <objects>

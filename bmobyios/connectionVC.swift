@@ -106,17 +106,27 @@ class connectionVC: UIViewController {
                         
                         // Stop the spinner
                         spinner.stopAnimating()
-                        
-                        if ((user) != nil) {
-                            print("User loged in with success")
+                        if (user?.valueForKey("emailVerified")?.boolValue == true){
+                            if ((user) != nil) {
+                                print("User loged in with success")
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+                                    let navigation = UINavigationController(rootViewController: viewController)
+                                    self.presentViewController(navigation, animated: true, completion: nil)
+                                })
+                                
+                            } else {
+                                print(error!.localizedDescription)
+                            }
+
+                        } else {
+                            print("please verify your email and click the button")
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+                                let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("NotVerified")
                                 let navigation = UINavigationController(rootViewController: viewController)
                                 self.presentViewController(navigation, animated: true, completion: nil)
                             })
-                            
-                        } else {
-                            print(error!.localizedDescription)
+
                         }
                     })
                 }
