@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */; };
+		87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */; };
 		870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B6DAF1DABA060004F193A /* adressMapVC.swift */; };
 		87E74B331DABA1070058B281 /* createListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E74B321DABA1070058B281 /* createListing.storyboard */; };
 		87E74B351DABA1A70058B281 /* adressSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTVC.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = listingAmenitiesVC.swift; path = /Users/Lors/bmobyios/bmobyios/listingAmenitiesVC.swift; sourceTree = "<absolute>"; };
+		87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingPhotosVC.swift; sourceTree = "<group>"; };
 		870B6DAF1DABA060004F193A /* adressMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressMapVC.swift; sourceTree = "<group>"; };
 		87E74B321DABA1070058B281 /* createListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = createListing.storyboard; sourceTree = "<group>"; };
 		87E74B341DABA1A70058B281 /* adressSearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTVC.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */,
 				87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */,
 				87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */,
+				87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */,
 			);
 			name = createListing;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				F2EF89151DA4F94B0099F1EE /* connectionVC.swift in Sources */,
 				87E74B531DAE12250058B281 /* listingInfo2VC.swift in Sources */,
 				F2EF892E1DA516890099F1EE /* registrationVC.swift in Sources */,
+				87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */,
 				87E74B511DAE12110058B281 /* listingInfo1VC.swift in Sources */,
 				87E74B4D1DAD492B0058B281 /* rangeSlider.swift in Sources */,
 				87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */,
