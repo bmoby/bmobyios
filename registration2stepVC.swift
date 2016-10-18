@@ -57,10 +57,16 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         @IBOutlet weak var nextBtn: UIButton!
         @IBAction func nextClicked(sender: AnyObject) {
             
-            self.userStep2.firstName = self.firstNameTxtF.text
-            self.userStep2.lastName = self.lastNameTxtF.text
-            self.userStep2.avatar = self.avatarImg
-            self.userStep2.birthDate = self.birthDateTxtF.text
+            if self.firstNameTxtF.text! == "" || self.lastNameTxtF.text! == "" || self.birthDateTxtF.text! == "" {
+                alerter("Empty fields", message: "Pleas fil all fields.")
+            }else {
+            
+                self.userStep2.firstName = self.firstNameTxtF.text
+                self.userStep2.lastName = self.lastNameTxtF.text
+                self.userStep2.avatar = self.avatarImg
+                self.userStep2.birthDate = self.birthDateTxtF.text
+                
+            }
         }
     
         @IBOutlet weak var backBtn: UIButton!
@@ -138,6 +144,16 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         hideKeyboard()
+    }
+    
+    
+    func alerter(name: String, message: String){
+        
+        let alert = UIAlertController(title: name, message: message, preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(alertAction)
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     
