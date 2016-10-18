@@ -10,11 +10,10 @@ import UIKit
 
 class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
     var userStep2 = user()
     
     
-
+    
     // -----------------------------------------------------------------------------------
     //****************************** OUTLETS & ACTIONS ***********************************
     
@@ -22,50 +21,53 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     @IBOutlet weak var titleLbl: UILabel!
     
-    
     // First & last names text fields -------------------------
         @IBOutlet weak var firstNameTxtF: UITextField!
         @IBOutlet weak var lastNameTxtF: UITextField!
     
-    
     // Avatar outlet ------------------------------------------
         @IBOutlet weak var avatarImg: UIImageView!
 
-    
     // Birth date picker & text field -------------------------
         @IBOutlet weak var birthDateTxtF: UITextField!
-    
     
     // Gender selection buttons & actions ---------------------
         @IBOutlet weak var manBtn: UIButton!
         @IBAction func manClicked(sender: AnyObject) {
             
+            self.manBtn.backgroundColor = UIColor.cyanColor()
+            self.womanBtn.backgroundColor = UIColor.grayColor()
+            self.userStep2.gender = "man"
+            
             // ACTION
         }
-    
+
         @IBOutlet weak var womanBtn: UIButton!
         @IBAction func womanClicked(sender: AnyObject) {
             
-            // ACTION
+            self.womanBtn.backgroundColor = UIColor.purpleColor()
+            self.manBtn.backgroundColor = UIColor.grayColor()
+            self.userStep2.gender = "woman"
         }
     
         @IBOutlet weak var separatorLbl: UILabel!
     
     
-    // Next & back buttons ------------------------------------
     
+    // Next & back buttons ------------------------------------
         @IBOutlet weak var nextBtn: UIButton!
         @IBAction func nextClicked(sender: AnyObject) {
             
             if self.firstNameTxtF.text! == "" || self.lastNameTxtF.text! == "" || self.birthDateTxtF.text! == "" {
                 alerter("Empty fields", message: "Pleas fil all fields.")
-            }else {
+            }else if (self.userStep2.gender == nil){
+                alerter("GENDER IS NOT SELECTED", message: "Please select a gender.")
+            } else {
             
                 self.userStep2.firstName = self.firstNameTxtF.text
                 self.userStep2.lastName = self.lastNameTxtF.text
                 self.userStep2.avatar = self.avatarImg
                 self.userStep2.birthDate = self.birthDateTxtF.text
-                
             }
         }
     
@@ -139,13 +141,11 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         self.view.endEditing(true)
     }
     
-    
     // Method to hide the keyboard when the screen is touched
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         hideKeyboard()
     }
-    
     
     func alerter(name: String, message: String){
         
@@ -185,7 +185,6 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         datePicker.addTarget(self, action: #selector(self.showDate(_:)), forControlEvents: .ValueChanged)
     }
     
-    
     // Method to show the date instantly when selecting it
     func showDate(sender: UIDatePicker){
         
@@ -205,11 +204,9 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     func setAvatar(){
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.addImg(_:)))
             imageTap.numberOfTapsRequired = 1
-        
         self.avatarImg.userInteractionEnabled = true
         self.avatarImg.addGestureRecognizer(imageTap)
     }
-    
     
     // Method that lets the user to click on the avatar default photo and select a custom one
     func addImg(recognizer :UITapGestureRecognizer){
@@ -219,7 +216,6 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
             picker.allowsEditing = true
         presentViewController(picker, animated: true, completion: nil)
     }
-    
     
     // Method to hide the library ones the desired picture was selected
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -235,14 +231,13 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     
     
-    
     // This guy takes some information in the actual controller and send it to another one
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "backStep1" {
+            
             let registration :registrationVC = segue.destinationViewController as! registrationVC
                 registration.userStep1 = self.userStep2
-            
         } else if segue.identifier == "goStep3" {
             
             let registration3 :registration3stepVC = segue.destinationViewController as! registration3stepVC
