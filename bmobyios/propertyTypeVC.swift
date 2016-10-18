@@ -11,20 +11,25 @@ import UIKit
 class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** LOCAL VARIABLES ***************************************************
-    var propertyTypeArray = ["Apartment","House","Dorm","Villa","Townhouse","Treehouse","RV","Chalet","Castle","Boat","Loft","Bungalow","Cabin","Plane","Lighthouse","Tipi","Yurt","Cave","Tent","Earthhouse","Hut","Train","Other"]
+//-----------------------------------------------------------------------------------------------------
+//***************************************** LOCAL VARIABLES *******************************************
     
+    //property type variable to send to database
+    var propertyType = String()
+    
+    // property type array to display on table cells
+    var propertyTypeArray = ["Apartment","House","Dorm","Villa","Townhouse","Treehouse","RV","Chalet","Castle","Boat","Loft","Bungalow","Cabin","Plane","Lighthouse","Tipi","Yurt","Cave","Tent","Earthhouse","Hut","Train","Other"]
+    var propertyTypeIconArray = [UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon")]
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** OUTLETS ***********************************************************
+//---------------------------------------------------------------------------------------------------
+//***************************************** OUTLETS *************************************************
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** DEFAULT ***********************************************************
+//---------------------------------------------------------------------------------------------------
+//***************************************** DEFAULT *************************************************
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +51,8 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 
 
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** TABLE *************************************************************
+//-------------------------------------------------------------------------------------------------
+//***************************************** TABLE *************************************************
     // number of sections
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -66,11 +71,28 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCellWithIdentifier("propertyTypeCell", forIndexPath: indexPath) as! propertyTypeCell
         
         cell.propertyTypeLbl.text = propertyTypeArray[indexPath.row]
-        cell.propertyTypeImg.image = UIImage(named: "adressIcon")
-        
+        cell.propertyTypeImg.image = propertyTypeIconArray[indexPath.row]
         
         
         return cell
+    }
+    
+    
+    //!!!!!!!!!!!!!
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)! as? propertyTypeCell
+        
+        if cell?.accessoryType != nil {
+            
+            // data to send to database
+            listing.propertyType = (cell?.propertyTypeLbl?.text)!
+            print("")
+            print(listing.propertyType)
+            
+            // going to the next controller: VC listingInfo1VC
+            let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
+            self.navigationController?.pushViewController(next, animated: true)
+        }
     }
     
 

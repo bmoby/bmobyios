@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+var listing = listingClass()
+
 protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
@@ -24,13 +26,16 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     //listing's location
     var currentLocation: CLLocation?
+    
+    // data send to the database
     var street = String()
     var postalCode = String()
     var city = String()
     var country = String()
-    var fullAdress = String()
     var longitude = String()
     var latitude = String()
+    
+    var fullAdress = String()
     
     
     
@@ -177,6 +182,29 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         return annotationView
     }
     
+    @IBAction func nextBtn_clicked(sender: AnyObject) {
+        
+        
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
+        self.navigationController?.pushViewController(next, animated: true)
+        
+        
+        // data to send to database: geolocation/manually. atributing data to the listingClass
+        listing.street = street
+        listing.postalCode = postalCode
+        listing.city = city
+        listing.country = country
+        listing.latitude = latitude
+        listing.longitude = longitude
+        print("")
+        print(listing.street)
+        print(listing.postalCode)
+        print(listing.city)
+        print(listing.country)
+        print(listing.latitude)
+        print(listing.longitude)
+        
+    }
 }
 
 
@@ -218,8 +246,7 @@ extension adressMapVC: HandleMapSearch {
                 latitude = "\(placemark.location?.coordinate.latitude)"
                 longitude = "\(placemark.location?.coordinate.longitude)"
                 print(latitude, longitude)
-            }
-            
+            }            
         }
         
         mapView.addAnnotation(annotation)

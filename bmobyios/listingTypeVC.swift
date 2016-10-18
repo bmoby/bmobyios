@@ -10,22 +10,24 @@ import UIKit
 
 class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** LOCAL VARIABLES ***************************************************
+//-------------------------------------------------------------------------------------------------
+//***************************************** LOCAL VARIABLES ****************************************
+  
+    // listing type array to display on table cells
     var listingTypeArray = ["Shared room", "Private room", "Entire place"]
-    var listingTypeImg = [UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon")]
+    var listingTypeIconArray = [UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon")]
     
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** OUTLETS ***********************************************************
+//--------------------------------------------------------------------------------------------------
+//***************************************** OUTLETS ************************************************
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** DEFAULT ***********************************************************
+//--------------------------------------------------------------------------------------------------
+//***************************************** DEFAULT ************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +47,8 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** TABLE *************************************************************
+//---------------------------------------------------------------------------------------------------
+//***************************************** TABLE ***************************************************
     /*
     // number of sections
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -63,9 +65,27 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCellWithIdentifier("listingTypeCell", forIndexPath: indexPath) as! listingTypeCell
         
         cell.listingTypeLbl.text = listingTypeArray[indexPath.row]
-        cell.listingTypeImg.image = listingTypeImg[indexPath.row]
+        cell.listingTypeImg.image = listingTypeIconArray[indexPath.row]
         
         return cell
+    }
+    
+    // !!!!!!!!!!!!
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)! as? listingTypeCell
+        
+        
+        if cell?.accessoryType != nil {
+            
+            // data to send to database
+            listing.listingType = (cell?.listingTypeLbl.text)!
+            print("")
+            print(listing.listingType)
+            
+            // going to the next controller: TVC of property type
+            let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
+            self.navigationController?.pushViewController(next, animated: true)
+        }
     }
 }
 

@@ -14,10 +14,12 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 //***************************************** LOCAL VARIABLES ****************************************
     
     var photoArray = [UIImage]()
+    var mainPhotoDB = UIImage()
     
     var width = CGFloat()
     var height = CGFloat()
     var cellWidth = CGFloat()
+    
     
     
     
@@ -110,7 +112,8 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         let cell = collectionView.cellForItemAtIndexPath(indexPath)! as! listingPhotoCell
         
         // display the main phtoto of listing
-        mainPhoto.image = cell.listingPhotoImg.image
+        self.mainPhoto.image = cell.listingPhotoImg.image
+        self.mainPhotoDB = cell.listingPhotoImg.image!
         
         // cell animation on taping
         UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 5, options: [],
@@ -125,7 +128,6 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
                 )
             }
         )
-        
     }
     
     
@@ -176,6 +178,7 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        
         photoArray.insert(image, atIndex: 0)
         mainPhoto.image = photoArray.first
         collectionView?.reloadData()
@@ -191,7 +194,36 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 //*********************************** GOING TO THE NEXT CONTROLLER ********************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
-        print(photoArray.count)
+        // send data to database
+        print(" ")
+        print(photoArray)
+        
+        if self.photoArray.contains(self.mainPhotoDB) {
+            
+            let row = self.photoArray.indexOf(self.mainPhotoDB)
+            self.photoArray.removeAtIndex(row!)
+            listing.photos.append(self.mainPhotoDB)
+            
+            for photo in self.photoArray {
+                listing.photos.append(photo)
+            }
+        }
+        else {
+            for photo in photoArray{
+                listing.photos.append(photo)
+            }
+        }
+        
+        
+        print(" ")
+        print(mainPhoto)
+        print(listing.photos)
+    
+        
+        // going to next controller: listingInfo3VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo3VC") as! listingInfo3VC
+        self.navigationController?.pushViewController(next, animated: true)
+        
     }
     
 }

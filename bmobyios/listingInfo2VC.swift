@@ -314,13 +314,7 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
         // if all variables sending data are zero: user doesn't choose a place to sleep
         if twinBed == "0" && singleBed == "0" && couch == "0" && matress == "0" && airMatress == "0" {
-            
-            print("twin =" + twinBed)
-            print("single =" + singleBed)
-            print("couch =" + couch)
-            print("matress =" + matress)
-            print("airMatress =" + airMatress)
-            
+        
             //alert
             let alert = UIAlertController(title: "Missing data", message: "Please, choose at least one sleeping place", preferredStyle: .Alert)
             let ok = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
@@ -330,11 +324,24 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
 
             //send data
-            print(twinBed)
-            print(singleBed)
-            print(couch)
-            print(matress)
-            print(airMatress)
+            
+            listing.twinBed = twinBed
+            listing.singleBed = singleBed
+            listing.couch = couch
+            listing.mattress = matress
+            listing.airMattress = airMatress
+            
+            print("")
+            print(listing.twinBed)
+            print(listing.singleBed)
+            print(listing.couch)
+            print(listing.mattress)
+            print(listing.airMattress)
+            
+            // going to next controller: listingAmenitiesVC
+            let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as? listingAmenitiesVC
+            self.navigationController?.pushViewController(next!, animated: true)
+            
         }
     }
 }

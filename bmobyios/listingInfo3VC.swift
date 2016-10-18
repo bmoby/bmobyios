@@ -10,8 +10,14 @@ import UIKit
 
 class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** LOCAL VARIABLES ***************************************************
+//-------------------------------------------------------------------------------------------------------
+//***************************************** LOCAL VARIABLES *********************************************
+    
+    //data to send to database
+    var price = String()
+    var checkin = String()
+    var daysORmontths = String()
+    var hostingPeriod = String()
     
     //Reset default size
     var scrollViewHeight: CGFloat = 0
@@ -39,8 +45,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var checkinRestriction = [String]()
     
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** OUTLETS ***********************************************************
+//-------------------------------------------------------------------------------------------------------
+//***************************************** OUTLETS *****************************************************
     
     // header
     @IBOutlet weak var headerView: UIView!
@@ -69,8 +75,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var listBtn: UIButton!
     
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** DEFAULT ***********************************************************
+//------------------------------------------------------------------------------------------------------
+//***************************************** DEFAULT *****************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,10 +122,12 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             }
         }
         
+        /*
         for object in checkinRestriction {
             print(object)
         }
         print(checkinRestriction)
+        */
         
 
     }
@@ -132,8 +140,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** OTHERS ************************************************************
+//------------------------------------------------------------------------------------------------------
+//***************************************** OTHERS *****************************************************
     
     // hide the keyboard
     func hideKeyboard() {
@@ -141,8 +149,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
     
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** DYAS/MONTHS *******************************************************
+//------------------------------------------------------------------------------------------------------
+//***************************************** DYAS/MONTHS ************************************************
     
     // user chooses to host for some days
     @IBAction func daysBtn_clicked(sender: AnyObject) {
@@ -176,7 +184,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
     
-    //--------------------------------------------PICKER VIEW METHODS----------------------------------------
+    //--------------------------------------------PICKER VIEW METHODS----------------------------------
     
     // number of components: one component the string array of hour
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -205,8 +213,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
 
     
-//-------------------------------------------------------------------------------------------------------------
-//***************************************** GOING TO THE NEXT CONTROLLER **************************************
+//-----------------------------------------------------------------------------------------------------
+//**************************************** GOING TO THE NEXT CONTROLLER *******************************
     
     // alert function
     func alert(error: String, message: String) {
@@ -228,6 +236,77 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             alert("Incorrect checkin time", message: "Pleas, choose your checkin time from picker")
             return
         }
+        
+        //data to send to data base
+        if ((priceTxt.text?.isEmpty) != nil) {
+            alert("Price field is empty", message: "Please, give your listing price. The dault price is 1 euro/dollar")
+            priceTxt.text = "1"
+            //listing.price = "1"
+        }
+        listing.price = priceTxt.text!
+        
+        listing.checkin = checkinTxt.text!
+        if daysBtn.backgroundColor == ownColor {
+            listing.daysORmonths = "days"
+        }
+        else {
+            listing.daysORmonths = "months"
+        }
+        listing.hostingPeriod = minValueLbl.text! + "-" + maxValueLbl.text!
+        
+        print("")
+        print(listing.street)
+        print(listing.postalCode)
+        print(listing.city)
+        print(listing.country)
+        print(listing.latitude)
+        print(listing.longitude)
+        
+        print("")
+        print(listing.listingType)
+        print(listing.propertyType)
+        
+        print("")
+        print(listing.rooms)
+        print(listing.hostingCapacity)
+        print(listing.kitchens)
+        print(listing.bathrooms)
+        
+        print("")
+        print(listing.twinBed)
+        print(listing.singleBed)
+        print(listing.couch)
+        print(listing.mattress)
+        print(listing.airMattress)
+        
+        print("")
+        print(listing.amenities)
+        
+        print("")
+        print(listing.photos)
+        
+        print(" ")
+        print(listing.price)
+        print(listing.checkin)
+        print(listing.daysORmonths)
+        print(listing.hostingPeriod)
+        
+        //listing.save()
+        
     }
     
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+

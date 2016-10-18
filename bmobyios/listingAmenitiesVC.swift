@@ -19,7 +19,7 @@ class listingAmenitiesVC: UIViewController {
     var chooseTxt = [String]()
     
     // array containing data to send to the database
-    var amenities = [String]()
+    //var amenities = [String]()
     
     // colors
     var grayColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1)
@@ -130,7 +130,6 @@ class listingAmenitiesVC: UIViewController {
     @IBOutlet var nextBtn: UIButton!
     
     
-    
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
@@ -152,11 +151,10 @@ class listingAmenitiesVC: UIViewController {
         
         // completing text array: chooseTxt
         let wheelchairAccessible = wheelchairLbl.text! + accessibleLbl.text!
-        let lockForBedroom = lockForLbl.text! + bedroomLbl.text!
-        let smokingAllowed = smokingLbl.text! + allowedLbl.text!
-        let indoorFireplace = indoorLbl.text! + fireplaceLbl.text!
+        let lockForBedroom = lockForLbl.text! + " " + bedroomLbl.text!
+        let smokingAllowed = smokingLbl.text! + " " + allowedLbl.text!
+        let indoorFireplace = indoorLbl.text! + " " + fireplaceLbl.text!
         chooseTxt = [breakfastLbl.text!, wifiInternetLbl.text!, wheelchairAccessible, tvLbl.text!, lockForBedroom, elevatorLbl.text!, dryerLbl.text!, washerLbl.text!, ironLbl.text!, hairDryerLbl.text!, smokingAllowed, intercomLbl.text!, airConditionerLbl.text!, familyKidLbl.text!, petsAllowedLbl.text!, parkingLbl.text!, indoorFireplace, gymLbl.text!, poolLbl.text!, saunaLbl.text!, hammamLbl.text!, jacuzziLbl.text!]
-        
         
         // Tap gesture recognizer: change the background color of chooseImg items background color
         for object in chooseImg {
@@ -195,14 +193,23 @@ class listingAmenitiesVC: UIViewController {
 //*********************************** GOING TO THE NEXT CONTROLLER ********************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
-        amenities.removeAll(keepCapacity: false)
+        //cleaning the amenities array
+        listing.amenities.removeAll(keepCapacity: false)
         
+        // picking up the string from chooseTxt that matchs with background color: append to amenities array
         for (txt, img) in zip(chooseTxt, chooseImg) {
             if img.backgroundColor == ownColor {
-                amenities.append(txt)
+                listing.amenities.append(txt)
             }
         }
-        print(amenities)
+        
+        // send data to database
+        print("")
+        print(listing.amenities)
+        
+        // going to next controller: listingPhotosVC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
+        self.navigationController?.pushViewController(next, animated: true)
     }
     
 }
