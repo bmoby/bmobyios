@@ -32,21 +32,17 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     //choose days or months
     var daysORmonths = String()
     
-    // range slider
-    var rangeSlider: RangeSlider = RangeSlider()
     
     //checkin pickerview and picker data
     var hour:String = ""
     var minute:String = ""
     var checkinPicker: UIPickerView!
     var checkinData = [["any hour","00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"], ["any minute","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"] ]
-    var hourRestriction = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
-    var minRestriction = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"]
-    var checkinRestriction = [String]()
-    
     
 //-------------------------------------------------------------------------------------------------------
 //***************************************** OUTLETS *****************************************************
+    // scroll view
+    @IBOutlet var scrollView: UIScrollView!
     
     // header
     @IBOutlet weak var headerView: UIView!
@@ -63,9 +59,9 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var daysBtn: UIButton!
     @IBOutlet weak var monthsBtn: UIButton!
     @IBOutlet weak var minLbl: UILabel!
-    @IBOutlet weak var minValueLbl: UILabel!
+    @IBOutlet var minValueTxt: UITextField!
     @IBOutlet weak var maxLbl: UILabel!
-    @IBOutlet weak var maxValueLbl: UILabel!
+    @IBOutlet var maxValueTxt: UITextField!
     
     //checkin time
     @IBOutlet weak var checkinHeaderLbl: UILabel!
@@ -80,30 +76,30 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //scroll view
+        scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+        scrollView.contentSize.height = self.view.frame.height
+        scrollViewHeight = scrollView.frame.size.height
+        
+        //check notification if keyboard shown or not
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(listingInfo3VC.showKeyboard(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(listingInfo3VC.hideKeyboard(_:)), name: UIKeyboardDidHideNotification, object: nil)
+        
         // tap to hide the keyboard
-        let hideTap = UITapGestureRecognizer(target: self, action: #selector(listingInfo3VC.hideKeyboard))
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(listingInfo3VC.hideTap))
         hideTap.numberOfTapsRequired = 1
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
         
-        //numeric keyboard for price text field
+        //numeric keyboard for price and days/months valuestext field
         priceTxt.delegate = self
         priceTxt.keyboardType = UIKeyboardType.NumberPad
+        minValueTxt.delegate = self
+        minValueTxt.keyboardType = UIKeyboardType.NumberPad
+        maxValueTxt.delegate = self
+        maxValueTxt.keyboardType = UIKeyboardType.NumberPad
         
-        
-        //range slider
-        rangeSlider.frame = CGRectMake(22, 440, self.view.frame.width - 44, 40)
-        rangeSlider.minimumValue = 0
-        rangeSlider.maximumValue = 100
-        rangeSlider.lowerValue = 0
-        rangeSlider.upperValue = 100
-        rangeSlider.trackHighlightTintColor = ownColor
-        rangeSlider.thumbTintColor = UIColor.whiteColor()
-        //rangeSlider.thumbBorderWidth = 5
-        rangeSlider.curvaceousness = 1.0
-        self.view.addSubview(rangeSlider)
-        rangeSlider.addTarget(self, action: #selector(listingInfo3VC.rangeSliderValueChanged(_:)),forControlEvents: .ValueChanged)
         
         //checkin picker
         checkinPicker = UIPickerView()
@@ -113,23 +109,6 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         checkinPicker.showsSelectionIndicator = true
         checkinTxt.inputView = checkinPicker
         
-        
-        // checkin restriction array
-        checkinRestriction.append("any time")
-        for h in hourRestriction {
-            for min in minRestriction {
-                checkinRestriction.append(h + ":" + min)
-            }
-        }
-        
-        /*
-        for object in checkinRestriction {
-            print(object)
-        }
-        print(checkinRestriction)
-        */
-        
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,12 +120,41 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     
 //------------------------------------------------------------------------------------------------------
-//***************************************** OTHERS *****************************************************
+//***************************************** KEYBOARD ***************************************************
     
     // hide the keyboard
-    func hideKeyboard() {
+    func hideTap() {
         self.view.endEditing(true)
     }
+    
+    var xScroll = CGPoint()
+    var yScroll = CGPoint()
+    
+    //show keyboard function
+    func showKeyboard(notification:NSNotification) {
+        
+        //define keyboard size
+        keyboard = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey]!.CGRectValue)!
+        
+        //move up UI
+        UIView.animateWithDuration(0.4) { () -> Void in
+            self.scrollView.frame = CGRectMake(0, -self.keyboard.height + 100, self.scrollViewHeight - self.keyboard.height, self.view.frame.size.height)
+            self.scrollView.contentSize.height = self.view.frame.height
+            self.scrollViewHeight = self.scrollView.frame.size.height
+        }
+    }
+    
+    //hide keyboard function
+    func hideKeyboard(notification:NSNotification) {
+        
+        //move down UI
+        UIView.animateWithDuration(0.4) { () -> Void in
+            self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+            self.scrollView.contentSize.height = self.view.frame.height
+            self.scrollViewHeight = self.scrollView.frame.size.height
+        }
+    }
+    
     
     
 //------------------------------------------------------------------------------------------------------
@@ -167,22 +175,9 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         daysORmonths = "months"
         print(daysORmonths)
     }
+   
     
-    // range slider min and max values displaying
-    func rangeSliderValueChanged(sender: RangeSlider) {
-        minValueLbl.text = "\(Int(rangeSlider.lowerValue))"
-        maxValueLbl.text = "\(Int(rangeSlider.upperValue))"
-        
-        //setting the min value to 1 when lowerValue = 0
-        if minValueLbl.text == "0" {
-            minValueLbl.text = "1"
-        }
-        
-        //setting the max value to 100+ when upperValue = 100
-        if maxValueLbl.text == "100" {
-            maxValueLbl.text = "100+"
-        }
-    }
+    //
     
     //--------------------------------------------PICKER VIEW METHODS----------------------------------
     
@@ -228,31 +223,41 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // list the place
     @IBAction func listBtn_clicked(sender: AnyObject) {
         
-        //restrictions on checkin text field
-        if checkinRestriction.contains(checkinTxt.text!) {
-            print(checkinTxt.text)
-        }
-        else {
-            alert("Incorrect checkin time", message: "Pleas, choose your checkin time from picker")
-            return
-        }
-        
         //data to send to data base
-        if ((priceTxt.text?.isEmpty) != nil) {
+        if priceTxt.text == "" {
             alert("Price field is empty", message: "Please, give your listing price. The dault price is 1 euro/dollar")
             priceTxt.text = "1"
-            //listing.price = "1"
         }
         listing.price = priceTxt.text!
         
         listing.checkin = checkinTxt.text!
+        
+        // days or months data
         if daysBtn.backgroundColor == ownColor {
             listing.daysORmonths = "days"
         }
         else {
             listing.daysORmonths = "months"
         }
-        listing.hostingPeriod = minValueLbl.text! + "-" + maxValueLbl.text!
+        
+        // min days/months value
+        if minValueTxt.text == "" {
+            alert("Min days field is empty", message: "Please, define min vaule. The dault min value is 1")
+            minValueTxt.text = "1"
+        }
+        
+        // max days/months value
+        if maxValueTxt.text == "" {
+            alert("Max days field is empty", message: "Please, define max vaule. The dault min value is 100+")
+            maxValueTxt.text = "100+"
+        }
+        
+        if Int(minValueTxt.text!) > Int(String(maxValueTxt.text!.characters.dropLast())) {
+            alert("Min days/months can not be more than max days/months. field is empty", message: "The dault min values are 1 and 100+")
+            minValueTxt.text = "1"
+            maxValueTxt.text = "100+"
+        }
+        listing.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
         
         print("")
         print(listing.street)

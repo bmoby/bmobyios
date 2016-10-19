@@ -60,6 +60,8 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         collectionView.dataSource = self
         self.view.addSubview(collectionView)
         
+        collectionView?.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +74,10 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 //-------------------------------------------------------------------------------------------------
 //***************************************** CELLS CONFIGURATION ***********************************
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoArray.count
+        
+        
+        return listing.photos.count + photoArray.count
+        
     }
 
     // cell's items
@@ -81,11 +86,27 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         // defining cells
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("listingPhoto", forIndexPath: indexPath) as! listingPhotoCell
         
-        if let imageView = cell.viewWithTag(1000) as? UIImageView {
-            imageView.image = photoArray[indexPath.row]
+        if listing.photos.count == 0 {
+            if let imageView = cell.viewWithTag(1000) as? UIImageView {
+                imageView.image = photoArray[indexPath.row]
+                
+                
+                /* all UIView subclasses have a method called viewWithTag(), which searches for any views inside itself (or indeed itself) with that tag number */
+            }
             
-            /* all UIView subclasses have a method called viewWithTag(), which searches for any views inside itself (or indeed itself) with that tag number */
         }
+        else {
+            cell.listingPhotoImg.image = listing.photos[indexPath.row]
+            if let imageView = cell.viewWithTag(1000) as? UIImageView {
+                imageView.image = photoArray[indexPath.row]
+                
+                
+                /* all UIView subclasses have a method called viewWithTag(), which searches for any views inside itself (or indeed itself) with that tag number */
+            }
+
+            
+        }
+        
         
         //image frame size
         cell.listingPhotoImg.frame.size = CGSize(width: cellWidth, height: cellWidth)
@@ -194,9 +215,8 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 //*********************************** GOING TO THE NEXT CONTROLLER ********************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
-        // send data to database
-        print(" ")
-        print(photoArray)
+        //clean array to don not append twice when comming back from next VC and then going to it 
+        listing.photos.removeAll()
         
         if self.photoArray.contains(self.mainPhotoDB) {
             
@@ -216,8 +236,10 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         
         
         print(" ")
+        print("Picked photos:", photoArray)
+        print("")
         print(mainPhoto)
-        print(listing.photos)
+        print("listingClass saved photos:", listing.photos)
     
         
         // going to next controller: listingInfo3VC

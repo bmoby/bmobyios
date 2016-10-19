@@ -19,7 +19,6 @@
 		87E74B471DAD1EAA0058B281 /* propertyTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B461DAD1EAA0058B281 /* propertyTypeVC.swift */; };
 		87E74B491DAD33430058B281 /* listingTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B481DAD33430058B281 /* listingTypeCell.swift */; };
 		87E74B4B1DAD33790058B281 /* propertyTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */; };
-		87E74B4D1DAD492B0058B281 /* rangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B4C1DAD492B0058B281 /* rangeSlider.swift */; };
 		87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */; };
 		87E74B511DAE12110058B281 /* listingInfo1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B501DAE12110058B281 /* listingInfo1VC.swift */; };
 		87E74B531DAE12250058B281 /* listingInfo2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B521DAE12250058B281 /* listingInfo2VC.swift */; };
@@ -64,7 +63,6 @@
 		87E74B461DAD1EAA0058B281 /* propertyTypeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = propertyTypeVC.swift; sourceTree = "<group>"; };
 		87E74B481DAD33430058B281 /* listingTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingTypeCell.swift; sourceTree = "<group>"; };
 		87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = propertyTypeCell.swift; sourceTree = "<group>"; };
-		87E74B4C1DAD492B0058B281 /* rangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rangeSlider.swift; sourceTree = "<group>"; };
 		87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo3VC.swift; sourceTree = "<group>"; };
 		87E74B501DAE12110058B281 /* listingInfo1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo1VC.swift; sourceTree = "<group>"; };
 		87E74B521DAE12250058B281 /* listingInfo2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo2VC.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				F2EF89021DA4F76F0099F1EE /* AppDelegate.swift */,
-				87E74B4C1DAD492B0058B281 /* rangeSlider.swift */,
 				F27C93E91DAB97C300FB5457 /* Main.storyboard */,
 				870B6DAC1DAB9FD1004F193A /* createListing */,
 				F2EF89091DA4F76F0099F1EE /* Assets.xcassets */,
@@ -294,7 +291,6 @@
 				87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */,
 				87E74B511DAE12110058B281 /* listingInfo1VC.swift in Sources */,
 				87035D391DB6069A004B52D2 /* listingClass.swift in Sources */,
-				87E74B4D1DAD492B0058B281 /* rangeSlider.swift in Sources */,
 				87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */,
 				F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */,
 				F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */,
@@ -422,6 +418,8 @@
 		F2EF89121DA4F76F0099F1EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -431,12 +429,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = os.bmobyios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		F2EF89131DA4F76F0099F1EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -446,6 +448,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = os.bmobyios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

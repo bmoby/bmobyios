@@ -146,7 +146,7 @@ class listingAmenitiesVC: UIViewController {
         
         // chooseImg image view background color
         for object in chooseImg {
-            object.backgroundColor = grayColor
+            
         }
         
         // completing text array: chooseTxt
@@ -158,12 +158,24 @@ class listingAmenitiesVC: UIViewController {
         
         // Tap gesture recognizer: change the background color of chooseImg items background color
         for object in chooseImg {
+            
+            object.backgroundColor = grayColor
+            
             let tapImg =  UITapGestureRecognizer(target: self, action: #selector(listingAmenitiesVC.tapImg(_:)))
             tapImg.numberOfTapsRequired = 1
             object.userInteractionEnabled = true
             object.addGestureRecognizer(tapImg)
         }
-
+        
+        // displaying choosen amenities by host once if went back to previous controller and came back to this one
+        for object in listing.amenities {
+            for (img, txt) in zip(chooseImg, chooseTxt) {
+                if object == txt {
+                    img.backgroundColor = ownColor
+                }
+            }
+        }
+        
         
     }
 
