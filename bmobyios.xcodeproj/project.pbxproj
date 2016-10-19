@@ -10,6 +10,7 @@
 		87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */; };
 		87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */; };
 		87035D391DB6069A004B52D2 /* listingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D381DB6069A004B52D2 /* listingClass.swift */; };
+		87035D3B1DB7DE4E004B52D2 /* listingInfo1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87035D3A1DB7DE4E004B52D2 /* listingInfo1VC.swift */; };
 		870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B6DAF1DABA060004F193A /* adressMapVC.swift */; };
 		87E74B331DABA1070058B281 /* createListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E74B321DABA1070058B281 /* createListing.storyboard */; };
 		87E74B351DABA1A70058B281 /* adressSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTVC.swift */; };
@@ -20,7 +21,6 @@
 		87E74B491DAD33430058B281 /* listingTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B481DAD33430058B281 /* listingTypeCell.swift */; };
 		87E74B4B1DAD33790058B281 /* propertyTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */; };
 		87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */; };
-		87E74B511DAE12110058B281 /* listingInfo1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B501DAE12110058B281 /* listingInfo1VC.swift */; };
 		87E74B531DAE12250058B281 /* listingInfo2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B521DAE12250058B281 /* listingInfo2VC.swift */; };
 		87E74B551DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */; };
 		F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27C93CB1DA6551400FB5457 /* languageCellVC.swift */; };
@@ -54,6 +54,7 @@
 		87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = listingAmenitiesVC.swift; path = /Users/Lors/bmobyios/bmobyios/listingAmenitiesVC.swift; sourceTree = "<absolute>"; };
 		87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingPhotosVC.swift; sourceTree = "<group>"; };
 		87035D381DB6069A004B52D2 /* listingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingClass.swift; sourceTree = "<group>"; };
+		87035D3A1DB7DE4E004B52D2 /* listingInfo1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo1VC.swift; sourceTree = "<group>"; };
 		870B6DAF1DABA060004F193A /* adressMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressMapVC.swift; sourceTree = "<group>"; };
 		87E74B321DABA1070058B281 /* createListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = createListing.storyboard; sourceTree = "<group>"; };
 		87E74B341DABA1A70058B281 /* adressSearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTVC.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		87E74B481DAD33430058B281 /* listingTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingTypeCell.swift; sourceTree = "<group>"; };
 		87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = propertyTypeCell.swift; sourceTree = "<group>"; };
 		87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo3VC.swift; sourceTree = "<group>"; };
-		87E74B501DAE12110058B281 /* listingInfo1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo1VC.swift; sourceTree = "<group>"; };
 		87E74B521DAE12250058B281 /* listingInfo2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listingInfo2VC.swift; sourceTree = "<group>"; };
 		87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGHorizontalLinearFlowLayout.swift; sourceTree = "<group>"; };
 		F27C93CB1DA6551400FB5457 /* languageCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = languageCellVC.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 				87E74B481DAD33430058B281 /* listingTypeCell.swift */,
 				87E74B461DAD1EAA0058B281 /* propertyTypeVC.swift */,
 				87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */,
-				87E74B501DAE12110058B281 /* listingInfo1VC.swift */,
+				87035D3A1DB7DE4E004B52D2 /* listingInfo1VC.swift */,
 				87E74B521DAE12250058B281 /* listingInfo2VC.swift */,
 				87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */,
 				87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */,
@@ -289,13 +289,13 @@
 				87E74B531DAE12250058B281 /* listingInfo2VC.swift in Sources */,
 				F2EF892E1DA516890099F1EE /* registrationVC.swift in Sources */,
 				87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */,
-				87E74B511DAE12110058B281 /* listingInfo1VC.swift in Sources */,
 				87035D391DB6069A004B52D2 /* listingClass.swift in Sources */,
 				87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */,
 				F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */,
 				F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */,
 				87E74B371DABA1E20058B281 /* annotationNSO.swift in Sources */,
 				87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */,
+				87035D3B1DB7DE4E004B52D2 /* listingInfo1VC.swift in Sources */,
 				87E74B4B1DAD33790058B281 /* propertyTypeCell.swift in Sources */,
 				870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */,
 				87E74B551DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift in Sources */,

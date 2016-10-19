@@ -491,20 +491,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rooms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11x-uY-5f7">
-                                <rect key="frame" x="65" y="217" width="183" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosting capacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HJD-Rv-CIe">
-                                <rect key="frame" x="65" y="287" width="183" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EB2-Om-hFe">
                                 <rect key="frame" x="0.0" y="538" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -528,8 +514,8 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kitchen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j72-wV-Yrg">
-                                <rect key="frame" x="65" y="361" width="183" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rooms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11x-uY-5f7">
+                                <rect key="frame" x="65" y="217" width="183" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -564,11 +550,18 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="lbl" destination="P7T-kW-rEz" id="n3C-dK-bcu"/>
+                                            <outlet property="lbl" destination="P7T-kW-rEz" id="2Is-Zn-VfL"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosting capacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HJD-Rv-CIe">
+                                <rect key="frame" x="65" y="287" width="183" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dha-EJ-swC">
                                 <rect key="frame" x="20" y="308" width="280" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -603,6 +596,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kitchen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j72-wV-Yrg">
+                                <rect key="frame" x="20" y="356" width="280" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="pDp-vA-ief">
                                 <rect key="frame" x="20" y="383" width="280" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -682,14 +682,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="bathroomHeaderLbl" destination="WLw-F2-0Kk" id="X6n-Gk-CtH"/>
-                        <outlet property="collectionViewBathrooms" destination="H5k-D2-ZMV" id="9Kh-QD-UBZ"/>
-                        <outlet property="collectionViewHostingCapacity" destination="dha-EJ-swC" id="Iuu-0g-R8j"/>
+                        <outlet property="bathroomLbl" destination="WLw-F2-0Kk" id="aHG-si-fKw"/>
+                        <outlet property="collectioViewHostingCapacity" destination="dha-EJ-swC" id="J3r-nI-pHP"/>
+                        <outlet property="collectionViewBathroom" destination="H5k-D2-ZMV" id="2hM-dK-c8c"/>
                         <outlet property="collectionViewKitchen" destination="pDp-vA-ief" id="2Qk-Vl-CqX"/>
-                        <outlet property="collectionViewRooms" destination="3Yp-6r-QOA" id="uUt-b8-LFW"/>
-                        <outlet property="hostingCapacityHeaderLbl" destination="HJD-Rv-CIe" id="9v3-Lc-3hY"/>
-                        <outlet property="kitchenHeaderLbl" destination="j72-wV-Yrg" id="f9A-M9-Ye6"/>
-                        <outlet property="roomHeaderLbl" destination="11x-uY-5f7" id="3wr-bV-qxm"/>
+                        <outlet property="collectionViewRoom" destination="3Yp-6r-QOA" id="zDA-8g-T1P"/>
+                        <outlet property="hostingCapacityLbl" destination="HJD-Rv-CIe" id="A77-E8-wuM"/>
+                        <outlet property="kitchenLbl" destination="j72-wV-Yrg" id="fAU-Tz-zDB"/>
+                        <outlet property="listingInfo1Lbl" destination="j1H-Df-1Co" id="TE5-u0-yMa"/>
+                        <outlet property="listingInfo1View" destination="j1H-Df-1Co" id="dP0-iy-Ujh"/>
+                        <outlet property="nextBtn" destination="EB2-Om-hFe" id="Ai3-Ik-MwW"/>
+                        <outlet property="roomLbl" destination="11x-uY-5f7" id="fZP-6A-G74"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzI-lf-NFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
