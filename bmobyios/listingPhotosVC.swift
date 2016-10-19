@@ -211,15 +211,17 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
 
+    
 //-------------------------------------------------------------------------------------------------
 //*********************************** GOING TO THE NEXT CONTROLLER ********************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
-        //clean array to don not append twice when comming back from next VC and then going to it 
+        //clean array to don not append twice when comming back from next VC and then going to it
         listing.photos.removeAll()
         
         if self.photoArray.contains(self.mainPhotoDB) {
             
+            // appending the main photo of listing at first row of listing.photos
             let row = self.photoArray.indexOf(self.mainPhotoDB)
             self.photoArray.removeAtIndex(row!)
             listing.photos.append(self.mainPhotoDB)
@@ -234,14 +236,13 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
         
-        
         print(" ")
         print("Picked photos:", photoArray)
+        photoArray.removeAll()
         print("")
         print(mainPhoto)
         print("listingClass saved photos:", listing.photos)
     
-        
         // going to next controller: listingInfo3VC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo3VC") as! listingInfo3VC
         self.navigationController?.pushViewController(next, animated: true)
