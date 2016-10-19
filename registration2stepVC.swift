@@ -96,6 +96,11 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         self.avatarImg.layer.masksToBounds = true
         setAvatar()
         setValuesIfExist()
+        self.navigationController?.navigationBar.hidden = true
+        
+        self.firstNameTxtF.delegate = self
+        self.lastNameTxtF.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,6 +131,18 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         if self.userStep2.birthDate != nil {
             self.birthDateTxtF.text = self.userStep2.birthDate
         }
+        if self.userStep2.gender != nil {
+            if self.userStep2.gender == "man" {
+                self.manBtn.backgroundColor = UIColor.cyanColor()
+                self.womanBtn.backgroundColor = UIColor.grayColor()
+                self.userStep2.gender = "man"
+            } else {
+                self.womanBtn.backgroundColor = UIColor.purpleColor()
+                self.manBtn.backgroundColor = UIColor.grayColor()
+                self.userStep2.gender = "woman"
+
+            }
+        }
     }
 
 
@@ -154,6 +171,15 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         alert.addAction(alertAction)
         presentViewController(alert, animated: true, completion: nil)
         
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == self.firstNameTxtF {
+            self.lastNameTxtF.becomeFirstResponder()
+            return true 
+        } else {
+            return true
+        }
     }
     
     
