@@ -129,6 +129,7 @@ class listingAmenitiesVC: UIViewController {
     // next button
     @IBOutlet var nextBtn: UIButton!
     
+    @IBOutlet var backBtn: UIButton!
     
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
@@ -144,11 +145,6 @@ class listingAmenitiesVC: UIViewController {
         // completing image view array: chooseImg
         chooseImg = [breakfastImg, wifiInternetImg, wheelChairAccessibleImg, tvImg, lockForBedroomImg, elevatorImg, dryerImg, washerImg, ironImg, hairDryerImg, smokingAllowedImg, intercomImg, airConditionerImg, familyKidsImg, petsAllowedImg, parkingImg, indoorFireplaceImg, gymImg, poolImg, saunaImg, hammamImg, jacuzziImg]
         
-        // chooseImg image view background color
-        for object in chooseImg {
-            
-        }
-        
         // completing text array: chooseTxt
         let wheelchairAccessible = wheelchairLbl.text! + accessibleLbl.text!
         let lockForBedroom = lockForLbl.text! + " " + bedroomLbl.text!
@@ -156,11 +152,13 @@ class listingAmenitiesVC: UIViewController {
         let indoorFireplace = indoorLbl.text! + " " + fireplaceLbl.text!
         chooseTxt = [breakfastLbl.text!, wifiInternetLbl.text!, wheelchairAccessible, tvLbl.text!, lockForBedroom, elevatorLbl.text!, dryerLbl.text!, washerLbl.text!, ironLbl.text!, hairDryerLbl.text!, smokingAllowed, intercomLbl.text!, airConditionerLbl.text!, familyKidLbl.text!, petsAllowedLbl.text!, parkingLbl.text!, indoorFireplace, gymLbl.text!, poolLbl.text!, saunaLbl.text!, hammamLbl.text!, jacuzziLbl.text!]
         
-        // Tap gesture recognizer: change the background color of chooseImg items background color
+        
         for object in chooseImg {
-            
+
+            // imageview background color
             object.backgroundColor = grayColor
             
+            // Tap gesture recognizer: change the background color of chooseImg items background color
             let tapImg =  UITapGestureRecognizer(target: self, action: #selector(listingAmenitiesVC.tapImg(_:)))
             tapImg.numberOfTapsRequired = 1
             object.userInteractionEnabled = true
@@ -215,14 +213,30 @@ class listingAmenitiesVC: UIViewController {
             }
         }
         
-        // send data to database
-        print("")
-        print(listing.amenities)
-        
         // going to next controller: listingPhotosVC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
         self.navigationController?.pushViewController(next, animated: true)
     }
+    
+    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        
+        //cleaning the amenities array
+        listing.amenities.removeAll(keepCapacity: false)
+        
+        // picking up the string from chooseTxt that matchs with background color: append to amenities array
+        for (txt, img) in zip(chooseTxt, chooseImg) {
+            if img.backgroundColor == ownColor {
+                listing.amenities.append(txt)
+            }
+        }
+        
+        
+        // going back: listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
     
 }
 

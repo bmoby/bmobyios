@@ -52,6 +52,7 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     //button to go to the next controller
     @IBOutlet var nextBtn: UIButton!
     
+    @IBOutlet var backBtn: UIButton!
 
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
@@ -303,13 +304,6 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
             couch = "0"
             matress = "0"
             airMatress = "0"
-            
-            print(twinBed)
-            print(singleBed)
-            print(couch)
-            print(matress)
-            print(airMatress)
-            
         }
     
         // if all variables sending data are zero: user doesn't choose a place to sleep
@@ -324,19 +318,11 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
 
             //send data
-            
             listing.twinBed = twinBed
             listing.singleBed = singleBed
             listing.couch = couch
             listing.mattress = matress
             listing.airMattress = airMatress
-            
-            print("")
-            print(listing.twinBed)
-            print(listing.singleBed)
-            print(listing.couch)
-            print(listing.mattress)
-            print(listing.airMattress)
             
             // going to next controller: listingAmenitiesVC
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as? listingAmenitiesVC
@@ -344,6 +330,13 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
             
         }
     }
+    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        // going back: listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
 }
 
 

@@ -70,6 +70,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // list button
     @IBOutlet weak var listBtn: UIButton!
     
+    @IBOutlet var backBtn_clicked: UIButton!
     
 //------------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT *****************************************************
@@ -165,7 +166,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         daysBtn.backgroundColor = ownColor
         monthsBtn.backgroundColor = grayColor
         daysORmonths = "days"
-        print(daysORmonths)
+
     }
     
     // user chooses to host for some months
@@ -173,7 +174,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         daysBtn.backgroundColor = grayColor
         monthsBtn.backgroundColor = ownColor
         daysORmonths = "months"
-        print(daysORmonths)
+        
     }
    
     
@@ -259,48 +260,19 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
         listing.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
         
-        print("")
-        print(listing.street)
-        print(listing.postalCode)
-        print(listing.city)
-        print(listing.country)
-        print(listing.latitude)
-        print(listing.longitude)
         
-        print("")
-        print(listing.listingType)
-        print(listing.propertyType)
-        
-        print("")
-        print(listing.rooms)
-        print(listing.hostingCapacity)
-        print(listing.kitchens)
-        print(listing.bathrooms)
-        
-        print("")
-        print(listing.twinBed)
-        print(listing.singleBed)
-        print(listing.couch)
-        print(listing.mattress)
-        print(listing.airMattress)
-        
-        print("")
-        print(listing.amenities)
-        
-        print("")
-        print(listing.photos)
-        
-        print(" ")
-        print(listing.price)
-        print(listing.checkin)
-        print(listing.daysORmonths)
-        print(listing.hostingPeriod)
-        
-        //listing.save()
+        // send and save data
+        listing.save()
         
     }
     
     
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        // going back: listingPhotosVC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
+        self.navigationController?.pushViewController(next, animated: true)
+
+    }
     
     
 }

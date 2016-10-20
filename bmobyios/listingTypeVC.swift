@@ -25,6 +25,7 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var headerLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet var backBtn: UIButton!
     
 //--------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ************************************************
@@ -79,14 +80,19 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             // data to send to database
             listing.listingType = (cell?.listingTypeLbl.text)!
-            print("")
-            print(listing.listingType)
             
             // going to the next controller: TVC of property type
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
             self.navigationController?.pushViewController(next, animated: true)
         }
     }
+    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        // going back: listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
 }
 
 

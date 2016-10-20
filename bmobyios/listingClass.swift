@@ -41,6 +41,7 @@ class listingClass {
     
     //listing photos
     var photos = [UIImage]()
+    var mainPhoto = UIImage(named: "adressIcon")
     var photoPFFile = [PFFile]()
     /*
     var photo1 : UIImage!
@@ -158,16 +159,25 @@ class listingClass {
         }
         
         //listing photos
+        if self.mainPhoto != UIImage(named: "adressIcon") {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.mainPhoto!, 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "mainPhoto", data: mainPhotoData!)
+            object["mainPhoto"] = mainPhotoFile
+        }
+
+        
         if self.photos.count > 0 {
             
             //declaring images data from images UIImageView
             let mainPhotoData = UIImageJPEGRepresentation(self.photos[0], 0.5)
             
             //converting images to PFFile to send to the DB
-            //let mainPhotoFile1 = photoPFFile[0].(name: "default", data: mainPhotoData!)
-            
             let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
-            object["listingMainPhoto"] = mainPhotoFile
+            object["listinPhoto1"] = mainPhotoFile
         }
         if self.photos.count > 1 {
             

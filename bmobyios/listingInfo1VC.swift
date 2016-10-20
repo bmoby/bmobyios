@@ -52,6 +52,7 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     //button to go to the next controller
     @IBOutlet var nextBtn: UIButton!
     
+    @IBOutlet var backBtn: UIButton!
     
     //-------------------------------------------------------------------------------------------------
     //***************************************** DEFAULT ***********************************************
@@ -280,33 +281,25 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
             kitchen = "0"
             bathroom = "0"
             
-            print("")
-            print(room)
-            print(hostingCapacity)
-            print(kitchen)
-            print(bathroom)
-            
-            
-        }
+    }
         
         //send data
-            
         listing.rooms = room
         listing.hostingCapacity = hostingCapacity
         listing.kitchens = kitchen
-        listing.bathrooms = bathroom
         
-        print("")
-        print(listing.rooms)
-        print(listing.hostingCapacity)
-        print(listing.kitchens)
-        print(listing.bathrooms)
-            
         // going to next controller: listingAmenitiesVC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as?listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as? listingInfo2VC
         self.navigationController?.pushViewController(next!, animated: true)
         
     }
+    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        // going back: listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
 }
 
 class collectionViewCell: UICollectionViewCell {

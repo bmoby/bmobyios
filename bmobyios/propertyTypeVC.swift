@@ -27,7 +27,7 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet var backBtn: UIButton!
 //---------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT *************************************************
 
@@ -86,8 +86,6 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // data to send to database
             listing.propertyType = (cell?.propertyTypeLbl?.text)!
-            print("")
-            print(listing.propertyType)
             
             // going to the next controller: VC listingInfo1VC
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
@@ -95,8 +93,10 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-
-  
-    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        // going back: listingInfo2VC
+        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
 
 }

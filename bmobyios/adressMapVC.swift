@@ -111,7 +111,6 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         // longitude and latitude
         latitude = "\(location.coordinate.latitude)"
         longitude = "\(location.coordinate.longitude)"
-        print(latitude, longitude)
         
         
         //getting the info from geolocation
@@ -132,7 +131,6 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
             //attributing the informations to the text view when geolocation finds adress
             self.fullAdress = self.street + ", " + self.postalCode + " " + self.city + ", " + self.country
             self.adressTxt.text = self.fullAdress
-            print(self.street, self.city, self.postalCode, self.country)
             
             //adding title and subtitle to current location
             let currentLocation: MKUserLocation = self.mapView.userLocation
@@ -196,15 +194,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         listing.country = country
         listing.latitude = latitude
         listing.longitude = longitude
-        print("")
-        print(listing.street)
-        print(listing.postalCode)
-        print(listing.city)
-        print(listing.country)
-        print(listing.latitude)
-        print(listing.longitude)
-        
     }
+    
 }
 
 
@@ -240,12 +231,10 @@ extension adressMapVC: HandleMapSearch {
                 //attributing the informations to the text view when manually adress found
                 self.fullAdress = self.street + ", " + self.postalCode + " " + self.city + ", " + self.country
                 self.adressTxt.text = self.fullAdress
-                print(self.street, self.city, self.postalCode, self.country)
                 
                 // longitude and latitude
                 latitude = "\(placemark.location?.coordinate.latitude)"
                 longitude = "\(placemark.location?.coordinate.longitude)"
-                print(latitude, longitude)
             }            
         }
         
