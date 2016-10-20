@@ -10,7 +10,7 @@
 		60C5E2ABC7763779DC608094 /* Pods_bmobyios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B230A8913B718AD508D7447 /* Pods_bmobyios.framework */; };
 		870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870B6DAF1DABA060004F193A /* adressMapVC.swift */; };
 		87E74B331DABA1070058B281 /* createListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E74B321DABA1070058B281 /* createListing.storyboard */; };
-		87E74B351DABA1A70058B281 /* adressSearchTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTC.swift */; };
+		87E74B351DABA1A70058B281 /* adressSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B341DABA1A70058B281 /* adressSearchTVC.swift */; };
 		87E74B371DABA1E20058B281 /* annotationNSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B361DABA1E20058B281 /* annotationNSO.swift */; };
 		87E74B391DABA2150058B281 /* adressAnnotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E74B381DABA2150058B281 /* adressAnnotView.swift */; };
 		F2438D331DAFD2D800E41044 /* homePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2438D321DAFD2D800E41044 /* homePage.swift */; };
@@ -47,7 +47,7 @@
 		1B230A8913B718AD508D7447 /* Pods_bmobyios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmobyios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870B6DAF1DABA060004F193A /* adressMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressMapVC.swift; sourceTree = "<group>"; };
 		87E74B321DABA1070058B281 /* createListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = createListing.storyboard; sourceTree = "<group>"; };
-		87E74B341DABA1A70058B281 /* adressSearchTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTC.swift; sourceTree = "<group>"; };
+		87E74B341DABA1A70058B281 /* adressSearchTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressSearchTVC.swift; sourceTree = "<group>"; };
 		87E74B361DABA1E20058B281 /* annotationNSO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = annotationNSO.swift; sourceTree = "<group>"; };
 		87E74B381DABA2150058B281 /* adressAnnotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adressAnnotView.swift; sourceTree = "<group>"; };
 		B77D994D97BC0913A4E441A9 /* Pods-bmobyios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmobyios.release.xcconfig"; path = "Pods/Target Support Files/Pods-bmobyios/Pods-bmobyios.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,11 +121,22 @@
 		870B6DAC1DAB9FD1004F193A /* createListing */ = {
 			isa = PBXGroup;
 			children = (
-				870B6DAF1DABA060004F193A /* adressMapVC.swift */,
 				87E74B321DABA1070058B281 /* createListing.storyboard */,
-				87E74B341DABA1A70058B281 /* adressSearchTC.swift */,
+				87035D381DB6069A004B52D2 /* listingClass.swift */,
+				870B6DAF1DABA060004F193A /* adressMapVC.swift */,
+				87E74B341DABA1A70058B281 /* adressSearchTVC.swift */,
 				87E74B361DABA1E20058B281 /* annotationNSO.swift */,
 				87E74B381DABA2150058B281 /* adressAnnotView.swift */,
+				87E74B441DACF1D50058B281 /* listingTypeVC.swift */,
+				87E74B481DAD33430058B281 /* listingTypeCell.swift */,
+				87E74B461DAD1EAA0058B281 /* propertyTypeVC.swift */,
+				87E74B4A1DAD33790058B281 /* propertyTypeCell.swift */,
+				87035D3A1DB7DE4E004B52D2 /* listingInfo1VC.swift */,
+				87E74B521DAE12250058B281 /* listingInfo2VC.swift */,
+				87E74B541DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift */,
+				87035D321DB13E15004B52D2 /* listingAmenitiesVC.swift */,
+				87035D361DB39A9F004B52D2 /* listingPhotosVC.swift */,
+				87E74B4E1DAD5C630058B281 /* listingInfo3VC.swift */,
 			);
 			name = createListing;
 			sourceTree = "<group>";
@@ -159,9 +170,9 @@
 		F2EF89011DA4F76F0099F1EE /* bmobyios */ = {
 			isa = PBXGroup;
 			children = (
-				870B6DAC1DAB9FD1004F193A /* createListing */,
 				F2EF89021DA4F76F0099F1EE /* AppDelegate.swift */,
 				F27C93E91DAB97C300FB5457 /* Main.storyboard */,
+				870B6DAC1DAB9FD1004F193A /* createListing */,
 				F2EF89091DA4F76F0099F1EE /* Assets.xcassets */,
 				F2EF890B1DA4F76F0099F1EE /* LaunchScreen.storyboard */,
 				F2EF890E1DA4F76F0099F1EE /* Info.plist */,
@@ -336,18 +347,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87E74B471DAD1EAA0058B281 /* propertyTypeVC.swift in Sources */,
 				F27C93D21DA6917E00FB5457 /* languageTVC.swift in Sources */,
 				F24F37851DB10F840044EED3 /* emailNotVerifiedVC.swift in Sources */,
 				F2EF89151DA4F94B0099F1EE /* connectionVC.swift in Sources */,
 				F24F37871DB600190044EED3 /* forgotVC.swift in Sources */,
 				F2EF892E1DA516890099F1EE /* registrationVC.swift in Sources */,
+				87035D371DB39A9F004B52D2 /* listingPhotosVC.swift in Sources */,
+				87035D391DB6069A004B52D2 /* listingClass.swift in Sources */,
+				87E74B4F1DAD5C630058B281 /* listingInfo3VC.swift in Sources */,
 				F27C93CC1DA6551400FB5457 /* languageCellVC.swift in Sources */,
 				F2EF89301DA536CD0099F1EE /* registration2stepVC.swift in Sources */,
 				87E74B371DABA1E20058B281 /* annotationNSO.swift in Sources */,
+				87035D331DB13E15004B52D2 /* listingAmenitiesVC.swift in Sources */,
+				87035D3B1DB7DE4E004B52D2 /* listingInfo1VC.swift in Sources */,
+				87E74B4B1DAD33790058B281 /* propertyTypeCell.swift in Sources */,
 				870B6DB01DABA060004F193A /* adressMapVC.swift in Sources */,
-				87E74B351DABA1A70058B281 /* adressSearchTC.swift in Sources */,
+				87E74B551DAF76460058B281 /* LGHorizontalLinearFlowLayout.swift in Sources */,
+				87E74B451DACF1D50058B281 /* listingTypeVC.swift in Sources */,
+				87E74B351DABA1A70058B281 /* adressSearchTVC.swift in Sources */,
 				F27C93D61DAA9D9800FB5457 /* user.swift in Sources */,
 				F27C93D41DA6BA2C00FB5457 /* language.swift in Sources */,
+				87E74B491DAD33430058B281 /* listingTypeCell.swift in Sources */,
 				F2EF89031DA4F76F0099F1EE /* AppDelegate.swift in Sources */,
 				87E74B391DABA2150058B281 /* adressAnnotView.swift in Sources */,
 				F2EF89361DA56DCE0099F1EE /* registration3stepVC.swift in Sources */,

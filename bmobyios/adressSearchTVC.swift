@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class adressSearchTC: UITableViewController {
+class adressSearchTVC: UITableViewController {
     
     
     weak var handleMapSearchDelegate: HandleMapSearch?
@@ -50,7 +50,7 @@ class adressSearchTC: UITableViewController {
     
 }
 
-extension adressSearchTC : UISearchResultsUpdating {
+extension adressSearchTVC : UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         guard let mapView = mapView,
@@ -73,7 +73,7 @@ extension adressSearchTC : UISearchResultsUpdating {
     
 }
 
-extension adressSearchTC {
+extension adressSearchTVC {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchingItems.count
@@ -89,7 +89,7 @@ extension adressSearchTC {
     
 }
 
-extension adressSearchTC {
+extension adressSearchTVC {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
