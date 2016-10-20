@@ -252,6 +252,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     
     
+    
     // -----------------------------------------------------------------------------------
     //***************************** PREPARE FOR SEGUE ************************************
     
