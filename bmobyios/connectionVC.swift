@@ -9,8 +9,9 @@
 import UIKit
 import Parse
 import ParseFacebookUtilsV4
+import mailgun
 
-class connectionVC: UIViewController {
+class connectionVC: UIViewController, UITextFieldDelegate {
     
     
     
@@ -21,16 +22,15 @@ class connectionVC: UIViewController {
     
         @IBOutlet weak var titleLbl: UILabel!
     
-        // SignUp btn outlet and action ---------------------------
+            // SignUp btn outlet and action ---------------------------
             @IBOutlet weak var signupBtn: UIButton!
-    
             @IBAction func signupClicked(sender: AnyObject) {
                 
                 // ACTION
             }
     
     
-        // Facebook  btn outlets and actions ----------------------
+            // Facebook  btn outlets and actions ----------------------
             @IBAction func facebookLoginBtnClicked(sender: AnyObject) {
                 
                 // Check if the current user is signed in or not to act
@@ -53,9 +53,7 @@ class connectionVC: UIViewController {
                                     let navigation = UINavigationController(rootViewController: viewController)
                                     self.presentViewController(navigation, animated: true, completion: nil)
                                 })
-                                
                             }
-
                         }
                     }
                 }
@@ -72,18 +70,17 @@ class connectionVC: UIViewController {
 
                             self.presentViewController(navigation, animated: true, completion: nil)
                         })
-                        
                     }
                 }
             }
 
     
-        // Login & password text fields ---------------------------
+            // Login & password text fields ---------------------------
             @IBOutlet weak var loginTxtF: UITextField!
             @IBOutlet weak var passwordTxtF: UITextField!
     
     
-        // Login & forgot btns actions & outlets ------------------
+            // Login & forgot btns actions & outlets ------------------
             @IBOutlet weak var loginBtn: UIButton!
             @IBAction func loginClicked(sender: AnyObject) {
                 
@@ -91,11 +88,19 @@ class connectionVC: UIViewController {
                 let password = self.passwordTxtF.text
                 
                 // Validate the text fields
-                if username!.characters.count < 5 {
-                    print("username must be longer thant 5 chars")
-                } else if password!.characters.count < 8 {
-                    print("password must be longer than 8 chars")
+                if (!restrictEmail(self.loginTxtF.text!) || self.loginTxtF.text == "") && (password!.characters.count < 8 || self.passwordTxtF.text == ""){
                     
+                    self.alerter("Incorrect Email and Password", message: "Please enter a correct email and enter a password longer or equal to 8 characters.")
+                    return
+                    
+                } else if password!.characters.count < 8 || self.passwordTxtF.text == ""{
+                     self.alerter("Incorrect Password", message: "Password most contain at least 8 characters.")
+                    return
+                } else if !restrictEmail(self.loginTxtF.text!) || self.loginTxtF.text == ""{
+                    self.alerter("Incorrect Email", message: "Please enter a correct email.")
+                    return
+
+                
                 } else {
                     // Run a spinner to show a task in progress
                     let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
@@ -104,6 +109,7 @@ class connectionVC: UIViewController {
                     // Send a request to login
                     PFUser.logInWithUsernameInBackground(username!, password: password!, block: { (user, error) -> Void in
                         
+                    if error == nil {
                         // Stop the spinner
                         spinner.stopAnimating()
                         if (user?.valueForKey("emailVerified")?.boolValue == true){
@@ -126,26 +132,26 @@ class connectionVC: UIViewController {
                                 let navigation = UINavigationController(rootViewController: viewController)
                                 self.presentViewController(navigation, animated: true, completion: nil)
                             })
-
                         }
-                    })
-                }
-                
+                    } else {
+                        self.alerter("USER NOT FOUD", message: "There is no user \(self.loginTxtF.text) in our DB or the password did not match! Please try again or register.")
+                    }
+                })
             }
+        }
     
-            @IBOutlet weak var forgotBtn: UIButton!
-            @IBAction func forgotClicked(sender: AnyObject) {
-                
-                // ACTION
-            }
+        // Outlet and action of forgot button
+        @IBOutlet weak var forgotBtn: UIButton!
+        @IBAction func forgotClicked(sender: AnyObject) {
+            
+            // ACTION
+        }
     
     
     
     // -----------------------------------------------------------------------------------
     //****************************** DEFAULT ACTIONS *************************************
 
-    
-    
 
     
     override func viewDidLoad() {
@@ -153,10 +159,9 @@ class connectionVC: UIViewController {
         super.viewDidLoad()
         self.reloadInputViews()
         // Do any additional setup after loading the view.
-        
-        if PFUser.currentUser() != nil {
-            print(PFUser.currentUser()?.email)
-        }
+        self.navigationController?.navigationBar.hidden = true
+        self.loginTxtF.delegate = self
+        self.passwordTxtF.delegate = self
         
     }
 
@@ -174,6 +179,24 @@ class connectionVC: UIViewController {
     
     
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == self.loginTxtF {
+            
+            self.passwordTxtF.becomeFirstResponder()
+            
+            return true
+        } else {
+            textField.becomeFirstResponder()
+            performAction()
+            return false
+        }
+    }
+    
+    func performAction() {
+        self.loginClicked(self.loginBtn)
+    }
+    
+    
     // Method to end the editing and hide the Keyboard
     func hideKeyboard(){
         
@@ -182,10 +205,30 @@ class connectionVC: UIViewController {
     
     
     // Method to hide the keyboard when the screen is touched
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         // Call function to hide the keyboard when touch began
         hideKeyboard()
+    }
+    
+    func alerter(name: String, message: String){
+        
+        let alert = UIAlertController(title: name, message: message, preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(alertAction)
+        presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    // Email restriction function
+    func restrictEmail(email: String) -> Bool{
+        
+        let regex = "[A-Z0-9a-z._-]{3}+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2}"
+        let range = email.rangeOfString(regex, options: .RegularExpressionSearch)
+        if range != nil {
+            return true
+        }else {
+            return false
+        }
     }
 }

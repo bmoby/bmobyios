@@ -22,30 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let parseConfig = ParseClientConfiguration { (ParseMutableClientConfiguration) in
             
             //Accessing heroku App vio ID & Keys
-            ParseMutableClientConfiguration.applicationId = "bmobyiosOS1107198730091989"
+            ParseMutableClientConfiguration.applicationId = "ms30091989mo11071987Bmoby"
             ParseMutableClientConfiguration.clientKey = "bmobyKeyBmobyiOsOS1107198730091989"
-            ParseMutableClientConfiguration.server = "http://bmobyios.herokuapp.com/parse"
+            ParseMutableClientConfiguration.server = "http://bmoby.herokuapp.com/parse"
         }
         
         Parse.initializeWithConfiguration(parseConfig)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        if PFUser.currentUser() == nil {
-            
-            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-            let protectedPage = storyboard.instantiateViewControllerWithIdentifier("loginPage") as! connectionVC
-            let homepages = UINavigationController(rootViewController: protectedPage)
-            self.window?.rootViewController = homepages
-        } else {
-            
-            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-            let protectedPage = storyboard.instantiateViewControllerWithIdentifier("Home") as! homePage
-            let homepages = UINavigationController(rootViewController: protectedPage)
-            self.window?.rootViewController = homepages
-
-        }
         
-            return true
+        return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

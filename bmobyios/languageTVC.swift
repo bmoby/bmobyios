@@ -12,8 +12,6 @@ import UIKit
 
 class languageTVC: UITableViewController, UISearchResultsUpdating {
     
-    var userStep3 = user()
-    
     
     
     // -----------------------------------------------------------------------------------
@@ -21,9 +19,8 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     
     
+    var userStep3 = user()
     var receivedLanguagesArray = [language]()
-    
-    // TEST FUNCTIONALITY CREATING LANGUAGE TYPE OBJECTS
     let francais:language = language()
     let anglais:language = language()
     let russe:language = language()
@@ -34,6 +31,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     var searchController: UISearchController!
     var resultsController = UITableViewController()
     var langue = language()
+    
 
     
 
@@ -43,17 +41,17 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.resultsController.tableView.dataSource = self
         self.resultsController.tableView.delegate = self
-        
         self.searchController = UISearchController(searchResultsController: self.resultsController)
         self.tableView.tableHeaderView = self.searchController.searchBar
         self.searchController.searchResultsUpdater = self
         
         createLanguages()
-        
+        self.navigationController?.navigationBar.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,29 +67,60 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     
     func createLanguages(){
+        
         self.francais.name = "Français"
         self.francais.flag = UIImage(named: "fr")!
-        
         self.anglais.name = "English"
         self.anglais.flag = UIImage(named: "en")!
-        
         self.russe.name = "Russkiy"
         self.russe.flag = UIImage(named: "ru")!
-        
         self.italien.name = "Italiano"
         self.italien.flag = UIImage(named: "it")!
-        
         self.allemand.name = "Deutsch"
         self.allemand.flag = UIImage(named: "de")!
-        
         self.languages.append(self.francais)
         self.languages.append(self.anglais)
         self.languages.append(self.russe)
         self.languages.append(self.italien)
         self.languages.append(self.allemand)
+        langListReset()
         
     }
     
+    
+    // Method that removes the language that hav been already selected from the languages array
+    func resetLanguagesList() -> [String]{
+        var newArray = [String]()
+        for langue in self.userStep3.languages {
+            
+            newArray.append(langue.name)
+        }
+        
+        return newArray
+    }
+    
+    func resetLanguagesList2() -> [String]{
+        var newArray = [String]()
+        for langue in self.languages {
+            
+            newArray.append(langue.name)
+        }
+        
+        return newArray
+    }
+    
+    func langListReset() {
+        let myarray = self.resetLanguagesList()
+        for lang in self.languages{
+            if myarray.contains(lang.name){
+                let myarray2 = self.resetLanguagesList2()
+                let index = myarray2.indexOf(lang.name)
+                self.languages.removeAtIndex(index!)
+            } else {
+                
+            }
+        }
+    }
     
     
     // -----------------------------------------------------------------------------------
@@ -107,12 +136,11 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
             if language.name.containsString(self.searchController.searchBar.text!){
             
                 return true
-            
+                
             } else {
             
                 return false
             }
-            
         })
         
         // Update the results tableview
@@ -151,7 +179,6 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         
         self.langue.name = (tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text)!
         self.langue.flag = (tableView.cellForRowAtIndexPath(indexPath)?.imageView?.image)!
-        
         if tableView != self.resultsController.tableView {
             
             self.performSegueWithIdentifier("languageSelected", sender: nil)
@@ -166,14 +193,17 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     // This function creates the cells and put info into it
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell()
         if tableView == self.tableView {
             cell.textLabel?.text = self.languages[indexPath.row].name
             cell.imageView?.image = self.languages[indexPath.row].flag
-        }else{
+        } else {
+            
             cell.textLabel?.text = self.filteredLanguages[indexPath.row].name
             cell.imageView?.image = self.filteredLanguages[indexPath.row].flag
         }
+        
         return cell
     }
 
@@ -192,8 +222,6 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         let registration3step :registration3stepVC = segue.destinationViewController as! registration3stepVC
         self.userStep3.languages.append(self.langue)
         registration3step.userStep3 = self.userStep3
-            
         }
-        
     }
 }

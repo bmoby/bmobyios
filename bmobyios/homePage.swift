@@ -97,9 +97,10 @@ class homePage: UIViewController {
     
 
     
-    
     // -----------------------------------------------------------------------------------
     //******************************* GET USER LOGIN NORM ********************************
+    
+    
     
     @IBOutlet weak var logOutNormallyBtn: UIButton!
     
@@ -115,31 +116,10 @@ class homePage: UIViewController {
     @IBAction func logOutNormallyBtnClicked(sender: AnyObject) {
         
         PFUser.logOut()
-        print("User loged out with success")
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             let viewController:UIViewController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewControllerWithIdentifier("loginPage")
             let navigation = UINavigationController(rootViewController: viewController)
             self.presentViewController(navigation, animated: true, completion: nil)
         })
-
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

@@ -9,3 +9,4 @@
 #import <Bolts/Bolts.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <mailgun/Mailgun.h>

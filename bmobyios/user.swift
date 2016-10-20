@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Parse
 
 
 class user{
@@ -27,7 +26,6 @@ class user{
     var music:String?
     var aboutMe:String?
     
-    //ESPACE
     
     
     // -----------------------------------------------------------------------------------
@@ -37,10 +35,11 @@ class user{
     
     // Function to call when the user have to be saved in the DB
     func save(){
-        let object = PFObject(className: "users")
+        let object = PFUser()
         let image = UIImageJPEGRepresentation(self.avatar!.image!, 0.5)
         let imageFile = PFFile(name: "img1", data: image!)
             object["email"] = self.email
+            object.username = self.email
             object["password"] = self.password
             object["phone"] = self.phone
             object["firstName"] = self.firstName
@@ -87,10 +86,11 @@ class user{
 
         
         // saving the object in the DB
-        object.saveInBackgroundWithBlock { (success:Bool, error:NSError?) in
+        object.signUpInBackgroundWithBlock { (success:Bool, error:NSError?) in
             if error == nil {
-                print("User was saved in DB with success")
-            }else{
+                print("User signed up and record has beed created in DB")
+            } else {
+                print("We got bad news! Cannot register this user there is a problems")
                 print(error!.localizedDescription)
             }
         }
