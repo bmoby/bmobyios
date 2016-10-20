@@ -356,7 +356,6 @@
                                 <state key="normal" title="next"/>
                                 <connections>
                                     <action selector="nextClicked:" destination="iya-ew-NSl" eventType="touchUpInside" id="UQW-hT-1UA"/>
-                                    <segue destination="6cF-3Q-l15" kind="push" identifier="goStep3" id="NLM-Zw-hOf"/>
                                 </connections>
                             </button>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" id="PGt-xg-LQd">
@@ -370,7 +369,6 @@
                                 <state key="normal" title="back"/>
                                 <connections>
                                     <action selector="backClicked:" destination="iya-ew-NSl" eventType="touchUpInside" id="5Nw-Az-AAx"/>
-                                    <segue destination="B88-pK-SqI" kind="push" identifier="backStep1" id="aXg-T3-uXg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -388,6 +386,8 @@
                         <outlet property="separatorLbl" destination="xJw-Jw-dTG" id="ayU-Oh-nUQ"/>
                         <outlet property="titleLbl" destination="KA6-mK-H1k" id="qRK-p6-Q0q"/>
                         <outlet property="womanBtn" destination="5NF-0e-MNc" id="WJg-Ql-6hk"/>
+                        <segue destination="B88-pK-SqI" kind="push" identifier="backStep1" id="uP7-Qr-D6o"/>
+                        <segue destination="6cF-3Q-l15" kind="push" identifier="goStep3" id="FsR-fq-HSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAV-hy-Qkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -520,7 +520,6 @@
                                         <state key="normal" title="back"/>
                                         <connections>
                                             <action selector="backClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="I4D-Ly-IFF"/>
-                                            <segue destination="iya-ew-NSl" kind="push" identifier="backStep2" id="m8T-Sk-YDb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uHe-gb-Iw3">
@@ -552,6 +551,7 @@
                         <outlet property="scrollRegistration3step" destination="pam-MZ-Dez" id="w0o-f9-9qh"/>
                         <outlet property="submitBtn" destination="uHe-gb-Iw3" id="up4-8N-9v1"/>
                         <outlet property="titleLbl" destination="Awk-Hd-DjB" id="ZLT-b0-nbh"/>
+                        <segue destination="iya-ew-NSl" kind="push" identifier="backStep2" id="vav-Uk-7qR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ln5-gn-V3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -698,8 +698,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9QV-nj-dbR"/>
-        <segue reference="NLM-Zw-hOf"/>
-        <segue reference="m8T-Sk-YDb"/>
-        <segue reference="aXg-T3-uXg"/>
+        <segue reference="FsR-fq-HSb"/>
+        <segue reference="vav-Uk-7qR"/>
+        <segue reference="uP7-Qr-D6o"/>
     </inferredMetricsTieBreakers>
 </document>

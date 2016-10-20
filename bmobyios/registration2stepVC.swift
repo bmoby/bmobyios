@@ -68,6 +68,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
                 self.userStep2.lastName = self.lastNameTxtF.text
                 self.userStep2.avatar = self.avatarImg
                 self.userStep2.birthDate = self.birthDateTxtF.text
+                self.performSegueWithIdentifier("goStep3", sender: nil)
             }
         }
     
@@ -78,6 +79,7 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
             self.userStep2.lastName = self.lastNameTxtF.text
             self.userStep2.avatar = self.avatarImg
             self.userStep2.birthDate = self.birthDateTxtF.text
+            self.performSegueWithIdentifier("backStep1", sender: nil)
         }
     
     

@@ -79,7 +79,7 @@
 		F2EF89291DA4FCE80099F1EE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		F2EF892A1DA4FCE80099F1EE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		F2EF892D1DA516890099F1EE /* registrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registrationVC.swift; sourceTree = "<group>"; };
-		F2EF892F1DA536CD0099F1EE /* registration2stepVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = registration2stepVC.swift; path = ../registration2stepVC.swift; sourceTree = "<group>"; };
+		F2EF892F1DA536CD0099F1EE /* registration2stepVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registration2stepVC.swift; sourceTree = "<group>"; };
 		F2EF89311DA542D10099F1EE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		F2EF89331DA542EA0099F1EE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		F2EF89351DA56DCE0099F1EE /* registration3stepVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registration3stepVC.swift; sourceTree = "<group>"; };

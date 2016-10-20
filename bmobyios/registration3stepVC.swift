@@ -93,6 +93,7 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         self.userStep3.profession = self.professionTxtF.text
         self.userStep3.music = self.musicTxtF.text
         self.userStep3.aboutMe = self.aboutMeTxtV.text
+        self.performSegueWithIdentifier("backStep2", sender: nil)
     }
     
     // Scroll view
