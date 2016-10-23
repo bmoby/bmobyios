@@ -22,17 +22,17 @@ class registrationVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleLbl: UILabel!
     
     // Login & password text fields ---------------------------
-        @IBOutlet weak var emailTxtF: UITextField!
-        @IBOutlet weak var passwordTxtF: UITextField!
-        @IBOutlet weak var repeatTxtF: UITextField!
-        @IBOutlet weak var phoneTxtF: UITextField!
+    @IBOutlet weak var emailTxtF: UITextField!
+    @IBOutlet weak var passwordTxtF: UITextField!
+    @IBOutlet weak var repeatTxtF: UITextField!
+    @IBOutlet weak var phoneTxtF: UITextField!
+    @IBOutlet weak var cancelBtn: UIButton!
     
     
     // Next btn action & outlet -------------------------------
-        @IBOutlet weak var nextBtn: UIButton!
-    
-        @IBAction func nextClicked(sender: AnyObject) {
-            
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBAction func nextClicked(sender: AnyObject) {
+        
             let query = PFUser.query()!.whereKey("email", equalTo: self.emailTxtF.text!)
             query.getFirstObjectInBackgroundWithBlock { (object:PFObject?, error:NSError?) in
                 if error == nil {
@@ -42,10 +42,10 @@ class registrationVC: UIViewController, UITextFieldDelegate {
                     
                     if !self.restrictEmail(self.emailTxtF.text!) || self.emailTxtF.text == ""{
                         
-                        self.alerter("Incorrect Email", message: "Please enter a correct email.")
+                        self.alerter("INCORRECT EMAIL", message: "Please enter a correct email.")
                     } else if self.passwordTxtF!.text!.characters.count < 8 || self.passwordTxtF.text != self.repeatTxtF.text || self.passwordTxtF.text == ""{
                         
-                        self.alerter("Incorrect Password", message: "Password most contain at least 8 characters and repeat password most match with password.")
+                        self.alerter("INCORRECT PASSWORD", message: "Password most contain at least 8 characters and repeat password most match with password.")
                     } else {
                         
                         // set the user information
@@ -59,6 +59,49 @@ class registrationVC: UIViewController, UITextFieldDelegate {
         }
     
     
+    // Save btn when user comes to edit his/her profile
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBAction func saveBtnClicked(sender: AnyObject) {
+        
+        if passwordTxtF.text != repeatTxtF.text {
+            alerter("INCORRECT PASSWORD", message: "Password must to match with repeat password.")
+        } else if !self.restrictEmail(self.emailTxtF.text!) || self.emailTxtF.text == "" {
+            self.alerter("INCORRECT EMAIL", message: "Please enter a correct email.")
+        } else if self.passwordTxtF!.text! != ""{
+            if self.passwordTxtF!.text!.characters.count < 8 {
+                self.alerter("INCORRECT PASSWORD", message: "Password most contain at least 8 characters.")
+            } else {
+            print("password ok")
+            }
+        }
+            if (PFUser.currentUser()?.valueForKey("email") as? String != self.emailTxtF.text){
+                PFUser.currentUser()?.setValue(self.emailTxtF.text , forKey: "email")
+            }
+            if self.passwordTxtF.text != nil {
+                PFUser.currentUser()?.setValue(self.passwordTxtF.text , forKey: "password")
+            }
+            PFUser.currentUser()?.setValue(self.phoneTxtF.text , forKey: "phone")
+            PFUser.currentUser()?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                if success {
+                    print("user updated")
+                }
+            })
+
+            // Redirect after restrictions varnings if every thing is ok
+            let story = UIStoryboard(name: "profileSB", bundle: nil)
+            let nextController = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+            self.presentViewController(nextController, animated: true, completion: nil)
+        
+    }
+    
+    // Back btn when user edit his/her profile
+    @IBOutlet weak var backBtn: UIButton!
+    @IBAction func backBtnClicked(sender: AnyObject) {
+        let story = UIStoryboard(name: "profileSB", bundle: nil)
+        let profileInfoEdit = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+        self.presentViewController(profileInfoEdit, animated: true, completion: nil)
+    }
+    
     
     
     // -----------------------------------------------------------------------------------
@@ -66,18 +109,29 @@ class registrationVC: UIViewController, UITextFieldDelegate {
     
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setValuesIfExist()
+        
         self.navigationController?.navigationBar.hidden = true
         
         self.emailTxtF.delegate = self
         self.passwordTxtF.delegate = self
         self.repeatTxtF.delegate = self
         self.phoneTxtF.delegate = self
+        
+        if PFUser.currentUser() == nil {
+            setValuesIfExist()
+            self.saveBtn.hidden = true
+            self.backBtn.hidden = true
+            self.titleLbl.text = "Registration"
+        } else {
+            self.nextBtn.hidden = true
+            self.cancelBtn.hidden = true
+            self.titleLbl.text = "Edit profile"
+            setValuesOfCurrentUser()
+        }
         
     }
 
@@ -91,7 +145,6 @@ class registrationVC: UIViewController, UITextFieldDelegate {
     
     // -----------------------------------------------------------------------------------
     // ******************************* HELPER METHODS ************************************
-    
     
     
     
@@ -125,6 +178,7 @@ class registrationVC: UIViewController, UITextFieldDelegate {
         hideKeyboard()
     }
     
+    // Alerter helper method to alert
     func alerter(name: String, message: String){
         
         let alert = UIAlertController(title: name, message: message, preferredStyle: .Alert)
@@ -145,6 +199,12 @@ class registrationVC: UIViewController, UITextFieldDelegate {
         }else {
             return false
         }
+    }
+    
+    // Method that sets the values of current user if there is a connection
+    func setValuesOfCurrentUser(){
+        self.emailTxtF.text = PFUser.currentUser()!.email
+        self.phoneTxtF.text = PFUser.currentUser()!.valueForKey("phone") as? String
     }
     
     

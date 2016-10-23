@@ -19,11 +19,10 @@ class user{
     var lastName:String?
     var birthDate:String?
     var gender:String?
-    var avatar:UIImageView?
+    var avatar = UIImageView()
     var languages = [language]()
     var nationality:String?
     var profession:String?
-    var music:String?
     var aboutMe:String?
     
     
@@ -36,7 +35,7 @@ class user{
     // Function to call when the user have to be saved in the DB
     func save(){
         let object = PFUser()
-        let image = UIImageJPEGRepresentation(self.avatar!.image!, 0.5)
+        let image = UIImageJPEGRepresentation(self.avatar.image!, 0.5)
         let imageFile = PFFile(name: "img1", data: image!)
             object["email"] = self.email
             object.username = self.email
@@ -48,7 +47,6 @@ class user{
             object["avatar"] = imageFile
             object["nationality"] = self.nationality
             object["profession"] = self.profession
-            object["music"] = self.music
             object["aboutMe"] = self.aboutMe
         
         

@@ -30,10 +30,9 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     @IBOutlet weak var languagesCollection: UICollectionView!
     
     
-    // Nationality & profession & music text fields -----------
+    // Nationality & profession & text fields -----------------
     @IBOutlet weak var nationalityTxtF: UITextField!
     @IBOutlet weak var professionTxtF: UITextField!
-    @IBOutlet weak var musicTxtF: UITextField!
     
     
     // AboutMe text view --------------------------------------
@@ -47,7 +46,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         // Defining inter step user values to perform the prepareforsegues method with it
         self.userStep3.nationality = self.nationalityTxtF.text
         self.userStep3.profession = self.professionTxtF.text
-        self.userStep3.music = self.musicTxtF.text
         self.userStep3.aboutMe = self.aboutMeTxtV.text
         
         // Saving all in DB
@@ -73,7 +71,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
                 } else {
                     print(error!.localizedDescription)
                 }
-                
             } else {
                 // dispatch allows to do things in background much quicker and user dont feel anything its like a good practice
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -91,7 +88,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         // If we go back we need to save current page data to reset it when we come back
         self.userStep3.nationality = self.nationalityTxtF.text
         self.userStep3.profession = self.professionTxtF.text
-        self.userStep3.music = self.musicTxtF.text
         self.userStep3.aboutMe = self.aboutMeTxtV.text
         self.performSegueWithIdentifier("backStep2", sender: nil)
     }
@@ -100,12 +96,76 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     @IBOutlet weak var scrollRegistration3step: UIScrollView!
     
     // Add a language btn
-    @IBAction func addLanguageClicked(sender: AnyObject) {
     
+    @IBOutlet weak var addLanguageBtn: UIButton!
+    @IBAction func addLanguageClicked(sender: AnyObject) {
+        
         self.userStep3.nationality = self.nationalityTxtF.text
         self.userStep3.profession = self.professionTxtF.text
-        self.userStep3.music = self.musicTxtF.text
         self.userStep3.aboutMe = self.aboutMeTxtV.text
+    }
+    
+    
+    @IBOutlet weak var addLanguage2Btn: UIButton!
+    @IBAction func addLanguage2BtnClciked(sender: AnyObject) {
+        performSegueWithIdentifier("modalToLanguageTable", sender: nil)
+    }
+    
+    
+    
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBAction func saveBtnClicked(sender: AnyObject) {
+        PFUser.currentUser()?.setValue(self.professionTxtF.text, forKey: "profession")
+        PFUser.currentUser()?.setValue(self.nationalityTxtF.text, forKey: "nationality")
+        PFUser.currentUser()?.setValue(self.aboutMeTxtV.text, forKey: "aboutMe")
+        removeAllLanguagesFromDB()
+        if self.userStep3.languages.count > 0{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[0].name, forKey: "language01")
+        }
+        if self.userStep3.languages.count > 1{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[1].name, forKey: "language02")
+        }
+        if self.userStep3.languages.count > 2{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[2].name, forKey: "language03")
+        }
+        if self.userStep3.languages.count > 3{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[3].name, forKey: "language04")
+        }
+        if self.userStep3.languages.count > 4{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[4].name, forKey: "language05")
+        }
+        if self.userStep3.languages.count > 5{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[5].name, forKey: "language06")
+        }
+        if self.userStep3.languages.count > 6{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[6].name, forKey: "language07")
+        }
+        if self.userStep3.languages.count > 7{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[7].name, forKey: "language08")
+        }
+        if self.userStep3.languages.count > 8{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[8].name, forKey: "language09")
+        }
+        if self.userStep3.languages.count > 9{
+            PFUser.currentUser()?.setValue(self.userStep3.languages[9].name, forKey: "language10")
+        }
+        
+        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+            if error == nil {
+                print("User saved with success")
+            }
+        })
+        
+        let story = UIStoryboard(name: "profileSB", bundle: nil)
+        let profileInfoEdit = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+        self.presentViewController(profileInfoEdit, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelBtnClicked(sender: AnyObject) {
+        let story = UIStoryboard(name: "profileSB", bundle: nil)
+        let profileInfoEdit = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+        self.presentViewController(profileInfoEdit, animated: true, completion: nil)
     }
     
     
@@ -118,7 +178,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
         self.languagesCollection.delegate = self
         self.languagesCollection.dataSource = self
         
@@ -146,14 +205,26 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(registration3stepVC.setScrollHeightOnHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
         // Show the existing values in text fields if exist a record in the user variable
-        setValuesIfExist()
+        
         self.navigationController?.navigationBar.hidden = true
         
         self.nationalityTxtF.delegate = self
-        self.musicTxtF.delegate = self
         self.aboutMeTxtV.delegate = self
         self.professionTxtF.delegate = self
         
+        // This conditional is set to find the case of editing and creating (which one is actual case?)
+        if PFUser.currentUser() == nil {
+            setValuesIfExist()
+            self.cancelBtn.hidden = true
+            self.saveBtn.hidden = true
+            self.addLanguage2Btn.hidden = true
+            
+        } else {
+            setCurrentUserValues()
+            self.backBtn.hidden = true
+            self.submitBtn.hidden = true
+            self.addLanguageBtn.hidden = true
+        }
      }
     
     override func didReceiveMemoryWarning() {
@@ -167,9 +238,6 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             self.professionTxtF.becomeFirstResponder()
             return true
         }else if(textField == professionTxtF){
-            self.musicTxtF.nextResponder()
-            return true
-        } else if (textField == self.musicTxtF) {
             self.aboutMeTxtV.becomeFirstResponder()
             return true
         } else {
@@ -189,24 +257,134 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     // If the user completed some info & commed back this function will display all info
     func setValuesIfExist(){
         
-        if self.userStep3.firstName != nil {
+        if self.userStep3.nationality != nil {
             self.nationalityTxtF.text = self.userStep3.nationality
         }
-        if self.userStep3.lastName != nil {
+        if self.userStep3.profession != nil {
             self.professionTxtF.text = self.userStep3.profession
         }
-        if self.userStep3.avatar != nil {
-            self.musicTxtF.text = self.userStep3.music
-        }
-        if self.userStep3.birthDate != nil {
+        if self.userStep3.aboutMe != nil {
             self.aboutMeTxtV.text = self.userStep3.aboutMe
         }
         if self.userStep3.languages.count > 0 {
             languagesCollection.reloadData()
-            
         }
     }
-
+    
+    // If the user commes to edit his/her info
+    func setCurrentUserValues() {
+        
+        self.nationalityTxtF.text = PFUser.currentUser()?.valueForKey("nationality") as? String
+        self.professionTxtF.text = PFUser.currentUser()?.valueForKey("profession") as? String
+        self.aboutMeTxtV.text = PFUser.currentUser()?.valueForKey("aboutMe") as? String
+        if self.userStep3.languages.count == 0 {
+        
+        let langue1 = language()
+        let langue2 = language()
+        let langue3 = language()
+        let langue4 = language()
+        let langue5 = language()
+        let langue6 = language()
+        let langue7 = language()
+        let langue8 = language()
+        let langue9 = language()
+        let langue10 = language()
+        
+        let langu = PFUser.currentUser()?.valueForKey("language01") as? String
+        let langu2 = PFUser.currentUser()?.valueForKey("language02") as? String
+        let langu3 = PFUser.currentUser()?.valueForKey("language03") as? String
+        let langu4 = PFUser.currentUser()?.valueForKey("language04") as? String
+        let langu5 = PFUser.currentUser()?.valueForKey("language05") as? String
+        let langu6 = PFUser.currentUser()?.valueForKey("language06") as? String
+        let langu7 = PFUser.currentUser()?.valueForKey("language07") as? String
+        let langu8 = PFUser.currentUser()?.valueForKey("language08") as? String
+        let langu9 = PFUser.currentUser()?.valueForKey("language09") as? String
+        let langu10 = PFUser.currentUser()?.valueForKey("language10") as? String
+        
+        if langu != nil {
+            
+            langue1.name = "\(langu!)"
+            langue1.flag = UIImage(named: "\(langu!)")!
+            self.userStep3.languages.append(langue1)
+        }
+        if langu2 != nil {
+            
+            langue2.name = "\(langu2!)"
+            langue2.flag = UIImage(named: "\(langu2!)")!
+            self.userStep3.languages.append(langue2)
+        }
+        if langu3 != nil {
+            
+            langue3.name = "\(langu3!)"
+            langue3.flag = UIImage(named: "\(langu3!)")!
+            self.userStep3.languages.append(langue3)
+        }
+        if langu4 != nil {
+            
+            langue4.name = "\(langu4!)"
+            langue4.flag = UIImage(named: "\(langu4!)")!
+            self.userStep3.languages.append(langue4)
+        }
+        if langu5 != nil {
+            
+            langue5.name = "\(langu5!)"
+            langue5.flag = UIImage(named: "\(langu5!)")!
+            self.userStep3.languages.append(langue5)
+        }
+        if langu6 != nil {
+            
+            langue6.name = "\(langu6!)"
+            langue6.flag = UIImage(named: "\(langu6!)")!
+            self.userStep3.languages.append(langue6)
+        }
+        if langu7 != nil {
+            
+            langue7.name = "\(langu7!)"
+            langue7.flag = UIImage(named: "\(langu7!)")!
+            self.userStep3.languages.append(langue7)
+        }
+        if langu8 != nil {
+            
+            langue8.name = "\(langu8!)"
+            langue8.flag = UIImage(named: "\(langu8!)")!
+            self.userStep3.languages.append(langue8)
+        }
+        if langu9 != nil {
+            
+            langue9.name = "\(langu9!)"
+            langue9.flag = UIImage(named: "\(langu9!)")!
+            self.userStep3.languages.append(langue9)
+        }
+        if langu10 != nil {
+            
+            langue10.name = "\(langu10!)"
+            langue10.flag = UIImage(named: "\(langu10!)")!
+            self.userStep3.languages.append(langue10)
+        }
+        
+        self.languagesCollection.reloadData()
+        }
+    }
+    
+    // Clean up languages in the DB befor edit languages
+    func removeAllLanguagesFromDB() {
+        PFUser.currentUser()?.removeObjectForKey("language01")
+        PFUser.currentUser()?.removeObjectForKey("language02")
+        PFUser.currentUser()?.removeObjectForKey("language03")
+        PFUser.currentUser()?.removeObjectForKey("language04")
+        PFUser.currentUser()?.removeObjectForKey("language05")
+        PFUser.currentUser()?.removeObjectForKey("language06")
+        PFUser.currentUser()?.removeObjectForKey("language07")
+        PFUser.currentUser()?.removeObjectForKey("language08")
+        PFUser.currentUser()?.removeObjectForKey("language09")
+        PFUser.currentUser()?.removeObjectForKey("language10")
+        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+            if success {
+                print("Languages are empty in DB")
+            }
+        })
+    }
+    
     
     
     // -----------------------------------------------------------------------------------
@@ -270,13 +448,20 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     
     // Cell delete methode
     func deleteCell(recognizer: UILongPressGestureRecognizer){
-    
-        let p = recognizer.locationInView(self.languagesCollection)
-        let indexPath  = self.languagesCollection.indexPathForItemAtPoint(p)
-        if let index = indexPath {
-            
-            self.userStep3.languages.removeAtIndex(index.row)
-            self.languagesCollection.reloadData()
+        if PFUser.currentUser() == nil {
+            let p = recognizer.locationInView(self.languagesCollection)
+            let indexPath  = self.languagesCollection.indexPathForItemAtPoint(p)
+            if let index = indexPath {
+                self.userStep3.languages.removeAtIndex(index.row)
+                self.languagesCollection.reloadData()
+            }
+        } else {
+            let p = recognizer.locationInView(self.languagesCollection)
+            let indexPath  = self.languagesCollection.indexPathForItemAtPoint(p)
+            if let index = indexPath {
+                self.userStep3.languages.removeAtIndex(index.row)
+                self.languagesCollection.reloadData()
+            }
         }
     }
     
@@ -325,6 +510,9 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
             
             let registration2step :registration2stepVC = segue.destinationViewController as! registration2stepVC
                 registration2step.userStep2 = self.userStep3
+        } else if segue.identifier == "modalToLanguageTable" {
+            let languageTable :languageTVC = segue.destinationViewController as! languageTVC
+            languageTable.userStep3.languages = self.userStep3.languages
         }
     }
     
@@ -332,6 +520,7 @@ class registration3stepVC: UIViewController, UITextFieldDelegate, UICollectionVi
     
     // -----------------------------------------------------------------------------------
     // ***************************** ABOUT ME TEXTVIEW ***********************************
+    
     
     
     // Method that allow to tap one time on the TextView to edit it instead double click on it
