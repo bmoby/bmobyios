@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bmobyios/registrationVC.swift"
-            timestampString = "498498586.724267"
+            timestampString = "498926840.321951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -32,6 +32,22 @@
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "createLanguages()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bmobyios/editProfile.swift"
+            timestampString = "498926840.321951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "setValues()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
