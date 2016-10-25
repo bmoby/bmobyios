@@ -12,8 +12,11 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
 //--------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
+   
     private var collectionViewLayout: LGHorizontalLinearFlowLayout!
     
+    var createListingInfo2 = listingClass()
+
     // sting array rooms and hosting capacity
     var stringArray: [String] = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30+"]
     
@@ -58,6 +61,8 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.hidden = true
         
         // delegate
         collectionViewTwinBed.delegate = self
@@ -318,23 +323,26 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
 
             //send data
-            listing.twinBed = twinBed
-            listing.singleBed = singleBed
-            listing.couch = couch
-            listing.mattress = matress
-            listing.airMattress = airMatress
+            createListingInfo2.twinBed = twinBed
+            createListingInfo2.singleBed = singleBed
+            createListingInfo2.couch = couch
+            createListingInfo2.mattress = matress
+            createListingInfo2.airMattress = airMatress
             
             // going to next controller: listingAmenitiesVC
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as? listingAmenitiesVC
             self.navigationController?.pushViewController(next!, animated: true)
+            next!.createListingAmenities = createListingInfo2
             
         }
     }
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
-        self.navigationController?.pushViewController(next, animated: true)
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingInfo1 = createListingInfo2
+
     }
     
 }

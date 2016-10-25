@@ -13,6 +13,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //-------------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES *********************************************
     
+    var createListingFinal = listingClass()
+    
     //data to send to database
     var price = String()
     var checkin = String()
@@ -77,6 +79,8 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.hidden = true
+        
         //scroll view
         scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
         scrollView.contentSize.height = self.view.frame.height
@@ -109,6 +113,30 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         checkinPicker.backgroundColor = UIColor.groupTableViewBackgroundColor()
         checkinPicker.showsSelectionIndicator = true
         checkinTxt.inputView = checkinPicker
+        
+        //--------------------------------- complete view fields listingClass values are not empty
+        if createListingFinal.price.isEmpty == false {
+            priceTxt.text = createListingFinal.price
+        }
+        if createListingFinal.checkin.isEmpty == false {
+            checkinTxt.text = createListingFinal.checkin
+        }
+        if createListingFinal.daysORmonths.isEmpty == false {
+            if createListingFinal.daysORmonths == "days" {
+                daysBtn.backgroundColor = ownColor
+                monthsBtn.backgroundColor = grayColor
+            }
+            else {
+                daysBtn.backgroundColor = grayColor
+                monthsBtn.backgroundColor = ownColor
+            }
+        }
+        if createListingFinal.hostingPeriodMin.isEmpty == false {
+            minValueTxt.text = createListingFinal.hostingPeriodMin
+        }
+        if createListingFinal.hostingPeriodMax.isEmpty == false {
+            maxValueTxt.text = createListingFinal.hostingPeriodMax
+        }
         
     }
     
@@ -224,53 +252,115 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // list the place
     @IBAction func listBtn_clicked(sender: AnyObject) {
         
-        //data to send to data base
+        // uuid
+        createListingFinal.uuid = "1"
+        
+        // days or months data
+        if daysBtn.backgroundColor == ownColor {
+            createListingFinal.daysORmonths = "days"
+        }
+        else {
+            createListingFinal.daysORmonths = "months"
+        }
+        
         if priceTxt.text == "" {
             alert("Price field is empty", message: "Please, give your listing price. The dault price is 1 euro/dollar")
             priceTxt.text = "1"
         }
-        listing.price = priceTxt.text!
-        
-        listing.checkin = checkinTxt.text!
-        
-        // days or months data
-        if daysBtn.backgroundColor == ownColor {
-            listing.daysORmonths = "days"
-        }
-        else {
-            listing.daysORmonths = "months"
-        }
-        
-        // min days/months value
-        if minValueTxt.text == "" {
+        else if minValueTxt.text == ""{
+            // min days/months value
             alert("Min days field is empty", message: "Please, define min vaule. The dault min value is 1")
             minValueTxt.text = "1"
+            
         }
-        
-        // max days/months value
-        if maxValueTxt.text == "" {
-            alert("Max days field is empty", message: "Please, define max vaule. The dault min value is 100+")
-            maxValueTxt.text = "100+"
+        else if maxValueTxt.text == "" {
+            // max days/months value
+            alert("Max days field is empty", message: "Please, define max vaule. The dault min value is 100000")
+            maxValueTxt.text = "100000"
         }
-        
-        if Int(minValueTxt.text!) > Int(String(maxValueTxt.text!.characters.dropLast())) {
-            alert("Min days/months can not be more than max days/months. field is empty", message: "The dault min values are 1 and 100+")
+        else if Int(minValueTxt.text!) > Int(maxValueTxt.text!) {
+            alert("Min days/months can not be more than max days/months field is empty", message: "The dault min values are 1 and 100000")
             minValueTxt.text = "1"
-            maxValueTxt.text = "100+"
+            maxValueTxt.text = "100000"
         }
-        listing.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
+        else {
+            createListingFinal.price = priceTxt.text!
+            createListingFinal.checkin = checkinTxt.text!
+            createListingFinal.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
+            
+            // send and save data
+            createListingFinal.save()
+            
+            print(createListingFinal.street)
+            print(createListingFinal.postalCode)
+            print(createListingFinal.city)
+            print(createListingFinal.country)
+            print(createListingFinal.listingType)
+            print(createListingFinal.propertyType)
+            print(createListingFinal.rooms)
+            print(createListingFinal.hostingCapacity)
+            print(createListingFinal.kitchens)
+            print(createListingFinal.bathrooms)
+            print(createListingFinal.twinBed)
+            print(createListingFinal.singleBed)
+            print(createListingFinal.couch)
+            print(createListingFinal.mattress)
+            print(createListingFinal.airMattress)
+            print(createListingFinal.amenities)
+            print(createListingFinal.photos)
+            print(createListingFinal.price)
+            print(createListingFinal.checkin)
+            print(createListingFinal.daysORmonths)
+            print(createListingFinal.hostingPeriod)
+        }
         
-        
-        // send and save data
-        listing.save()
         
     }
     
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
+        
+        // days or months data
+        if daysBtn.backgroundColor == ownColor {
+            createListingFinal.daysORmonths = "days"
+        }
+        else {
+            createListingFinal.daysORmonths = "months"
+        }
+        
+        createListingFinal.price = priceTxt.text!
+        createListingFinal.checkin = checkinTxt.text!
+        createListingFinal.hostingPeriodMin = minValueTxt.text!
+        createListingFinal.hostingPeriodMax = maxValueTxt.text!
+        createListingFinal.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
+        
         // going back: listingPhotosVC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
-        self.navigationController?.pushViewController(next, animated: true)
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingPhotos = createListingFinal
+        
+        print(createListingFinal)
+        print(createListingFinal.street)
+        print(createListingFinal.postalCode)
+        print(createListingFinal.city)
+        print(createListingFinal.country)
+        print(createListingFinal.listingType)
+        print(createListingFinal.propertyType)
+        print(createListingFinal.rooms)
+        print(createListingFinal.hostingCapacity)
+        print(createListingFinal.kitchens)
+        print(createListingFinal.bathrooms)
+        print(createListingFinal.twinBed)
+        print(createListingFinal.singleBed)
+        print(createListingFinal.couch)
+        print(createListingFinal.mattress)
+        print(createListingFinal.airMattress)
+        print(createListingFinal.amenities)
+        print(createListingFinal.photos)
+        print(createListingFinal.price)
+        print(createListingFinal.checkin)
+        print(createListingFinal.daysORmonths)
+        print(createListingFinal.hostingPeriod)
 
     }
     

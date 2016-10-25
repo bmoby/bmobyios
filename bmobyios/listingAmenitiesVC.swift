@@ -12,6 +12,9 @@ class listingAmenitiesVC: UIViewController {
 
 //--------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
+    
+    var createListingAmenities = listingClass()
+    
     // to change background color of image views
     var chooseImg = [UIImageView]()
     
@@ -136,6 +139,8 @@ class listingAmenitiesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.hidden = true
+        
         let height = self.view.frame.height
         let width = self.view.frame.size.width
         
@@ -166,10 +171,12 @@ class listingAmenitiesVC: UIViewController {
         }
         
         // displaying choosen amenities by host once if went back to previous controller and came back to this one
-        for object in listing.amenities {
-            for (img, txt) in zip(chooseImg, chooseTxt) {
-                if object == txt {
-                    img.backgroundColor = ownColor
+        if createListingAmenities.amenities.isEmpty == false {
+            for object in createListingAmenities.amenities {
+                for (img, txt) in zip(chooseImg, chooseTxt) {
+                    if object == txt {
+                        img.backgroundColor = ownColor
+                    }
                 }
             }
         }
@@ -197,46 +204,50 @@ class listingAmenitiesVC: UIViewController {
         }
     }
 
-    
+
     
 //-------------------------------------------------------------------------------------------------
 //*********************************** GOING TO THE NEXT CONTROLLER ********************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
         //cleaning the amenities array
-        listing.amenities.removeAll(keepCapacity: false)
+        createListingAmenities.amenities.removeAll(keepCapacity: false)
         
         // picking up the string from chooseTxt that matchs with background color: append to amenities array
         for (txt, img) in zip(chooseTxt, chooseImg) {
             if img.backgroundColor == ownColor {
-                listing.amenities.append(txt)
+                createListingAmenities.amenities.append(txt)
             }
         }
+        
         
         // going to next controller: listingPhotosVC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
         self.navigationController?.pushViewController(next, animated: true)
+        next.createListingPhotos = createListingAmenities
+        print(createListingAmenities.amenities)
+        
     }
     
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
         
         //cleaning the amenities array
-        listing.amenities.removeAll(keepCapacity: false)
+        createListingAmenities.amenities.removeAll(keepCapacity: false)
         
         // picking up the string from chooseTxt that matchs with background color: append to amenities array
         for (txt, img) in zip(chooseTxt, chooseImg) {
             if img.backgroundColor == ownColor {
-                listing.amenities.append(txt)
+                createListingAmenities.amenities.append(txt)
             }
         }
         
-        
         // going back: listingInfo2VC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
-        self.navigationController?.pushViewController(next, animated: true)
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingInfo2 = createListingAmenities
+
     }
-    
     
 }
 

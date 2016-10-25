@@ -14,6 +14,7 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 //-----------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES *******************************************
     
+    var createListingPropertyType = listingClass()
     //property type variable to send to database
     var propertyType = String()
     
@@ -33,6 +34,8 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.hidden = true
         
         //initializing table
         tableView.delegate = self
@@ -78,18 +81,21 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    //!!!!!!!!!!!!!
+    // going to the next controller and managing data 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as? propertyTypeCell
         
         if cell?.accessoryType != nil {
             
             // data to send to database
-            listing.propertyType = (cell?.propertyTypeLbl?.text)!
+            createListingPropertyType.propertyType = (cell?.propertyTypeLbl?.text)!
+            //listing.propertyType = (cell?.propertyTypeLbl?.text)!
             
             // going to the next controller: VC listingInfo1VC
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
             self.navigationController?.pushViewController(next, animated: true)
+            next.createListingInfo1 = createListingPropertyType
+            
         }
     }
     
@@ -97,6 +103,8 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // going back: listingInfo2VC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
         self.navigationController?.pushViewController(next, animated: true)
+        next.createListingType = createListingPropertyType
+
     }
 
 }

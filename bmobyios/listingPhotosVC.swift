@@ -12,6 +12,11 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
 //--------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
+    // variable sent from myMistingVC to update the photo data
+    
+    var createListingPhotos = listingClass()
+    
+    var controller = String()
     
     var width = CGFloat()
     var height = CGFloat()
@@ -35,10 +40,18 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     
     @IBOutlet var backBtn: UIButton!
     
+    // activated buttons when host comes from myLisitngVC
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
+    
+    
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.hidden = true
+        self.collectionView.reloadData()
         
         // screen size
         width = self.view.frame.size.width
@@ -58,10 +71,35 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         collectionView.dataSource = self
         self.view.addSubview(collectionView)
         
-        if listing.mainPhoto != nil {
-            self.mainPhoto?.image = listing.mainPhoto
+        if createListingPhotos.mainPhoto != nil {
+            self.mainPhoto!.image = createListingPhotos.mainPhoto
         }
         collectionView!.reloadData()
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            nextBtn.hidden = true
+            //nextBtn.userInteractionEnabled = false
+            backBtn.hidden = true
+            //backBtn.userInteractionEnabled = false
+            
+            updateBtn.hidden = false
+            //updateBtn.userInteractionEnabled = true
+            doNotUpdateBtn.hidden = false
+            //doNotUpdateBtn.userInteractionEnabled = true
+            print(controller)
+        }
+        else {
+            nextBtn.hidden = false
+            nextBtn.userInteractionEnabled = true
+            backBtn.hidden = false
+            backBtn.userInteractionEnabled = true
+            
+            updateBtn.hidden = true
+            updateBtn.userInteractionEnabled = false
+            doNotUpdateBtn.hidden = true
+            updateBtn.userInteractionEnabled = false
+        }
         
     }
 
@@ -74,18 +112,28 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     
 //-------------------------------------------------------------------------------------------------
 //***************************************** CELLS CONFIGURATION ***********************************
-   
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listing.photos.count
+    
+    
+    // items' size
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let dim = CGSize(width: cellWidth, height: cellWidth)
+        return dim
     }
+    
+    
+    //
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return createListingPhotos.photos.count     }
 
+    
     // cell's items
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         // defining cells
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("listingPhoto", forIndexPath: indexPath) as! listingPhotoCell
         
-        let image = listing.photos[indexPath.row]
+        let image = createListingPhotos.photos[indexPath.row]
         cell.listingPhotoImg.image = image
         
         //image frame size
@@ -98,19 +146,12 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         return cell
     }
     
-    // items' size
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        let dim = CGSize(width: cellWidth, height: cellWidth)
-        return dim
-    }
-    
     
     // select a cell: display main phto + animation
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         let cell = collectionView.cellForItemAtIndexPath(indexPath)! as! listingPhotoCell
-        listing.mainPhoto = cell.listingPhotoImg.image
+        createListingPhotos.mainPhoto = cell.listingPhotoImg.image
         self.mainPhoto!.image = cell.listingPhotoImg.image
         
         // cell animation on taping
@@ -129,16 +170,16 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     // remove a photo from a cell
     func removePhoto (sender:UIButton) {
         let i : Int = (sender.layer.valueForKey("index")) as! Int
-        listing.photos.removeAtIndex(i)
+        createListingPhotos.photos.removeAtIndex(i)
         
         
-        if listing.photos.isEmpty {
-            listing.mainPhoto = UIImage(named: "adressIcon")
-            mainPhoto?.image = listing.mainPhoto
+        if createListingPhotos.photos.isEmpty {
+            createListingPhotos.mainPhoto = UIImage(named: "adressIcon")
+            mainPhoto?.image = createListingPhotos.mainPhoto
         }
         else {
-            listing.mainPhoto = listing.photos.first
-            mainPhoto?.image = listing.mainPhoto
+            createListingPhotos.mainPhoto = createListingPhotos.photos.first
+            mainPhoto?.image = createListingPhotos.mainPhoto
         }
         collectionView.reloadData()
     }
@@ -160,7 +201,7 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     @IBAction func addPhotoBtn_clicked(sender: AnyObject) {
         
         // no more than 9 photos
-        if listing.photos.count <= 8 {
+        if createListingPhotos.photos.count <= 8 {
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = .PhotoLibrary
@@ -175,13 +216,12 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
-        listing.photos.append(image!)
+        createListingPhotos.photos.append(image!)
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        self.mainPhoto?.image = listing.photos.first
-        listing.mainPhoto = listing.photos.first
+        self.mainPhoto?.image = createListingPhotos.photos.first
+        createListingPhotos.mainPhoto = createListingPhotos.photos.first
 
-        
         self.collectionView.reloadData()
     }
     
@@ -194,15 +234,32 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         // going to next controller: listingInfo3VC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo3VC") as! listingInfo3VC
         self.navigationController?.pushViewController(next, animated: true)
+        next.createListingFinal = createListingPhotos
         
     }
     
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingAmenitiesVC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as! listingAmenitiesVC
-        self.navigationController?.pushViewController(next, animated: true)
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as! listingAmenitiesVC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingAmenities = createListingPhotos
+
     }
+    
+    
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
+        print(self.createListingPhotos.photos)
+        print("update")
+    }
+    
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        self.navigationController?.pushViewController(back, animated: true)
+        print("do not update")
+    }
+    
     
     
 }

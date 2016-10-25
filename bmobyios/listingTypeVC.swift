@@ -12,7 +12,9 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
 //-------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
-  
+    
+    var createListingType = listingClass()
+    
     // listing type array to display on table cells
     var listingTypeArray = ["Shared room", "Private room", "Entire place"]
     var listingTypeIconArray = [UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon")]
@@ -31,6 +33,8 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //***************************************** DEFAULT ************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        self.navigationController?.navigationBar.hidden = true
         
         //initializing table
         tableView.delegate = self
@@ -50,11 +54,6 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
 //---------------------------------------------------------------------------------------------------
 //***************************************** TABLE ***************************************************
-    /*
-    // number of sections
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    } */
 
     // number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,19 +78,24 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if cell?.accessoryType != nil {
             
             // data to send to database
-            listing.listingType = (cell?.listingTypeLbl.text)!
+            createListingType.listingType = (cell?.listingTypeLbl.text)!
+            //listing.listingType = (cell?.listingTypeLbl.text)!
             
             // going to the next controller: TVC of property type
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
             self.navigationController?.pushViewController(next, animated: true)
+            next.createListingPropertyType = createListingType
+            
         }
     }
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
-        self.navigationController?.pushViewController(next, animated: true)
-    }
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingAdress = createListingType
+        
+        }
     
 }
 

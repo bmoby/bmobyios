@@ -11,6 +11,13 @@ import Foundation
 import Parse
 
 class listingClass {
+    
+    // user unique ID
+    var uuid: String = ""
+    
+    // activated true
+    var activated: String = "true"
+    
     //adress
     var street: String = ""
     var postalCode: String = ""
@@ -42,53 +49,50 @@ class listingClass {
     //listing photos
     var photos = [UIImage]()
     var mainPhoto = UIImage(named: "adressIcon")
-    var photoPFFile = [PFFile]()
-    /*
-    var photo1 : UIImage!
-    var photo2 : UIImage!
-    var photo3 : UIImage!
-    var photo4 : UIImage!
-    var photo5 : UIImage!
-    var photo6 : UIImage!
-    var photo7 : UIImage!
-    var photo8 : UIImage!
-    var photo9 : UIImage!
-    */
     
     //listing info 3
     var price: String = ""
     var checkin: String = ""
     var daysORmonths: String = ""
+    var hostingPeriodMin: String = ""
+    var hostingPeriodMax: String = ""
     var hostingPeriod: String = ""
     
-    
+
     func save() {
         let object = PFObject(className: "listing")
         
+        // uuid
+        object["uuid"] = uuid
+        
+        // activated true
+        object["activated"] = activated
+        
         //adress
-        object["street"] = listing.street
-        object["postalCode"] = listing.postalCode
-        object["city"] = listing.city
-        object["country"] = listing.country
-        object["latitude"] = listing.latitude
-        object["longitude"] = listing.longitude
+        object["street"] = street
+        object["postalCode"] = postalCode
+        object["city"] = city
+        object["country"] = country
+        object["latitude"] = latitude
+        object["longitude"] = longitude
+        object["fullAdress"] = street+", "+postalCode+" "+city+", "+country
             
         // type
-        object["listingType"] = listing.listingType
-        object["propertyType"] = listing.propertyType
+        object["listingType"] = listingType
+        object["propertyType"] = propertyType
         
         //listing info 1
-        object["rooms"] = listing.rooms
-        object["hostingCapacity"] = listing.hostingCapacity
-        object["kitchens"] = listing.kitchens
-        object["bathrooms"] = listing.bathrooms
+        object["rooms"] = rooms
+        object["hostingCapacity"] = hostingCapacity
+        object["kitchens"] = kitchens
+        object["bathrooms"] = bathrooms
         
         //listing info 2
-        object["twinBed"] = listing.twinBed
-        object["singleBed"] = listing.singleBed
-        object["couch"] = listing.couch
-        object["mattress"] = listing.mattress
-        object["airMattress"] = listing.airMattress
+        object["twinBed"] = twinBed
+        object["singleBed"] = singleBed
+        object["couch"] = couch
+        object["mattress"] = mattress
+        object["airMattress"] = airMattress
         
         //amenities
         if amenities.count > 0 {
@@ -131,7 +135,7 @@ class listingClass {
             object["amenity12"] = self.amenities[12]
         }
         if amenities.count > 13 {
-            object["amenit13"] = self.amenities[13]
+            object["amenity13"] = self.amenities[13]
         }
         if amenities.count > 14 {
             object["amenity14"] = self.amenities[14]
@@ -177,7 +181,7 @@ class listingClass {
             
             //converting images to PFFile to send to the DB
             let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
-            object["listinPhoto1"] = mainPhotoFile
+            object["listingPhoto1"] = mainPhotoFile
         }
         if self.photos.count > 1 {
             
@@ -251,6 +255,12 @@ class listingClass {
             let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
             object["listingPhoto9"] = mainPhotoFile
         }
+        
+        //listing info 3
+        object["price"] = price
+        object["checkin"] = checkin
+        object["daysORmonths"] = daysORmonths
+        object["hostingPeriod"] = hostingPeriod
         
         object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) in
             if success {

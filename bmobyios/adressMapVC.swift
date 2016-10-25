@@ -9,7 +9,6 @@
 import UIKit
 import MapKit
 
-var listing = listingClass()
 
 protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
@@ -19,6 +18,8 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
 //--------------------------------------------------------------------------------------------------------------
 //****************************************** Local Variables ***************************************************
+    
+    var createListingAdress = listingClass()
     
     var selectedPin: MKPlacemark?
     var resultSearchController: UISearchController!
@@ -53,6 +54,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //initiating map kit
         self.mapView.delegate = self
@@ -182,18 +184,18 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
-        
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
         self.navigationController?.pushViewController(next, animated: true)
         
-        
         // data to send to database: geolocation/manually. atributing data to the listingClass
-        listing.street = street
-        listing.postalCode = postalCode
-        listing.city = city
-        listing.country = country
-        listing.latitude = latitude
-        listing.longitude = longitude
+        createListingAdress.street = street
+        createListingAdress.postalCode = postalCode
+        createListingAdress.city = city
+        createListingAdress.country = country
+        createListingAdress.latitude = latitude
+        createListingAdress.longitude = longitude
+        
+        next.createListingType = createListingAdress
     }
     
 }

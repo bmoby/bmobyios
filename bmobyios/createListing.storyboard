@@ -273,15 +273,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NIs-nZ-Kv1">
-                                <rect key="frame" x="163" y="538" width="157" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="next"/>
-                                <connections>
-                                    <action selector="nextBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="Klg-gn-D1H"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9t0-S9-Wd5">
                                 <rect key="frame" x="261" y="76" width="59" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -290,15 +281,6 @@
                                 <state key="normal" title="add photo"/>
                                 <connections>
                                     <action selector="addPhotoBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="2tL-xC-ESc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="asD-9D-zVF">
-                                <rect key="frame" x="0.0" y="538" width="146" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="back"/>
-                                <connections>
-                                    <action selector="backBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="pfe-os-bL9"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ik0-WI-yrj">
@@ -338,6 +320,42 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NIs-nZ-Kv1">
+                                <rect key="frame" x="163" y="538" width="157" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="next"/>
+                                <connections>
+                                    <action selector="nextBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="Klg-gn-D1H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="asD-9D-zVF">
+                                <rect key="frame" x="0.0" y="538" width="146" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="backBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="pfe-os-bL9"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pDG-QW-pMv">
+                                <rect key="frame" x="163" y="538" width="157" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="update"/>
+                                <connections>
+                                    <action selector="updateBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="VXT-CT-yqP"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Cg7-zR-c9c">
+                                <rect key="frame" x="9" y="538" width="146" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Do not update"/>
+                                <connections>
+                                    <action selector="doNotUpdateBtn_clicked:" destination="mdv-qB-4Fa" eventType="touchUpInside" id="6Tf-kM-k8B"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -345,13 +363,15 @@
                         <outlet property="addPhotoBtn" destination="9t0-S9-Wd5" id="7uM-3j-QWP"/>
                         <outlet property="backBtn" destination="asD-9D-zVF" id="xzl-x3-DJv"/>
                         <outlet property="collectionView" destination="Ik0-WI-yrj" id="EZC-6v-R3r"/>
+                        <outlet property="doNotUpdateBtn" destination="Cg7-zR-c9c" id="xfE-42-Nvc"/>
                         <outlet property="mainPhoto" destination="Avf-mv-0Mp" id="FJ9-8e-mtb"/>
                         <outlet property="nextBtn" destination="NIs-nZ-Kv1" id="u46-Wf-E9Z"/>
+                        <outlet property="updateBtn" destination="pDG-QW-pMv" id="9nG-JW-rr9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="094-7J-bi0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="-1905"/>
+            <point key="canvasLocation" x="756" y="-1905"/>
         </scene>
         <!--Listing Info3VC-->
         <scene sceneID="AJc-V6-BIV">
@@ -458,7 +478,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100+" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="F2O-lF-3Pc">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100000" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="F2O-lF-3Pc">
                                         <rect key="frame" x="158" y="402" width="90" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -515,7 +535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkF-7k-yam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1168" y="-1905"/>
+            <point key="canvasLocation" x="1160" y="-1905"/>
         </scene>
         <!--Listing Info1VC-->
         <scene sceneID="TWt-6I-xzj">
@@ -1390,6 +1410,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JaO-IM-YSv">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIn-ZC-zf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ixq-i2-OfY" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wJ0-tA-ugF">
@@ -1401,7 +1422,6 @@
                         <segue destination="sTY-hh-6Ir" kind="relationship" relationship="rootViewController" id="oRd-cW-P4R"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NIn-ZC-zf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2391" y="-1905"/>
         </scene>

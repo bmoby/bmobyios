@@ -12,7 +12,10 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //--------------------------------------------------------------------------------------------------
     //***************************************** LOCAL VARIABLES ****************************************
+    
     private var collectionViewLayout: LGHorizontalLinearFlowLayout!
+    
+    var createListingInfo1 = listingClass()
     
     // sting array rooms and hosting capacity
     var stringArray: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30+"]
@@ -58,6 +61,8 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.hidden = true
         
         // delegate
         collectionViewRoom.delegate = self
@@ -239,7 +244,7 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     //****************************************************************************************************
-    //------------------------  Matress: getting central value of collection view ------------------------
+    //------------------------  Bathroom: getting central value of collection view ------------------------
     
     func findCenterIndexBathroom(scrollView: UIScrollView) {
         let collectionOrigin = collectionViewBathroom!.bounds.origin
@@ -281,23 +286,27 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
             kitchen = "0"
             bathroom = "0"
             
-    }
+        }
         
         //send data
-        listing.rooms = room
-        listing.hostingCapacity = hostingCapacity
-        listing.kitchens = kitchen
+        createListingInfo1.rooms = room
+        createListingInfo1.hostingCapacity = hostingCapacity
+        createListingInfo1.kitchens = kitchen
+        createListingInfo1.bathrooms = bathroom
         
         // going to next controller: listingAmenitiesVC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as? listingInfo2VC
         self.navigationController?.pushViewController(next!, animated: true)
+        next?.createListingInfo2 = createListingInfo1
         
     }
     
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
-        self.navigationController?.pushViewController(next, animated: true)
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
+        self.navigationController?.pushViewController(back, animated: true)
+        back.createListingPropertyType = createListingInfo1
+        
     }
     
 }
