@@ -26,6 +26,8 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @IBOutlet var tableView: UITableView!
     
+    // go back btn
+    @IBOutlet var backBtn: UIButton!
 
     
 //--------------------------------------------------------------------------------------------------
@@ -33,8 +35,11 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.reloadData()
         
        loadMyListings()
     }
@@ -114,6 +119,13 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         // transporting data to the next controller
         next.id = self.id[indexPath.row]
     }
+    
+    
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        let next = storyboard?.instantiateViewControllerWithIdentifier("backofficeVC") as! backofficeVC
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
     
 }
 

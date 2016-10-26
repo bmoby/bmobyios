@@ -17,6 +17,10 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var createListingInfo1 = listingClass()
     
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
+    
     // sting array rooms and hosting capacity
     var stringArray: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30+"]
     
@@ -54,8 +58,12 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //button to go to the next controller
     @IBOutlet var nextBtn: UIButton!
-    
     @IBOutlet var backBtn: UIButton!
+    
+    // update and do not update buttons
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
+    
     
     //-------------------------------------------------------------------------------------------------
     //***************************************** DEFAULT ***********************************************
@@ -101,6 +109,23 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.collectionViewLayout = LGHorizontalLinearFlowLayout.configureLayout(self.collectionViewBathroom, itemSize: CGSizeMake(32, 32), minimumLineSpacing: 10)
         
         selectedCell = 0
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            nextBtn.hidden = true
+            backBtn.hidden = true
+            
+            updateBtn.hidden = false
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            nextBtn.hidden = false
+            backBtn.hidden = false
+            
+            updateBtn.hidden = true
+            doNotUpdateBtn.hidden = true
+        }
+
         
     }
     
@@ -304,10 +329,68 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingPropertyType = createListingInfo1
+        self.navigationController?.pushViewController(back, animated: true)
         
     }
+    
+    
+
+//-------------------------------------------------------------------------------------------------
+//*********************************** UPDATING listingInfo1VC TYPES *******************************
+    
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
+        //send data
+        createListingInfo1.rooms = room
+        createListingInfo1.hostingCapacity = hostingCapacity
+        createListingInfo1.kitchens = kitchen
+        createListingInfo1.bathrooms = bathroom
+        
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                object?.setValue(self.createListingInfo1.rooms, forKey: "rooms")
+                object?.setValue(self.createListingInfo1.hostingCapacity, forKey: "hostingCapacity")
+                object?.setValue(self.createListingInfo1.kitchens, forKey: "kitchens")
+                object?.setValue(self.createListingInfo1.bathrooms, forKey: "bathrooms")
+
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                        back.id = self.id
+                        self.navigationController?.pushViewController(back, animated: true)
+                        
+                        print("listing and property types have been successfully updated")
+                        
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+                
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
+
+    }
+    
+    
+    
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
+        print("let me go back")
+    }
+    
     
 }
 

@@ -16,13 +16,13 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     
     var createListingPhotos = listingClass()
     
-    var controller = String()
-    
     var width = CGFloat()
     var height = CGFloat()
     var cellWidth = CGFloat()
     
-    
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
     
     
 //-------------------------------------------------------------------------------------------------
@@ -79,26 +79,17 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         // hide and show buttons dependng on previous controller
         if controller == "myListngVC" {
             nextBtn.hidden = true
-            //nextBtn.userInteractionEnabled = false
             backBtn.hidden = true
-            //backBtn.userInteractionEnabled = false
             
             updateBtn.hidden = false
-            //updateBtn.userInteractionEnabled = true
             doNotUpdateBtn.hidden = false
-            //doNotUpdateBtn.userInteractionEnabled = true
-            print(controller)
         }
         else {
             nextBtn.hidden = false
-            nextBtn.userInteractionEnabled = true
             backBtn.hidden = false
-            backBtn.userInteractionEnabled = true
             
             updateBtn.hidden = true
-            updateBtn.userInteractionEnabled = false
             doNotUpdateBtn.hidden = true
-            updateBtn.userInteractionEnabled = false
         }
         
     }
@@ -106,6 +97,11 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.collectionView.reloadData()
     }
     
     
@@ -248,19 +244,179 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     
+    
+//-------------------------------------------------------------------------------------------------
+//*********************************** UPDATING THE LISTING PHOTOS *********************************
+
     @IBAction func updateBtn_clicked(sender: AnyObject) {
-        print(self.createListingPhotos.photos)
-        print("update")
+        
+        // remove all photos before updating
+        removePhotos()
+        
+        // saving new photos
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                //listing photos
+                if self.createListingPhotos.mainPhoto != nil {
+
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.mainPhoto!, 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "mainPhoto", data: mainPhotoData!)
+                    object!["mainPhoto"] = mainPhotoFile
+                }
+                
+                if self.createListingPhotos.photos.count > 0 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[0], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto1"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 1 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[1], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto2"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 2 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[2], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto3"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 3 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[3], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto4"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 4 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[4], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto5"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 5 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[5], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto6"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 6 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[6], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto7"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 7 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[7], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto8"] = mainPhotoFile
+                }
+                if self.createListingPhotos.photos.count > 8 {
+                    //declaring images data from images UIImageView
+                    let mainPhotoData = UIImageJPEGRepresentation(self.createListingPhotos.photos[8], 0.5)
+                    
+                    //converting images to PFFile to send to the DB
+                    let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+                    object!["listingPhoto9"] = mainPhotoFile
+                }
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error:NSError?) in
+                    if error == nil {
+                        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                        back.id = self.id
+                        self.navigationController?.pushViewController(back, animated: true)
+                        
+                        
+                        print("photos have been successfully updated")
+                        
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+                
+            else {
+                print(error?.localizedDescription)
+            }
+        }
     }
+    
+    
+    // removing all photos before update
+    func removePhotos() {
+        let query = PFQuery(className: "listing")
+        query.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                if object?.objectId == self.id {
+                    
+                    object?.removeObjectForKey("mainPhoto")
+                    object?.removeObjectForKey("listingPhoto1")
+                    object?.removeObjectForKey("listingPhoto2")
+                    object?.removeObjectForKey("listingPhoto3")
+                    object?.removeObjectForKey("listingPhoto4")
+                    object?.removeObjectForKey("listingPhoto5")
+                    object?.removeObjectForKey("listingPhoto6")
+                    object?.removeObjectForKey("listingPhoto7")
+                    object?.removeObjectForKey("listingPhoto8")
+                    object?.removeObjectForKey("listingPhoto9")
+                }
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        print("photos have been deleted")
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+
+        }
+        
+    }
+        
+
+    
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
     
     @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
         self.navigationController?.pushViewController(back, animated: true)
+        
+
         print("do not update")
     }
-    
-    
     
 }
 

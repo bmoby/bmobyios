@@ -16,6 +16,10 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     private var collectionViewLayout: LGHorizontalLinearFlowLayout!
     
     var createListingInfo2 = listingClass()
+    
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
 
     // sting array rooms and hosting capacity
     var stringArray: [String] = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30+"]
@@ -54,9 +58,12 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //button to go to the next controller
     @IBOutlet var nextBtn: UIButton!
-    
     @IBOutlet var backBtn: UIButton!
+    
+    // update and do not update buttons
 
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
@@ -102,6 +109,22 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.collectionViewLayout = LGHorizontalLinearFlowLayout.configureLayout(self.collectionViewAirMatress, itemSize: CGSizeMake(32, 32), minimumLineSpacing: 10)
         
         selectedCell = 0
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            nextBtn.hidden = true
+            backBtn.hidden = true
+            
+            updateBtn.hidden = false
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            nextBtn.hidden = false
+            backBtn.hidden = false
+            
+            updateBtn.hidden = true
+            doNotUpdateBtn.hidden = true
+        }
 
     }
     
@@ -342,9 +365,87 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
         self.navigationController?.pushViewController(back, animated: true)
         back.createListingInfo1 = createListingInfo2
-
     }
     
+
+//-------------------------------------------------------------------------------------------------
+//*********************************** UPDATING listingInfo2VC TYPES *******************************
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
+        
+        //the dafault value to send in database
+        if twinBed.isEmpty && singleBed.isEmpty && couch.isEmpty && matress.isEmpty && airMatress.isEmpty {
+            // if user touch at least one collection view, the celle values are recognized otherwise set them to 0:
+            twinBed = "0"
+            singleBed = "0"
+            couch = "0"
+            matress = "0"
+            airMatress = "0"
+        }
+        
+        // if all variables sending data are zero: user doesn't choose a place to sleep
+        if twinBed == "0" && singleBed == "0" && couch == "0" && matress == "0" && airMatress == "0" {
+            
+            //alert
+            let alert = UIAlertController(title: "Missing data", message: "Please, choose at least one sleeping place", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+            alert.addAction(ok)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+            
+            //send data
+            createListingInfo2.twinBed = twinBed
+            createListingInfo2.singleBed = singleBed
+            createListingInfo2.couch = couch
+            createListingInfo2.mattress = matress
+            createListingInfo2.airMattress = airMatress
+        
+            let query = PFQuery(className: "listing")
+            query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+                if error == nil {
+                    object?.setValue(self.createListingInfo2.twinBed, forKey: "twinBed")
+                    object?.setValue(self.createListingInfo2.singleBed, forKey: "singleBed")
+                    object?.setValue(self.createListingInfo2.couch, forKey: "couch")
+                    object?.setValue(self.createListingInfo2.mattress, forKey: "mattress")
+                    object?.setValue(self.createListingInfo2.airMattress, forKey: "airMattress")
+
+                
+                
+                    object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                        if error == nil {
+                            let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                            let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                            back.id = self.id
+                            self.navigationController?.pushViewController(back, animated: true)
+                        
+                            print("sleep info ave been successfully updated")
+                        
+                        }
+                        else {
+                            print(error?.localizedDescription)
+                        }
+                    })
+                
+                }
+                else {
+                    print(error?.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    
+    
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
+    }
+
 }
 
 

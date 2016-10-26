@@ -13,6 +13,9 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //-------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
     
+    var id = String()
+    var controller = String()
+    
     var createListingType = listingClass()
     
     // listing type array to display on table cells
@@ -28,6 +31,7 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet var backBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
     
 //--------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ************************************************
@@ -42,6 +46,18 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         //cell height
         self.tableView.rowHeight = 68
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            backBtn.hidden = true
+            
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            backBtn.hidden = false
+            
+            doNotUpdateBtn.hidden = true
+        }
 
     }
 
@@ -70,7 +86,7 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    // !!!!!!!!!!!!
+    // select a row and do an action
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as? listingTypeCell
         
@@ -79,13 +95,13 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             // data to send to database
             createListingType.listingType = (cell?.listingTypeLbl.text)!
-            //listing.listingType = (cell?.listingTypeLbl.text)!
             
             // going to the next controller: TVC of property type
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
-            self.navigationController?.pushViewController(next, animated: true)
             next.createListingPropertyType = createListingType
-            
+            next.id = self.id
+            next.controller = self.controller
+            self.navigationController?.pushViewController(next, animated: true)
         }
     }
     
@@ -96,6 +112,19 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         back.createListingAdress = createListingType
         
         }
+    
+    
+    
+//-------------------------------------------------------------------------------------------------    
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
+        print("let me go back")
+    }
+    
     
 }
 

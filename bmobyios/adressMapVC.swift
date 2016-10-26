@@ -16,10 +16,15 @@ protocol HandleMapSearch: class {
 
 class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-//--------------------------------------------------------------------------------------------------------------
-//****************************************** Local Variables ***************************************************
+//----------------------------------------------------------------------------------------------------
+//****************************************** Local Variables *****************************************
     
+    // class to manage the data from one controller to other
     var createListingAdress = listingClass()
+        
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
     
     var selectedPin: MKPlacemark?
     var resultSearchController: UISearchController!
@@ -46,7 +51,10 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     @IBOutlet weak var adressTxt: UITextView!
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet var nextBtn: UIButton!
     
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
     
     
 //--------------------------------------------------------------------------------------------------------------
@@ -86,6 +94,23 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         //Handle of the mapView from the main View Controller onto the locationSearchTable
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
+        
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            nextBtn.hidden = true
+            //backBtn.hidden = true
+            
+            updateBtn.hidden = false
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            nextBtn.hidden = false
+            //backBtn.hidden = false
+            
+            updateBtn.hidden = true
+            doNotUpdateBtn.hidden = true
+        }
         
     }
     
@@ -188,22 +213,85 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         self.navigationController?.pushViewController(next, animated: true)
         
         // data to send to database: geolocation/manually. atributing data to the listingClass
-        createListingAdress.street = street
+        self.createListingAdress.street = street
+        self.createListingAdress.postalCode = postalCode
+        self.createListingAdress.city = city
+        self.createListingAdress.country = country
+        self.createListingAdress.latitude = latitude
+        self.createListingAdress.longitude = longitude
+        
+        next.createListingType = createListingAdress
+    }
+    
+    
+    
+//-------------------------------------------------------------------------------------------------
+//*********************************** UPDATING THE LISTING ADDRESS ********************************
+    
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
+        
+        // data to send to database: geolocation/manually. atributing data to the listingClass
+        self.createListingAdress.street = street
         createListingAdress.postalCode = postalCode
         createListingAdress.city = city
         createListingAdress.country = country
         createListingAdress.latitude = latitude
         createListingAdress.longitude = longitude
         
-        next.createListingType = createListingAdress
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                let fullAddress = self.street+", "+self.postalCode+" "+self.city+", "+self.country
+                
+                object?.setValue(self.createListingAdress.street, forKey: "street")
+                object?.setValue(self.createListingAdress.postalCode, forKey: "postalCode")
+                object?.setValue(self.createListingAdress.city, forKey: "city")
+                object?.setValue(self.createListingAdress.country, forKey: "country")
+                object?.setValue(self.createListingAdress.latitude, forKey: "latitude")
+                object?.setValue(self.createListingAdress.longitude, forKey: "longitude")
+                object?.setValue(fullAddress, forKey: "fullAdress")
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                        back.id = self.id
+                        self.navigationController?.pushViewController(back, animated: true)
+            
+                        print("adress has been successfully updated")
+                        
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+                
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    
+
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
+        print("let me go back")
     }
     
 }
 
 
 
-//--------------------------------------------------------------------------------------------------------------
-//****************************************** Handle Map Search *************************************************
+//-------------------------------------------------------------------------------------------
+//********************************* Handle Map Search ***************************************
 
 extension adressMapVC: HandleMapSearch {
     
@@ -231,7 +319,7 @@ extension adressMapVC: HandleMapSearch {
                 self.country = country
                 
                 //attributing the informations to the text view when manually adress found
-                self.fullAdress = self.street + ", " + self.postalCode + " " + self.city + ", " + self.country
+                self.fullAdress = self.street+", "+self.postalCode+" "+self.city+", "+self.country
                 self.adressTxt.text = self.fullAdress
                 
                 // longitude and latitude

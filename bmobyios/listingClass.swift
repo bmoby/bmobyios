@@ -12,6 +12,9 @@ import Parse
 
 class listingClass {
     
+    //listing id
+    var id: String = ""
+    
     // user unique ID
     var uuid: String = ""
     
@@ -269,6 +272,114 @@ class listingClass {
                 print(error?.localizedDescription)
             }
         }
+    }
+    
+    func savePhotos() {
+        let object = PFObject(className: "listing")
+        object.objectId = id
+        
+        //listing photos
+        if self.mainPhoto != UIImage(named: "adressIcon") {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.mainPhoto!, 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "mainPhoto", data: mainPhotoData!)
+            object["mainPhoto"] = mainPhotoFile
+        }
+        
+        
+        if self.photos.count > 0 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[0], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto1"] = mainPhotoFile
+        }
+        if self.photos.count > 1 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[1], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto2"] = mainPhotoFile
+        }
+        if self.photos.count > 2 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[2], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto3"] = mainPhotoFile
+        }
+        if self.photos.count > 3 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[3], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto4"] = mainPhotoFile
+        }
+        if self.photos.count > 4 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[4], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto5"] = mainPhotoFile
+        }
+        if self.photos.count > 5 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[5], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto6"] = mainPhotoFile
+        }
+        if self.photos.count > 6 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[6], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto7"] = mainPhotoFile
+        }
+        if self.photos.count > 7 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[7], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto8"] = mainPhotoFile
+        }
+        if self.photos.count > 8 {
+            
+            //declaring images data from images UIImageView
+            let mainPhotoData = UIImageJPEGRepresentation(self.photos[8], 0.5)
+            
+            //converting images to PFFile to send to the DB
+            let mainPhotoFile = PFFile(name: "default", data: mainPhotoData!)
+            object["listingPhoto9"] = mainPhotoFile
+        }
+        
+        object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) in
+            if success {
+                print("listing was saved in DB with success")
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+            
     }
     
 }

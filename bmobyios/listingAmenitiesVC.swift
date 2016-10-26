@@ -15,6 +15,10 @@ class listingAmenitiesVC: UIViewController {
     
     var createListingAmenities = listingClass()
     
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
+    
     // to change background color of image views
     var chooseImg = [UIImageView]()
     
@@ -131,8 +135,12 @@ class listingAmenitiesVC: UIViewController {
 
     // next button
     @IBOutlet var nextBtn: UIButton!
-    
     @IBOutlet var backBtn: UIButton!
+    
+    // update and do not update buttons
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
+    
     
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
@@ -179,6 +187,22 @@ class listingAmenitiesVC: UIViewController {
                     }
                 }
             }
+        }
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            nextBtn.hidden = true
+            backBtn.hidden = true
+            
+            updateBtn.hidden = false
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            nextBtn.hidden = false
+            backBtn.hidden = false
+            
+            updateBtn.hidden = true
+            doNotUpdateBtn.hidden = true
         }
         
         
@@ -246,10 +270,188 @@ class listingAmenitiesVC: UIViewController {
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
         self.navigationController?.pushViewController(back, animated: true)
         back.createListingInfo2 = createListingAmenities
+    }
+    
 
+
+    //-------------------------------------------------------------------------------------------------
+    //*********************************** UPDATING listingInfo2VC TYPES *******************************
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
+        
+        removeAmenities()
+        
+        //cleaning the amenities array
+        createListingAmenities.amenities.removeAll(keepCapacity: false)
+        
+        // picking up the string from chooseTxt that matchs with background color: append to amenities array
+        for (txt, img) in zip(chooseTxt, chooseImg) {
+            if img.backgroundColor == ownColor {
+                createListingAmenities.amenities.append(txt)
+            }
+        }
+
+        
+        //the dafault value to send in database
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                
+                //amenities
+                if self.createListingAmenities.amenities.count > 0 {
+                    object!["amenity0"] = self.createListingAmenities.amenities[0]
+                }
+                if self.createListingAmenities.amenities.count > 1 {
+                    object!["amenity1"] = self.createListingAmenities.amenities[1]
+                }
+                if self.createListingAmenities.amenities.count > 2 {
+                    object!["amenity2"] = self.createListingAmenities.amenities[2]
+                }
+                if self.createListingAmenities.amenities.count > 3 {
+                    object!["amenity3"] = self.createListingAmenities.amenities[3]
+                }
+                if self.createListingAmenities.amenities.count > 4 {
+                    object!["amenity4"] = self.createListingAmenities.amenities[4]
+                }
+                if self.createListingAmenities.amenities.count > 5 {
+                    object!["amenity5"] = self.createListingAmenities.amenities[5]
+                }
+                if self.createListingAmenities.amenities.count > 6 {
+                    object!["amenity6"] = self.createListingAmenities.amenities[6]
+                }
+                if self.createListingAmenities.amenities.count > 7 {
+                    object!["amenity7"] = self.createListingAmenities.amenities[7]
+                }
+                if self.createListingAmenities.amenities.count > 8 {
+                    object!["amenity8"] = self.createListingAmenities.amenities[8]
+                }
+                if self.createListingAmenities.amenities.count > 9 {
+                    object!["amenity9"] = self.createListingAmenities.amenities[9]
+                }
+                if self.createListingAmenities.amenities.count > 10 {
+                    object!["amenity10"] = self.createListingAmenities.amenities[10]
+                }
+                if self.createListingAmenities.amenities.count > 11 {
+                    object!["amenity11"] = self.createListingAmenities.amenities[11]
+                }
+                if self.createListingAmenities.amenities.count > 12 {
+                    object!["amenity12"] = self.createListingAmenities.amenities[12]
+                }
+                if self.createListingAmenities.amenities.count > 13 {
+                    object!["amenity13"] = self.createListingAmenities.amenities[13]
+                }
+                if self.createListingAmenities.amenities.count > 14 {
+                    object!["amenity14"] = self.createListingAmenities.amenities[14]
+                }
+                if self.createListingAmenities.amenities.count > 15 {
+                    object!["amenity15"] = self.createListingAmenities.amenities[15]
+                }
+                if self.createListingAmenities.amenities.count > 16 {
+                    object!["amenity16"] = self.createListingAmenities.amenities[16]
+                }
+                if self.createListingAmenities.amenities.count > 17 {
+                    object!["amenity17"] = self.createListingAmenities.amenities[17]
+                }
+                if self.createListingAmenities.amenities.count > 18 {
+                    object!["amenity18"] = self.createListingAmenities.amenities[18]
+                }
+                if self.createListingAmenities.amenities.count > 19 {
+                    object!["amenity19"] = self.createListingAmenities.amenities[19]
+                }
+                if self.createListingAmenities.amenities.count > 20 {
+                    object!["amenity20"] = self.createListingAmenities.amenities[20]
+                }
+                if self.createListingAmenities.amenities.count > 21 {
+                    object!["amenity21"] = self.createListingAmenities.amenities[21]
+                }
+
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                        back.id = self.id
+                        self.navigationController?.pushViewController(back, animated: true)
+                        
+                        print("adress has been successfully updated")
+                        
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+                
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    // removing all photos before update
+    func removeAmenities() {
+        let query = PFQuery(className: "listing")
+        query.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                if object?.objectId == self.id {
+                    
+                    object?.removeObjectForKey("amenity0")
+                    object?.removeObjectForKey("amenity1")
+                    object?.removeObjectForKey("amenity2")
+                    object?.removeObjectForKey("amenity3")
+                    object?.removeObjectForKey("amenity4")
+                    object?.removeObjectForKey("amenity5")
+                    object?.removeObjectForKey("amenity6")
+                    object?.removeObjectForKey("amenity7")
+                    object?.removeObjectForKey("amenity8")
+                    object?.removeObjectForKey("amenity9")
+                    object?.removeObjectForKey("amenity10")
+                    object?.removeObjectForKey("amenity11")
+                    object?.removeObjectForKey("amenity12")
+                    object?.removeObjectForKey("amenity13")
+                    object?.removeObjectForKey("amenity14")
+                    object?.removeObjectForKey("amenity15")
+                    object?.removeObjectForKey("amenity16")
+                    object?.removeObjectForKey("amenity17")
+                    object?.removeObjectForKey("amenity18")
+                    object?.removeObjectForKey("amenity19")
+                    object?.removeObjectForKey("amenity20")
+                    object?.removeObjectForKey("amenity21")
+                }
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        print("amenities have been deleted")
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+            
+        }
+        
+    }
+
+    
+    
+    
+    //-------------------------------------------------------------------------------------------------
+    //*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
     }
     
 }
+
+
 
 
 

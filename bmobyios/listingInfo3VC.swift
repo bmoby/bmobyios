@@ -15,6 +15,10 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
     var createListingFinal = listingClass()
     
+    // listing id to update the photos and controller to show the update buttons
+    var id = String()
+    var controller = String()
+    
     //data to send to database
     var price = String()
     var checkin = String()

@@ -14,6 +14,7 @@ class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollecti
 //***************************************** LOCAL VARIABLES ****************************************
     var listingPhotos = [PFFile]()
     
+    @IBOutlet var backBtn: UIButton!
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     @IBOutlet var collectionView: UICollectionView!
@@ -59,6 +60,9 @@ class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         return cell
+    }
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 

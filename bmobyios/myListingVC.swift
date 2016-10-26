@@ -12,6 +12,9 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 //--------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
     
+    var OK = String()
+    
+    //
     var id = String()
     var price = String()
     var prices = [String]()
@@ -19,7 +22,9 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     //photo
     var mainPhoto = [PFFile]()
+    var mainPhotoImg = UIImage()
     var listingPhotos = [PFFile]()
+    var listingPhotosImg = [UIImage]()
     
     var fullAdress = String()
     var listingType = String()
@@ -90,6 +95,9 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     // amenities collection view
     @IBOutlet var amenitiesCollectionView: UICollectionView!
     
+    // back button
+    @IBOutlet var backBtn: UIButton!
+    
     //  edit buttons
     @IBOutlet var editListingPhotoBtn: UIButton!
     @IBOutlet var editAddressBtn: UIButton!
@@ -109,6 +117,8 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         // view width and height
         let width = self.view.frame.size.width
@@ -130,9 +140,10 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         self.sleepCollectionView.dataSource = self
         self.amenitiesCollectionView.dataSource = self
         
+        
         // query to load data
         loadMyListing()
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -414,9 +425,28 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                         self.amenitiesCollectionView.reloadData()
                     }
                 }
+                print("query for listing has successfully been done")
+                self.OK = "OK"
+                self.PFFileToUIImage()
             }
             else {
                 print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    func PFFileToUIImage(){
+        if mainPhoto.count != 0 {
+            self.mainPhoto[0].getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
+                self.mainPhotoImg = UIImage(data: data!)!
+            }
+        }
+        
+        if listingPhotos.count != 0 {
+            for object in listingPhotos {
+                object.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) in
+                    self.listingPhotosImg.append(UIImage(data: data!)!)
+                })
             }
         }
     }
@@ -486,47 +516,133 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     
 //---------------------------------------------------------------------------------------------------
-//***************************************** ACTION BUTTONS ******************************************
+//*************************** GOING TO listingPhotosVC FOR EDITING **********************************
 
     
     @IBAction func editListingPhotoBtn_clicked(sender: AnyObject) {
         
         let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
         let next = storyBoard.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
-        self.navigationController?.pushViewController(next, animated: true)
+        // sending the listing id to get back it
+        next.id = id
+        // attribute "myListingVC" to the controller variable to hide the buttons
         next.controller = "myListngVC"
-        self.mainPhoto[0].getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
-            next.mainPhoto?.image = UIImage(data: data!)
-        }
-        for object in self.listingPhotos {
-            object.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) in
-                next.createListingPhotos.photos.append(UIImage(data: data!)!)
-            })
-        }
+        // photos
+        next.createListingPhotos.mainPhoto = mainPhotoImg
+        next.createListingPhotos.photos = listingPhotosImg
+    
+        self.navigationController?.pushViewController(next, animated: true)
+        
         
     }
     
-    
+//---------------------------------------------------------------------------------------------------
+//********************************* GOING TO adressMap FOR EDITING **********************************
     @IBAction func editAddressBtn_clicked(sender: AnyObject) {
+        
+        // defining the storyboard, navigation controller, and adresssMapVC
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let nav = storyBoard.instantiateViewControllerWithIdentifier("UINavigationController") as! UINavigationController
+        let next = nav.topViewController as! adressMapVC
+        
+        //passing data to the adressMapVC
+        next.id = id
+        next.controller = "myListngVC"
+        
+        //presenting the adressMapVC through navigationController
+        self.navigationController?.pushViewController(next, animated: true)
+
     }
     
-    @IBAction func aditListingPropertyTypeBtn_clicked(sender: AnyObject) {
+    
+//---------------------------------------------------------------------------------------------------
+//*********************** GOING TO listingTypeVC and propertyType  FOR EDITING **********************
+    
+    @IBAction func editListingPropertyTypeBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let next = storyBoard.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
+        // sending the listing id to get back it
+        next.id = id
+        // attribute "myListingVC" to the controller variable to hide the buttons
+        next.controller = "myListngVC"
+
+        self.navigationController?.pushViewController(next, animated: true)
     }
+    
+    
+    
+    
+    
+//---------------------------------------------------------------------------------------------------
+//**************************** GOING TO listingInfo1VC FOR EDITING **********************************
     
     @IBAction func editGenInfoBtn_clicked(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let next = storyBoard.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
+        // sending the listing id to get back it
+        next.id = id
+        // attribute "myListingVC" to the controller variable to hide the buttons
+        next.controller = "myListngVC"
+        
+        self.navigationController?.pushViewController(next, animated: true)
     }
+    
+    
+
+//---------------------------------------------------------------------------------------------------
+//**************************** GOING TO listingInfo2VC FOR EDITING **********************************
     
     @IBAction func editSleepBtn_clicked(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let next = storyBoard.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
+        // sending the listing id to get back it
+        next.id = self.id
+        // attribute "myListingVC" to the controller variable to hide the buttons
+        next.controller = "myListngVC"
+        
+        self.navigationController?.pushViewController(next, animated: true)
     }
+
     
+    
+    
+//---------------------------------------------------------------------------------------------------
+//**************************** GOING TO listingAmenitiesVC FOR EDITING ******************************
+
     @IBAction func editAmenitiesBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let next = storyBoard.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as! listingAmenitiesVC
+        // sending the listing id to get back it
+        next.id = id
+        // attribute "myListingVC" to the controller variable to hide the buttons
+        next.controller = "myListngVC"
+        next.createListingAmenities.amenities = self.amenities
+        
+        self.navigationController?.pushViewController(next, animated: true)
     }
+
+    
+    
+//---------------------------------------------------------------------------------------------------
+//**************************** GOING TO listingInfo3VC FOR EDITING **********************************
 
     @IBAction func deactivateTemporarilyBtn_clicked(sender: AnyObject) {
     }
     
     @IBAction func deleteBtn_clicked(sender: AnyObject) {
     }
+    
+    
+//-------------------------------------------------------------------------------------------------
+//***************************************** GO BACK ***********************************************
+    @IBAction func backBtn_clicked(sender: AnyObject) {
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("myListingsVC") as! myListingsVC
+        self.navigationController?.pushViewController(back, animated: true)
+    }
+    
+    
     
 }
 
