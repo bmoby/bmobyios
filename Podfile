@@ -11,5 +11,7 @@ target 'bmobyios' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'mailgun'
+    pod 'GoogleMaps'
+    pod 'GooglePlaces'
 end
 

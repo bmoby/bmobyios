@@ -47,7 +47,6 @@ class adressSearchTVC: UITableViewController {
         
         return addressLine
     }
-    
 }
 
 extension adressSearchTVC : UISearchResultsUpdating {
@@ -68,9 +67,7 @@ extension adressSearchTVC : UISearchResultsUpdating {
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         }
-        
     }
-    
 }
 
 extension adressSearchTVC {
