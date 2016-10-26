@@ -17,8 +17,9 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     //
     var id = String()
     var price = String()
-    var prices = [String]()
     var checkin = String()
+    var daysORmonths = String()
+    var hostingPeriod = String()
     
     //photo
     var mainPhoto = [PFFile]()
@@ -105,6 +106,7 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet var editGenInfoBtn: UIButton!
     @IBOutlet var editSleepBtn: UIButton!
     @IBOutlet var editAmenitiesBtn: UIButton!
+    @IBOutlet var editPriceCheckinBtn: UIButton!
     
     // deactivate temporarily and delete listing buttons
     @IBOutlet var deactivateTemporarilyBtn: UIButton!
@@ -169,6 +171,11 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                     if object.objectId == self.id {
                         self.priceLbl.text! = "\(object.objectForKey("price") as! String) euros"
                         self.checkinLbl.text! = "checkin time: \(object.valueForKey("checkin") as! String)"
+                        self.price = object.valueForKey("price") as! String
+                        self.checkin = object.valueForKey("checkin") as! String
+                        self.daysORmonths = object.valueForKey("daysORmonths") as! String
+                        self.hostingPeriod = object.valueForKey("hostingPeriod") as! String
+
                         
                         // photos
                         self.mainPhoto.append(object.valueForKey("mainPhoto") as! PFFile)
@@ -627,6 +634,27 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
 //---------------------------------------------------------------------------------------------------
 //**************************** GOING TO listingInfo3VC FOR EDITING **********************************
+    
+    
+    @IBAction func editPriceCheckinBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+        let next = storyBoard.instantiateViewControllerWithIdentifier("listingInfo3VC") as! listingInfo3VC
+        // sending the listing id to get back it
+        next.id = id
+        // attribute "myListingVC" to the controller variable to hide the buttons
+        next.controller = "myListngVC"
+        next.createListingFinal.price = self.price
+        next.createListingFinal.checkin = self.checkin
+        next.createListingFinal.daysORmonths = self.daysORmonths
+        next.createListingFinal.hostingPeriod = self.hostingPeriod
+        
+        print(self.price, self.checkin, self.daysORmonths, self.hostingPeriod)
+        
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+    
+    
 
     @IBAction func deactivateTemporarilyBtn_clicked(sender: AnyObject) {
     }

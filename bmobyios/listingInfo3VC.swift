@@ -75,8 +75,10 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
     // list button
     @IBOutlet weak var listBtn: UIButton!
+    @IBOutlet var backBtn: UIButton!
     
-    @IBOutlet var backBtn_clicked: UIButton!
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var doNotUpdateBtn: UIButton!
     
 //------------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT *****************************************************
@@ -140,6 +142,23 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
         if createListingFinal.hostingPeriodMax.isEmpty == false {
             maxValueTxt.text = createListingFinal.hostingPeriodMax
+        }
+        
+        
+        // hide and show buttons dependng on previous controller
+        if controller == "myListngVC" {
+            listBtn.hidden = true
+            backBtn.hidden = true
+            
+            updateBtn.hidden = false
+            doNotUpdateBtn.hidden = false
+        }
+        else {
+            listBtn.hidden = false
+            backBtn.hidden = false
+            
+            backBtn.hidden = true
+            doNotUpdateBtn.hidden = true
         }
         
     }
@@ -295,29 +314,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             // send and save data
             createListingFinal.save()
             
-            print(createListingFinal.street)
-            print(createListingFinal.postalCode)
-            print(createListingFinal.city)
-            print(createListingFinal.country)
-            print(createListingFinal.listingType)
-            print(createListingFinal.propertyType)
-            print(createListingFinal.rooms)
-            print(createListingFinal.hostingCapacity)
-            print(createListingFinal.kitchens)
-            print(createListingFinal.bathrooms)
-            print(createListingFinal.twinBed)
-            print(createListingFinal.singleBed)
-            print(createListingFinal.couch)
-            print(createListingFinal.mattress)
-            print(createListingFinal.airMattress)
-            print(createListingFinal.amenities)
-            print(createListingFinal.photos)
-            print(createListingFinal.price)
-            print(createListingFinal.checkin)
-            print(createListingFinal.daysORmonths)
-            print(createListingFinal.hostingPeriod)
         }
-        
         
     }
     
@@ -342,34 +339,102 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
         self.navigationController?.pushViewController(back, animated: true)
         back.createListingPhotos = createListingFinal
+    }
+    
+    
+    
+    
+    
+    
+    @IBAction func updateBtn_clicked(sender: AnyObject) {
         
-        print(createListingFinal)
-        print(createListingFinal.street)
-        print(createListingFinal.postalCode)
-        print(createListingFinal.city)
-        print(createListingFinal.country)
-        print(createListingFinal.listingType)
-        print(createListingFinal.propertyType)
-        print(createListingFinal.rooms)
-        print(createListingFinal.hostingCapacity)
-        print(createListingFinal.kitchens)
-        print(createListingFinal.bathrooms)
-        print(createListingFinal.twinBed)
-        print(createListingFinal.singleBed)
-        print(createListingFinal.couch)
-        print(createListingFinal.mattress)
-        print(createListingFinal.airMattress)
-        print(createListingFinal.amenities)
-        print(createListingFinal.photos)
-        print(createListingFinal.price)
-        print(createListingFinal.checkin)
-        print(createListingFinal.daysORmonths)
-        print(createListingFinal.hostingPeriod)
+        // uuid
+        createListingFinal.uuid = "1"
+        
+        // days or months data
+        if daysBtn.backgroundColor == ownColor {
+            createListingFinal.daysORmonths = "days"
+        }
+        else {
+            createListingFinal.daysORmonths = "months"
+        }
+        
+        if priceTxt.text == "" {
+            alert("Price field is empty", message: "Please, give your listing price. The dault price is 1 euro/dollar")
+            priceTxt.text = "1"
+        }
+        else if minValueTxt.text == ""{
+            // min days/months value
+            alert("Min days field is empty", message: "Please, define min vaule. The dault min value is 1")
+            minValueTxt.text = "1"
+            
+        }
+        else if maxValueTxt.text == "" {
+            // max days/months value
+            alert("Max days field is empty", message: "Please, define max vaule. The dault min value is 100000")
+            maxValueTxt.text = "100000"
+        }
+        else if Int(minValueTxt.text!) > Int(maxValueTxt.text!) {
+            alert("Min days/months can not be more than max days/months field is empty", message: "The dault min values are 1 and 100000")
+            minValueTxt.text = "1"
+            maxValueTxt.text = "100000"
+        }
+        else {
+            createListingFinal.price = priceTxt.text!
+            createListingFinal.checkin = checkinTxt.text!
+            createListingFinal.hostingPeriod = minValueTxt.text! + "-" + maxValueTxt.text!
+            
+            
+            let query = PFQuery(className: "listing")
+            query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+                
+                if error == nil {
+                    
+                    object?.setValue(self.createListingFinal.price, forKey: "price")
+                    object?.setValue(self.createListingFinal.checkin, forKey: "checkin")
+                    object?.setValue(self.createListingFinal.daysORmonths, forKey: "daysORmonths")
+                    object?.setValue(self.createListingFinal.hostingPeriod, forKey: "hostingPeriod")
+                    
+                    object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                        if error == nil {
+                            let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+                            let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+                            back.id = self.id
+                            self.navigationController?.pushViewController(back, animated: true)
+                            
+                            print("adress has been successfully updated")
+                            
+                        }
+                        else {
+                            print(error?.localizedDescription)
+                        }
+                    })
+                    
+                }
+                else {
+                    print(error?.localizedDescription)
+                }
+            }
+            
+        }
 
     }
     
     
+    
+    //-------------------------------------------------------------------------------------------------
+    //*********************** GOING BACK TO THE myListingVC: no update ********************************
+    @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
+        let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
+        let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        back.id = self.id
+        self.navigationController?.pushViewController(back, animated: true)
+        print("let me go back")
+    }
+    
 }
+
+    
 
 
 

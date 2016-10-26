@@ -438,6 +438,15 @@
                                             <action selector="editSleepBtn_clicked:" destination="P8r-cH-5DH" eventType="touchUpInside" id="vvs-wE-FoR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5OC-Vd-Fzx">
+                                        <rect key="frame" x="125" y="51" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="edit"/>
+                                        <connections>
+                                            <action selector="editPriceCheckinBtn_clicked:" destination="P8r-cH-5DH" eventType="touchUpInside" id="hpf-J4-XuV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -456,6 +465,7 @@
                         <outlet property="editGenInfoBtn" destination="cKx-dh-G58" id="bDb-Hc-laV"/>
                         <outlet property="editListingPhotoBtn" destination="7Bm-LI-CN0" id="rfi-oi-ipM"/>
                         <outlet property="editListingPropertyTypeBtn" destination="xOq-Vr-t7Q" id="Ogr-Ru-0mn"/>
+                        <outlet property="editPriceCheckinBtn" destination="5OC-Vd-Fzx" id="saT-IT-nQW"/>
                         <outlet property="editSleepBtn" destination="riI-Kz-Urg" id="cUi-Bc-nkW"/>
                         <outlet property="genInfoCollectionView" destination="6EV-Xf-jCP" id="h5B-Qu-lKb"/>
                         <outlet property="gradeLbl" destination="U8b-2K-M54" id="DUd-pd-sbC"/>

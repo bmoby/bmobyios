@@ -553,16 +553,33 @@
                                             <action selector="backBtn_clicked:" destination="QEI-gj-xR1" eventType="touchUpInside" id="uEY-Vu-FSK"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0rT-vp-ECT">
+                                        <rect key="frame" x="0.0" y="538" width="150" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Do not update"/>
+                                        <connections>
+                                            <action selector="doNotUpdateBtn_clicked:" destination="QEI-gj-xR1" eventType="touchUpInside" id="1FI-2l-1FI"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Zl-rA-tJ0">
+                                        <rect key="frame" x="170" y="538" width="150" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Update"/>
+                                        <connections>
+                                            <action selector="updateBtn_clicked:" destination="QEI-gj-xR1" eventType="touchUpInside" id="JPY-V2-fMp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="backBtn_clicked" destination="hvp-wf-Iba" id="Se8-4Q-cNh"/>
+                        <outlet property="backBtn" destination="hvp-wf-Iba" id="yzF-jj-ePm"/>
                         <outlet property="checkinHeaderLbl" destination="zg5-zL-pvN" id="hnJ-43-B2u"/>
                         <outlet property="checkinTxt" destination="sEZ-0l-NFV" id="3X9-gh-GLY"/>
                         <outlet property="daysBtn" destination="98T-Bg-urW" id="b0R-Ti-Adg"/>
+                        <outlet property="doNotUpdateBtn" destination="0rT-vp-ECT" id="zJ4-Ph-vN7"/>
                         <outlet property="headerLbl" destination="fiV-Y8-NkG" id="BmM-ZG-Px1"/>
                         <outlet property="headerView" destination="aGK-Xy-K5T" id="MHM-4W-c1y"/>
                         <outlet property="listBtn" destination="Atr-q5-MTh" id="4zv-XU-Ghy"/>
@@ -577,6 +594,7 @@
                         <outlet property="priceTxt" destination="9C3-eR-SeO" id="SXE-Xb-c8S"/>
                         <outlet property="priceView" destination="Vxg-6K-4zT" id="8Au-qT-3sr"/>
                         <outlet property="scrollView" destination="hfZ-WT-hdo" id="wHc-Qs-7gA"/>
+                        <outlet property="updateBtn" destination="2Zl-rA-tJ0" id="pMG-JQ-y5o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IkF-7k-yam" userLabel="First Responder" sceneMemberID="firstResponder"/>
