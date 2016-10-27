@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="F3j-ue-H2P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="laM-Ue-eUG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,7 +99,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signupClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="UuQ-rG-dAp"/>
-                                    <segue destination="B88-pK-SqI" kind="push" id="Usp-KJ-NnL"/>
+                                    <segue destination="B88-pK-SqI" kind="modal" id="Usp-KJ-NnL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxM-Y3-1ad">
@@ -117,7 +117,7 @@
                                     <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bG1-Er-y4s" kind="push" id="8V4-WA-Vac"/>
+                                    <segue destination="bG1-Er-y4s" kind="modal" id="8V4-WA-Vac"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -172,7 +172,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="T8C-xe-dfF" kind="push" id="9QV-nj-dbR"/>
+                                    <segue destination="T8C-xe-dfF" kind="modal" id="9QV-nj-dbR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -255,7 +255,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="cancel"/>
                                 <connections>
-                                    <segue destination="T8C-xe-dfF" kind="push" id="3Ii-vM-OLa"/>
+                                    <segue destination="T8C-xe-dfF" kind="modal" id="3Ii-vM-OLa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RFK-in-pF8">
@@ -291,7 +291,7 @@
                         <outlet property="repeatTxtF" destination="hlq-M3-xyn" id="zc2-eT-twk"/>
                         <outlet property="saveBtn" destination="RFK-in-pF8" id="qB3-kZ-ZEs"/>
                         <outlet property="titleLbl" destination="FR2-eo-DHd" id="u6c-zF-bbm"/>
-                        <segue destination="iya-ew-NSl" kind="push" identifier="goStep2" id="uFD-Vi-Yn8"/>
+                        <segue destination="iya-ew-NSl" kind="modal" identifier="goStep2" id="uFD-Vi-Yn8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gJ-zS-nA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -428,8 +428,8 @@
                         <outlet property="separatorLbl" destination="xJw-Jw-dTG" id="ayU-Oh-nUQ"/>
                         <outlet property="titleLbl" destination="KA6-mK-H1k" id="qRK-p6-Q0q"/>
                         <outlet property="womanBtn" destination="5NF-0e-MNc" id="WJg-Ql-6hk"/>
-                        <segue destination="B88-pK-SqI" kind="push" identifier="backStep1" id="uP7-Qr-D6o"/>
-                        <segue destination="6cF-3Q-l15" kind="push" identifier="goStep3" id="FsR-fq-HSb"/>
+                        <segue destination="B88-pK-SqI" kind="modal" identifier="backStep1" id="uP7-Qr-D6o"/>
+                        <segue destination="6cF-3Q-l15" kind="modal" identifier="goStep3" id="FsR-fq-HSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAV-hy-Qkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -536,7 +536,7 @@
                                         <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="addLanguageClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="50l-vX-XdZ"/>
-                                            <segue destination="OBc-NG-OJe" kind="push" identifier="backToLanguageSelection" id="AtR-GZ-hzq"/>
+                                            <segue destination="OBc-NG-OJe" kind="modal" identifier="backToLanguageSelection" id="AtR-GZ-hzq"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add languages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QuX-0L-FED">
@@ -613,7 +613,7 @@
                         <outlet property="scrollRegistration3step" destination="pam-MZ-Dez" id="w0o-f9-9qh"/>
                         <outlet property="submitBtn" destination="uHe-gb-Iw3" id="up4-8N-9v1"/>
                         <outlet property="titleLbl" destination="Awk-Hd-DjB" id="ZLT-b0-nbh"/>
-                        <segue destination="iya-ew-NSl" kind="push" identifier="backStep2" id="vav-Uk-7qR"/>
+                        <segue destination="iya-ew-NSl" kind="modal" identifier="backStep2" id="vav-Uk-7qR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ln5-gn-V3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -637,7 +637,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6cF-3Q-l15" kind="push" identifier="languageSelected" id="GlU-tr-8yn"/>
+                                    <segue destination="6cF-3Q-l15" kind="modal" identifier="languageSelected" id="GlU-tr-8yn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -655,24 +655,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBm-dV-8Ct" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="350" y="2969"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="f0W-Tq-NvE">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F3j-ue-H2P" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kTY-EI-txE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="T8C-xe-dfF" kind="relationship" relationship="rootViewController" id="CyB-iw-qwM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H8F-bF-Tqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1006" y="2220"/>
         </scene>
         <!--Email Not VerifiedVC-->
         <scene sceneID="utr-MV-I8s">
@@ -762,10 +744,10 @@
         <image name="profile" width="210" height="210"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Ii-vM-OLa"/>
-        <segue reference="uP7-Qr-D6o"/>
+        <segue reference="Usp-KJ-NnL"/>
+        <segue reference="9QV-nj-dbR"/>
         <segue reference="vav-Uk-7qR"/>
-        <segue reference="1uH-Aj-kHw"/>
+        <segue reference="GlU-tr-8yn"/>
         <segue reference="kTI-Jh-WqT"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,8 +13,9 @@ import ParseFacebookUtilsV4
 
 
 
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GMSMapViewDelegate {
 
     var window: UIWindow?
 

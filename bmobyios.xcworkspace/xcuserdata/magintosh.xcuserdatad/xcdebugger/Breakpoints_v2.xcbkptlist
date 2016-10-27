@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bmobyios/checkVC.swift"
-            timestampString = "499165865.016059"
+            timestampString = "499182185.112574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "checkVC"
             landmarkType = "3">
          </BreakpointContent>
