@@ -10,7 +10,6 @@ import UIKit
 
 class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
 //-----------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES *******************************************
     
@@ -26,6 +25,7 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var propertyTypeIconArray = [UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon"), UIImage(named: "adressIcon")]
 
     
+    
 //---------------------------------------------------------------------------------------------------
 //***************************************** OUTLETS *************************************************
     @IBOutlet weak var headerView: UIView!
@@ -36,14 +36,14 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var updateBtn: UIButton!
     @IBOutlet var backBtnUpdate: UIButton!
     
+    
+    
 //---------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT *************************************************
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.hidden = true
-        
+                
         //initializing table
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,8 +65,6 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             updateBtn.hidden = true
             backBtnUpdate.hidden = true
         }
-
-        
         
     }
     
@@ -111,6 +109,10 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
+//------------------------------------------------------------------------------------------------
+//************************************ GOING TO NEXT VC: listingInfo1VC **************************
+    
     // going to the next controller and managing data 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as? propertyTypeCell
@@ -123,8 +125,9 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 // going to the next controller: VC listingInfo1VC
                 let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
-                self.navigationController?.pushViewController(next, animated: true)
                 next.createListingInfo1 = createListingPropertyType
+
+                self.presentViewController(next, animated: true, completion: nil)
             }
             else {
                 cell?.backgroundColor = UIColor.clearColor()
@@ -132,14 +135,18 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+
     
+    
+//-------------------------------------------------------------------------------------------------
+//************************************** GOING BACK TO listingTypeVC ******************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back
-        let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
-        next.createListingType = createListingPropertyType
-        self.navigationController?.pushViewController(next, animated: true)
-
+        let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
+        back.createListingType = createListingPropertyType
+        self.presentViewController(back, animated: true, completion: nil)
     }
+    
     
     
 //-------------------------------------------------------------------------------------------------
@@ -160,7 +167,7 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                         back.id = self.id
-                        self.navigationController?.pushViewController(back, animated: true)
+                        self.presentViewController(back, animated: true, completion: nil)
                         
                         print("listing and property types have been successfully updated")
                         
@@ -188,7 +195,7 @@ class propertyTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
         back.id = self.id
         back.controller = self.controller
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
     }
     
     

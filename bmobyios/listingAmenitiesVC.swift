@@ -146,9 +146,7 @@ class listingAmenitiesVC: UIViewController {
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.hidden = true
-        
+                
         let height = self.view.frame.height
         let width = self.view.frame.size.width
         
@@ -231,7 +229,7 @@ class listingAmenitiesVC: UIViewController {
 
     
 //-------------------------------------------------------------------------------------------------
-//*********************************** GOING TO THE NEXT CONTROLLER ********************************
+//********************** GOING TO THE NEXT CONTROLLER: listingPhotosVC ****************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
         //cleaning the amenities array
@@ -247,13 +245,16 @@ class listingAmenitiesVC: UIViewController {
         
         // going to next controller: listingPhotosVC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
-        self.navigationController?.pushViewController(next, animated: true)
         next.createListingPhotos = createListingAmenities
         print(createListingAmenities.amenities)
-        
+
+        self.presentViewController(next, animated: true, completion: nil)
     }
     
     
+    
+//****************************************************************************************************
+//------------------------------  GOING BACK TO: listingInfo2VC  -------------------------------------
     @IBAction func backBtn_clicked(sender: AnyObject) {
         
         //cleaning the amenities array
@@ -268,14 +269,15 @@ class listingAmenitiesVC: UIViewController {
         
         // going back: listingInfo2VC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as! listingInfo2VC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingInfo2 = createListingAmenities
+
+        self.presentViewController(back, animated: true, completion: nil)
     }
     
 
 
-    //-------------------------------------------------------------------------------------------------
-    //*********************************** UPDATING listingInfo2VC TYPES *******************************
+//-------------------------------------------------------------------------------------------------
+//*********************************** UPDATING AMENITIES ******************************************
     @IBAction func updateBtn_clicked(sender: AnyObject) {
         
         removeAmenities()
@@ -371,7 +373,7 @@ class listingAmenitiesVC: UIViewController {
                         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                         back.id = self.id
-                        self.navigationController?.pushViewController(back, animated: true)
+                        self.presentViewController(back, animated: true, completion: nil)
                         
                         print("adress has been successfully updated")
                         
@@ -439,14 +441,13 @@ class listingAmenitiesVC: UIViewController {
 
     
     
-    
-    //-------------------------------------------------------------------------------------------------
-    //*********************** GOING BACK TO THE myListingVC: no update ********************************
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
     @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
     }
     
 }

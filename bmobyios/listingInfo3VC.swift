@@ -143,6 +143,9 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         if createListingFinal.hostingPeriodMax.isEmpty == false {
             maxValueTxt.text = createListingFinal.hostingPeriodMax
         }
+        if minValueTxt.text! == "1" && createListingFinal.hostingPeriodMin.isEmpty == false {
+            
+        }
         
         
         // hide and show buttons dependng on previous controller
@@ -157,7 +160,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             listBtn.hidden = false
             backBtn.hidden = false
             
-            backBtn.hidden = true
+            updateBtn.hidden = true
             doNotUpdateBtn.hidden = true
         }
         
@@ -228,8 +231,6 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
     }
    
-    
-    //
     
     //--------------------------------------------PICKER VIEW METHODS----------------------------------
     
@@ -337,14 +338,15 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
         // going back: listingPhotosVC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingPhotosVC") as! listingPhotosVC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingPhotos = createListingFinal
+        self.presentViewController(back, animated: true, completion: nil)
     }
     
     
     
     
-    
+//-------------------------------------------------------------------------------------------------
+//**************************** UPDATING THE LISTING PRICE, CHECKIN AND HOSTING PERIOD *************
     
     @IBAction func updateBtn_clicked(sender: AnyObject) {
         
@@ -400,7 +402,7 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                             let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                             let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                             back.id = self.id
-                            self.navigationController?.pushViewController(back, animated: true)
+                            self.presentViewController(back, animated: true, completion: nil)
                             
                             print("adress has been successfully updated")
                             
@@ -422,13 +424,13 @@ class listingInfo3VC: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
     
     
-    //-------------------------------------------------------------------------------------------------
-    //*********************** GOING BACK TO THE myListingVC: no update ********************************
+//-------------------------------------------------------------------------------------------------
+//*********************** GOING BACK TO THE myListingVC: no update ********************************
     @IBAction func doNotUpdateBtn_clicked(sender: AnyObject) {
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
         print("let me go back")
     }
     

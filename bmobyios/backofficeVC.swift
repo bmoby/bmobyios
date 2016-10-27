@@ -16,9 +16,6 @@ class backofficeVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var iconImg = [UIImage(named: "fr"), UIImage(named: "it"), UIImage(named: "en"), UIImage(named: "de")]
     var titleLbl = ["My profile", "My listings", "Create listing", "Options"]
     
-  
-    
-    
     
     
 //--------------------------------------------------------------------------------------------------
@@ -26,15 +23,11 @@ class backofficeVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     @IBOutlet var tableView: UITableView!
     
-    
-    
-    
-    
 //--------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+                
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -45,7 +38,6 @@ class backofficeVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
-  
     
     
     
@@ -73,13 +65,17 @@ class backofficeVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if cell.lbl.text == "Create listing" {
-            let storyb = UIStoryboard(name: "createListing", bundle: nil)
-            let next = storyb.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
-            self.navigationController?.pushViewController(next, animated: true)
+            // defining the storyboard, navigation controller, and adresssMapVC
+            let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
+            let next = storyBoard.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
+            
+            //presenting the adressMapVC through navigationController
+            self.presentViewController(next, animated: true, completion: nil)
+
         }
         else if cell.lbl.text == "My listings"{
-            let mytListingsVC = self.storyboard?.instantiateViewControllerWithIdentifier("myListingsVC") as! myListingsVC
-            self.navigationController?.pushViewController(mytListingsVC, animated: true)
+            let next = self.storyboard?.instantiateViewControllerWithIdentifier("myListingsVC") as! myListingsVC
+            self.presentViewController(next, animated: true, completion: nil)
         }
 
                 /*

@@ -35,8 +35,6 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.reloadData()
@@ -49,7 +47,10 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
+
     
+//---------------------------------------------------------------------------------------------------
+//***************************************** LOADING HOST'S LISTINGS *********************************
     func loadMyListings() {
         // to add: if statement to check if user has or not a listing and alert message if does not
         let query = PFQuery(className: "listing")
@@ -60,11 +61,7 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.id.removeAll(keepCapacity: false)
                 self.price.removeAll(keepCapacity: false)
                 self.fullAdress.removeAll(keepCapacity: false)
-                
-                // photo
                 self.mainPhoto.removeAll(keepCapacity: false)
-                
-                
                 self.fullAdress.removeAll(keepCapacity: false)
                 
                 for object in objects! {
@@ -87,13 +84,13 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
 //---------------------------------------------------------------------------------------------------
 //***************************************** TABLE ***************************************************
-    //
+    //number of rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return  price.count
     }
     
-    //
+    
+    // rows data and configuration
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // defining cell
@@ -111,26 +108,30 @@ class myListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    // action touching the row
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let next = storyboard?.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
-        self.navigationController?.pushViewController(next, animated: true)
-        
         // transporting data to the next controller
         next.id = self.id[indexPath.row]
+        self.presentViewController(next, animated: true, completion: nil)
+        
     }
     
     
+
+//---------------------------------------------------------------------------------------------------
+//***************************************** GOING BACK TO backofficeVC ******************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
         let next = storyboard?.instantiateViewControllerWithIdentifier("backofficeVC") as! backofficeVC
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
-    
     
 }
 
 
-
+//---------------------------------------------------------------------------------------------------
+//***************************************** TABLE CELLS CLASS ***************************************
 class myListingsCell: UITableViewCell {
     
     @IBOutlet var mainPothoImg: UIImageView!

@@ -11,10 +11,14 @@ import UIKit
 class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
 //-------------------------------------------------------------------------------------------------
-//***************************************** LOCAL VARIABLES ****************************************
+//***************************************** LOCAL VARIABLES ***************************************
+    var id = String()
     var listingPhotos = [PFFile]()
     
     @IBOutlet var backBtn: UIButton!
+    
+    
+    
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     @IBOutlet var collectionView: UICollectionView!
@@ -36,6 +40,8 @@ class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollecti
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 //-------------------------------------------------------------------------------------------------
 //***************************************** CONFIFURE CELLS ***************************************
@@ -61,10 +67,19 @@ class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollecti
         
         return cell
     }
+    
+    
+    
+//-------------------------------------------------------------------------------------------------
+//***************************************** GO BACK TO myListingVC ********************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        let next = storyboard?.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
+        next.id = self.id
+        self.presentViewController(next, animated: true, completion: nil)
     }
 }
+
+
 
 //-------------------------------------------------------------------------------------------------
 //***************************************** CELL CLASS ********************************************
@@ -72,4 +87,9 @@ class fullScreenPhotosVC: UIViewController, UICollectionViewDelegate, UICollecti
 class fullScreenPhotoCell: UICollectionViewCell {
     @IBOutlet var img: UIImageView!
 }
+
+
+
+
+
 

@@ -12,8 +12,6 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 //--------------------------------------------------------------------------------------------------
 //***************************************** LOCAL VARIABLES ****************************************
     
-    var OK = String()
-    
     //
     var id = String()
     var price = String()
@@ -110,6 +108,7 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     // deactivate temporarily and delete listing buttons
     @IBOutlet var deactivateTemporarilyBtn: UIButton!
+    @IBOutlet var activateBtn: UIButton!
     @IBOutlet var deleteBtn: UIButton!
     
     
@@ -119,15 +118,13 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+                
         // view width and height
         let width = self.view.frame.size.width
         let height = self.view.frame.size.height
         
         // scrollview
-        self.scrollView.frame.origin = CGPoint(x: 0, y: 0)
+        self.scrollView.frame.origin = CGPoint(x: 0, y: 50)
         self.scrollView.contentSize = CGSize(width: width, height: height + 260)
         
         // collection view delegate
@@ -152,6 +149,8 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
   
 //---------------------------------------------------------------------------------------------------
 //***************************************** QUERY TO LOAD DATA **************************************
@@ -432,8 +431,6 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
                         self.amenitiesCollectionView.reloadData()
                     }
                 }
-                print("query for listing has successfully been done")
-                self.OK = "OK"
                 self.PFFileToUIImage()
             }
             else {
@@ -442,6 +439,8 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    
+    // converting PFFiles picked from data base to UIImage
     func PFFileToUIImage(){
         if mainPhoto.count != 0 {
             self.mainPhoto[0].getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
@@ -457,6 +456,8 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
             }
         }
     }
+    
+    
     
 //---------------------------------------------------------------------------------------------------
 //***************************************** COLLECTION VIEW *****************************************
@@ -517,14 +518,14 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("fullScreenPhotosVC") as! fullScreenPhotosVC
         next.listingPhotos = listingPhotos
-        self.navigationController?.pushViewController(next, animated: true)
+        next.id = self.id
+        self.presentViewController(next, animated: true, completion: nil)
     }
     
     
     
 //---------------------------------------------------------------------------------------------------
 //*************************** GOING TO listingPhotosVC FOR EDITING **********************************
-
     
     @IBAction func editListingPhotoBtn_clicked(sender: AnyObject) {
         
@@ -538,10 +539,12 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         next.createListingPhotos.mainPhoto = mainPhotoImg
         next.createListingPhotos.photos = listingPhotosImg
     
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
         
         
     }
+    
+    
     
 //---------------------------------------------------------------------------------------------------
 //********************************* GOING TO adressMap FOR EDITING **********************************
@@ -549,17 +552,17 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         
         // defining the storyboard, navigation controller, and adresssMapVC
         let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
-        let nav = storyBoard.instantiateViewControllerWithIdentifier("UINavigationController") as! UINavigationController
-        let next = nav.topViewController as! adressMapVC
+        let next = storyBoard.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
         
         //passing data to the adressMapVC
         next.id = id
         next.controller = "myListngVC"
         
         //presenting the adressMapVC through navigationController
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
 
     }
+    
     
     
 //---------------------------------------------------------------------------------------------------
@@ -573,10 +576,8 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         // attribute "myListingVC" to the controller variable to hide the buttons
         next.controller = "myListngVC"
 
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
-    
-    
     
     
     
@@ -592,7 +593,7 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         // attribute "myListingVC" to the controller variable to hide the buttons
         next.controller = "myListngVC"
         
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
     
     
@@ -609,7 +610,7 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         // attribute "myListingVC" to the controller variable to hide the buttons
         next.controller = "myListngVC"
         
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
 
     
@@ -627,14 +628,13 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         next.controller = "myListngVC"
         next.createListingAmenities.amenities = self.amenities
         
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
 
     
     
 //---------------------------------------------------------------------------------------------------
 //**************************** GOING TO listingInfo3VC FOR EDITING **********************************
-    
     
     @IBAction func editPriceCheckinBtn_clicked(sender: AnyObject) {
         let storyBoard = UIStoryboard(name: "createListing", bundle: nil)
@@ -646,33 +646,118 @@ class myListingVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
         next.createListingFinal.price = self.price
         next.createListingFinal.checkin = self.checkin
         next.createListingFinal.daysORmonths = self.daysORmonths
-        next.createListingFinal.hostingPeriod = self.hostingPeriod
+        let minValue = self.hostingPeriod.componentsSeparatedByString("-").first
+        let maxValue = self.hostingPeriod.componentsSeparatedByString("-").last
+        next.createListingFinal.hostingPeriodMin = minValue!
+        next.createListingFinal.hostingPeriodMax = maxValue!
         
         print(self.price, self.checkin, self.daysORmonths, self.hostingPeriod)
         
-        self.navigationController?.pushViewController(next, animated: true)
+        self.presentViewController(next, animated: true, completion: nil)
     }
     
     
     
+//---------------------------------------------------------------------------------------------------
+//************************************ DEACTIVATE AND REACTIVATE LISTING ****************************
+    
+    // alert function
+    func alert(error: String, message: String) {
+        let alert = UIAlertController(title: error, message: message, preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(ok)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 
     @IBAction func deactivateTemporarilyBtn_clicked(sender: AnyObject) {
+        deactivateTemporarilyBtn.hidden = true
+        activateBtn.hidden = false
+        
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                object?.setValue("false", forKey: "activated")
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        self.alert("Listing is deactivated", message: "You will miss an incredible experience with new guests in your city. Be openmindne with Bmoby")
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+
+    
+    @IBAction func activateBtn_clicked(sender: AnyObject) {
+        deactivateTemporarilyBtn.hidden = false
+        activateBtn.hidden = true
+        
+        let query = PFQuery(className: "listing")
+        query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+            
+            if error == nil {
+                object?.setValue("true", forKey: "activated")
+                
+                object?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    if error == nil {
+                        self.alert("Listing is activated", message: "Your listing is activated. Now guests can visit you any time. Be openmindne with Bmoby")
+                    }
+                    else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+            else {
+                print(error?.localizedDescription)
+            }
+        }
     }
     
+    
+    
+//---------------------------------------------------------------------------------------------------
+//************************************ DELETE LISTING ***********************************************
+    
     @IBAction func deleteBtn_clicked(sender: AnyObject) {
+        print(self.id)
+        
+        let message = UIAlertController(title: "Deleting", message: "Are you sure?", preferredStyle: .Alert)
+        let no = UIAlertAction(title: "No", style: .Cancel, handler: nil)
+        let yes = UIAlertAction(title: "Yes", style: .Default) { (action:UIAlertAction) in
+            let query = PFQuery(className: "listing")
+            query.getObjectInBackgroundWithId(self.id) {(object: PFObject?, error: NSError?) in
+                object?.deleteInBackground()
+                self.goBack()
+            }
+        }
+        message.addAction(no)
+        message.addAction(yes)
+        self.presentViewController(message, animated: true, completion: nil)
     }
+    
+    // go back to myListingsVC when deleting a listing
+    func goBack(){
+        let back = storyboard?.instantiateViewControllerWithIdentifier("myListingsVC") as! myListingsVC
+        self.presentViewController(back, animated: true, completion: nil)
+    }
+   
     
     
 //-------------------------------------------------------------------------------------------------
-//***************************************** GO BACK ***********************************************
+//***************************************** GO BACK TO myListingsVC *******************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("myListingsVC") as! myListingsVC
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
     }
-    
-    
-    
 }
+
 
 
 //-------------------------------------------------------------------------------------------------

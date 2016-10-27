@@ -32,6 +32,8 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     var couch = String()
     var matress = String()
     var airMatress = String()
+    
+    
 
 //-------------------------------------------------------------------------------------------------
 //***************************************** OUTLETS ***********************************************
@@ -64,13 +66,14 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     @IBOutlet var updateBtn: UIButton!
     @IBOutlet var doNotUpdateBtn: UIButton!
+    
+    
+    
 //-------------------------------------------------------------------------------------------------
 //***************************************** DEFAULT ***********************************************
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.hidden = true
-        
+                
         // delegate
         collectionViewTwinBed.delegate = self
         collectioViewSingleBed.delegate = self
@@ -132,6 +135,8 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 //--------------------------------------------------------------------------------------------------
 //********************************* CELLS CONFIG  **************************************************
@@ -321,7 +326,7 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
 //****************************************************************************************************
-//-----------------------------------  SEND DATA TO DATABASE -----------------------------------------
+//------------------------------  GOING TO NEXT VC: listingInfo2VC  ----------------------------------
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
         //the dafault value to send in database
@@ -354,8 +359,8 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             // going to next controller: listingAmenitiesVC
             let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as? listingAmenitiesVC
-            self.navigationController?.pushViewController(next!, animated: true)
             next!.createListingAmenities = createListingInfo2
+            self.presentViewController(next!, animated: true, completion: nil)
             
         }
     }
@@ -363,11 +368,12 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo1VC") as! listingInfo1VC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingInfo1 = createListingInfo2
+        self.presentViewController(back, animated: true, completion: nil)
     }
     
 
+    
 //-------------------------------------------------------------------------------------------------
 //*********************************** UPDATING listingInfo2VC TYPES *******************************
     @IBAction func updateBtn_clicked(sender: AnyObject) {
@@ -417,7 +423,7 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
                             let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                             let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                             back.id = self.id
-                            self.navigationController?.pushViewController(back, animated: true)
+                            self.presentViewController(back, animated: true, completion: nil)
                         
                             print("sleep info ave been successfully updated")
                         
@@ -443,7 +449,7 @@ class listingInfo2VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
     }
 
 }

@@ -37,9 +37,7 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 //***************************************** DEFAULT ************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        self.navigationController?.navigationBar.hidden = true
-        
+                        
         //initializing table
         tableView.delegate = self
         tableView.dataSource = self
@@ -101,15 +99,21 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             next.createListingPropertyType = createListingType
             next.id = self.id
             next.controller = self.controller
-            self.navigationController?.pushViewController(next, animated: true)
+            self.presentViewController(next, animated: true, completion: nil)
         }
     }
     
+    
+
+//-------------------------------------------------------------------------------------------------
+//************************************** GOING BACK  **********************************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("adressMapVC") as! adressMapVC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingAdress = createListingType
+        
+        self.presentViewController(back, animated: true, completion: nil)
+
         
         }
     
@@ -121,7 +125,7 @@ class listingTypeVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
         print("let me go back")
     }
     

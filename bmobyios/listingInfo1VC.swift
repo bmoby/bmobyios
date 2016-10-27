@@ -70,21 +70,17 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.hidden = true
-        
         // delegate
         collectionViewRoom.delegate = self
         collectioViewHostingCapacity.delegate = self
         collectionViewKitchen.delegate = self
         collectionViewBathroom.delegate = self
      
-        
         // data source
         collectionViewRoom.dataSource = self
         collectioViewHostingCapacity.dataSource = self
         collectionViewKitchen.dataSource = self
         collectionViewBathroom.dataSource = self
-        
         
         // scroll indicator
         collectionViewRoom.showsHorizontalScrollIndicator = false
@@ -92,15 +88,11 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionViewKitchen.showsHorizontalScrollIndicator = false
         collectionViewBathroom.showsHorizontalScrollIndicator = false
         
-        
-        
         // paging
         collectionViewRoom.pagingEnabled = false
         collectioViewHostingCapacity.pagingEnabled = false
         collectionViewKitchen.pagingEnabled = false
         collectionViewBathroom.pagingEnabled = false
-        
-        
         
         // cells size
         self.collectionViewLayout = LGHorizontalLinearFlowLayout.configureLayout(self.collectionViewRoom, itemSize: CGSizeMake(32, 32), minimumLineSpacing: 10)
@@ -297,10 +289,8 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     
-    
-    
-    //****************************************************************************************************
-    //-----------------------------------  SEND DATA TO DATABASE -----------------------------------------
+//------------------------------------------------------------------------------------------------
+//********************************* GOING TO NEXT VC: listingInfo2VC *****************************
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
         //the dafault value to send to database
@@ -321,16 +311,20 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // going to next controller: listingAmenitiesVC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo2VC") as? listingInfo2VC
-        self.navigationController?.pushViewController(next!, animated: true)
+        self.presentViewController(next!, animated: true, completion: nil)
         next?.createListingInfo2 = createListingInfo1
         
     }
+
     
+//-------------------------------------------------------------------------------------------------
+//************************************** GOING BACK  **********************************************
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingInfo2VC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("propertyTypeVC") as! propertyTypeVC
         back.createListingPropertyType = createListingInfo1
-        self.navigationController?.pushViewController(back, animated: true)
+        
+        self.presentViewController(back, animated: true, completion: nil)
         
     }
     
@@ -361,7 +355,7 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
                         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                         back.id = self.id
-                        self.navigationController?.pushViewController(back, animated: true)
+                        self.presentViewController(back, animated: true, completion: nil)
                         
                         print("listing and property types have been successfully updated")
                         
@@ -387,7 +381,7 @@ class listingInfo1VC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
         print("let me go back")
     }
     

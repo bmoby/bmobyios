@@ -62,7 +62,6 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         //initiating map kit
         self.mapView.delegate = self
@@ -210,7 +209,6 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
     @IBAction func nextBtn_clicked(sender: AnyObject) {
         
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingTypeVC") as! listingTypeVC
-        self.navigationController?.pushViewController(next, animated: true)
         
         // data to send to database: geolocation/manually. atributing data to the listingClass
         self.createListingAdress.street = street
@@ -219,8 +217,9 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         self.createListingAdress.country = country
         self.createListingAdress.latitude = latitude
         self.createListingAdress.longitude = longitude
-        
         next.createListingType = createListingAdress
+        
+        self.presentViewController(next, animated: true, completion: nil)
     }
     
     
@@ -257,7 +256,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
                         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                         back.id = self.id
-                        self.navigationController?.pushViewController(back, animated: true)
+                        self.presentViewController(back, animated: true, completion: nil)
             
                         print("adress has been successfully updated")
                         
@@ -282,7 +281,7 @@ class adressMapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegat
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
+        self.presentViewController(back, animated: true, completion: nil)
         print("let me go back")
     }
     

@@ -50,7 +50,6 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.hidden = true
         self.collectionView.reloadData()
         
         // screen size
@@ -229,8 +228,9 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         
         // going to next controller: listingInfo3VC
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("listingInfo3VC") as! listingInfo3VC
-        self.navigationController?.pushViewController(next, animated: true)
         next.createListingFinal = createListingPhotos
+        
+        self.presentViewController(next, animated: true, completion: nil)
         
     }
     
@@ -238,8 +238,9 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
     @IBAction func backBtn_clicked(sender: AnyObject) {
         // going back: listingAmenitiesVC
         let back = self.storyboard?.instantiateViewControllerWithIdentifier("listingAmenitiesVC") as! listingAmenitiesVC
-        self.navigationController?.pushViewController(back, animated: true)
         back.createListingAmenities = createListingPhotos
+        
+        self.presentViewController(back, animated: true, completion: nil)
 
     }
     
@@ -347,8 +348,7 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
                         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
                         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
                         back.id = self.id
-                        self.navigationController?.pushViewController(back, animated: true)
-                        
+                        self.presentViewController(back, animated: true, completion: nil)
                         
                         print("photos have been successfully updated")
                         
@@ -412,8 +412,7 @@ class listingPhotosVC: UIViewController, UICollectionViewDelegate, UICollectionV
         let storyBoard = UIStoryboard(name: "backoffice", bundle: nil)
         let back = storyBoard.instantiateViewControllerWithIdentifier("myListingVC") as! myListingVC
         back.id = self.id
-        self.navigationController?.pushViewController(back, animated: true)
-        
+        self.presentViewController(back, animated: true, completion: nil)
 
         print("do not update")
     }
