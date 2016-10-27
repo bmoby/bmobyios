@@ -62,8 +62,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>mailgunAPIPath</key>
 	<string>https://API:key-3a73c9deb37b5d3060a894201fa6f3ae@api.mailgun.net/v3/bmoby.com/messages?</string>

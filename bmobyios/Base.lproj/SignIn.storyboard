@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="F3j-ue-H2P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="laM-Ue-eUG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,7 +99,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signupClicked:" destination="T8C-xe-dfF" eventType="touchUpInside" id="UuQ-rG-dAp"/>
-                                    <segue destination="B88-pK-SqI" kind="push" id="Usp-KJ-NnL"/>
+                                    <segue destination="B88-pK-SqI" kind="modal" id="Usp-KJ-NnL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxM-Y3-1ad">
@@ -117,7 +117,7 @@
                                     <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bG1-Er-y4s" kind="push" id="8V4-WA-Vac"/>
+                                    <segue destination="bG1-Er-y4s" kind="modal" id="8V4-WA-Vac"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -172,7 +172,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="T8C-xe-dfF" kind="push" id="9QV-nj-dbR"/>
+                                    <segue destination="T8C-xe-dfF" kind="modal" id="9QV-nj-dbR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -192,7 +192,7 @@
         <!--RegistrationVC-->
         <scene sceneID="adE-AP-UYC">
             <objects>
-                <viewController id="B88-pK-SqI" customClass="registrationVC" customModule="bmobyios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="step1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B88-pK-SqI" customClass="registrationVC" customModule="bmobyios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WhH-a7-P7F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,43 +250,48 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kHD-uR-wav">
-                                <rect key="frame" x="20" y="518" width="77" height="30"/>
+                                <rect key="frame" x="20" y="514" width="77" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Cancel"/>
+                                <state key="normal" title="cancel"/>
                                 <connections>
-                                    <segue destination="T8C-xe-dfF" kind="push" id="3Ii-vM-OLa"/>
+                                    <segue destination="T8C-xe-dfF" kind="modal" id="3Ii-vM-OLa"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="Zhs-dD-hlo">
-                                <rect key="frame" x="101" y="28" width="115" height="2"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RFK-in-pF8">
+                                <rect key="frame" x="223" y="509" width="93" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Rjh-iz-Opw">
-                                <rect key="frame" x="87" y="16" width="28" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="save"/>
+                                <connections>
+                                    <action selector="saveBtnClicked:" destination="B88-pK-SqI" eventType="touchUpInside" id="QQt-la-EL3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hiX-i0-4Rg">
+                                <rect key="frame" x="20" y="514" width="77" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ZaQ-1I-Vx5">
-                                <rect key="frame" x="146" y="16" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="OH5-Ui-Vm5">
-                                <rect key="frame" x="203" y="16" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="backBtnClicked:" destination="B88-pK-SqI" eventType="touchUpInside" id="kb5-tt-1Jn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="wuR-rJ-Ek1"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backBtn" destination="hiX-i0-4Rg" id="vUR-yt-DIO"/>
+                        <outlet property="cancelBtn" destination="kHD-uR-wav" id="CyC-rA-mww"/>
                         <outlet property="emailTxtF" destination="6h3-Eg-mdU" id="Fal-yg-uy0"/>
+                        <outlet property="nextBtn" destination="sBf-9b-y9a" id="bA9-rq-zY0"/>
                         <outlet property="passwordTxtF" destination="fql-gI-P6j" id="R20-t9-MeJ"/>
                         <outlet property="phoneTxtF" destination="zaH-4x-3JC" id="Pom-Lg-V7q"/>
                         <outlet property="repeatTxtF" destination="hlq-M3-xyn" id="zc2-eT-twk"/>
+                        <outlet property="saveBtn" destination="RFK-in-pF8" id="qB3-kZ-ZEs"/>
                         <outlet property="titleLbl" destination="FR2-eo-DHd" id="u6c-zF-bbm"/>
-                        <segue destination="iya-ew-NSl" kind="push" identifier="goStep2" id="uFD-Vi-Yn8"/>
+                        <segue destination="iya-ew-NSl" kind="modal" identifier="goStep2" id="uFD-Vi-Yn8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gJ-zS-nA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -388,23 +393,24 @@
                                     <action selector="backClicked:" destination="iya-ew-NSl" eventType="touchUpInside" id="5Nw-Az-AAx"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="hig-FL-OD7">
-                                <rect key="frame" x="102" y="32" width="115" height="2"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eb8-DE-1Qx">
+                                <rect key="frame" x="11" y="512" width="81" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="81i-Dt-lMS">
-                                <rect key="frame" x="88" y="20" width="28" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="cancel"/>
+                                <connections>
+                                    <action selector="cancelBtnClicked:" destination="iya-ew-NSl" eventType="touchUpInside" id="g6f-FZ-9Lb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a7g-Ah-4ta">
+                                <rect key="frame" x="245" y="509" width="57" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="f6U-Wp-MGv">
-                                <rect key="frame" x="147" y="20" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PJB-FU-FBt">
-                                <rect key="frame" x="204" y="20" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="save"/>
+                                <connections>
+                                    <action selector="saveBtnClicked:" destination="iya-ew-NSl" eventType="touchUpInside" id="Nb6-Ab-p3O"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -413,15 +419,17 @@
                         <outlet property="avatarImg" destination="PGt-xg-LQd" id="OPf-KO-Ffs"/>
                         <outlet property="backBtn" destination="dNz-dj-t75" id="tge-3a-tgD"/>
                         <outlet property="birthDateTxtF" destination="fdB-qy-W4T" id="aJG-rC-XgQ"/>
+                        <outlet property="cancelBtn" destination="Eb8-DE-1Qx" id="LK5-ON-iJl"/>
                         <outlet property="firstNameTxtF" destination="Y90-K2-akb" id="T9S-rg-EHR"/>
                         <outlet property="lastNameTxtF" destination="Rwc-pj-I5l" id="1zR-E8-ZTs"/>
                         <outlet property="manBtn" destination="jAf-xi-TaA" id="mQz-U3-thk"/>
                         <outlet property="nextBtn" destination="ecO-Iw-C2s" id="WqO-Vt-Vqt"/>
+                        <outlet property="saveBnt" destination="a7g-Ah-4ta" id="rhv-QA-pbR"/>
                         <outlet property="separatorLbl" destination="xJw-Jw-dTG" id="ayU-Oh-nUQ"/>
                         <outlet property="titleLbl" destination="KA6-mK-H1k" id="qRK-p6-Q0q"/>
                         <outlet property="womanBtn" destination="5NF-0e-MNc" id="WJg-Ql-6hk"/>
-                        <segue destination="B88-pK-SqI" kind="push" identifier="backStep1" id="uP7-Qr-D6o"/>
-                        <segue destination="6cF-3Q-l15" kind="push" identifier="goStep3" id="FsR-fq-HSb"/>
+                        <segue destination="B88-pK-SqI" kind="modal" identifier="backStep1" id="uP7-Qr-D6o"/>
+                        <segue destination="6cF-3Q-l15" kind="modal" identifier="goStep3" id="FsR-fq-HSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAV-hy-Qkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -504,15 +512,6 @@
                                             <outlet property="delegate" destination="6cF-3Q-l15" id="qgM-HP-mqw"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="music" textAlignment="natural" minimumFontSize="17" id="UwE-6P-uiO">
-                                        <rect key="frame" x="8" y="260" width="304" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="6cF-3Q-l15" id="Ab2-7j-chw"/>
-                                        </connections>
-                                    </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" keyboardDismissMode="interactive" usesAttributedText="YES" id="51J-oM-0cp">
                                         <rect key="frame" x="8" y="298" width="304" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -537,7 +536,7 @@
                                         <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="addLanguageClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="50l-vX-XdZ"/>
-                                            <segue destination="OBc-NG-OJe" kind="push" identifier="backToLanguageSelection" id="AtR-GZ-hzq"/>
+                                            <segue destination="OBc-NG-OJe" kind="modal" identifier="backToLanguageSelection" id="AtR-GZ-hzq"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add languages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QuX-0L-FED">
@@ -565,28 +564,37 @@
                                             <action selector="submitClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="60k-qi-t31"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zrq-Fj-bXs">
+                                        <rect key="frame" x="230" y="460" width="76" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <state key="normal" title="save"/>
+                                        <connections>
+                                            <action selector="saveBtnClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="RNS-SE-2rD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rls-T3-nta">
+                                        <rect key="frame" x="14" y="466" width="87" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="cancel"/>
+                                        <connections>
+                                            <action selector="cancelBtnClicked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="VPR-iE-UKq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="w8k-S4-6ix">
+                                        <rect key="frame" x="285" y="93" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="addLanguage2BtnClciked:" destination="6cF-3Q-l15" eventType="touchUpInside" id="04H-YY-6z2"/>
+                                            <segue destination="OBc-NG-OJe" kind="modal" identifier="modalToLanguageTable" id="kTI-Jh-WqT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="6cF-3Q-l15" id="DYD-oM-lzO"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" id="pVY-LV-ZKE">
-                                <rect key="frame" x="102" y="32" width="115" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jcO-lE-AbM">
-                                <rect key="frame" x="88" y="20" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GOK-tr-Caw">
-                                <rect key="frame" x="147" y="20" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lti-SW-JRq">
-                                <rect key="frame" x="204" y="20" width="28" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -594,15 +602,18 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="aboutMeTxtV" destination="51J-oM-0cp" id="5hI-Om-XrJ"/>
+                        <outlet property="addLanguage2Btn" destination="w8k-S4-6ix" id="LLR-3f-bdQ"/>
+                        <outlet property="addLanguageBtn" destination="hNx-V4-Jah" id="8uC-Hc-VzI"/>
                         <outlet property="backBtn" destination="fTU-TV-ghg" id="aZV-uK-bvQ"/>
+                        <outlet property="cancelBtn" destination="Rls-T3-nta" id="UoD-le-iEP"/>
                         <outlet property="languagesCollection" destination="oB5-m9-g0C" id="m8J-Ee-r9e"/>
-                        <outlet property="musicTxtF" destination="UwE-6P-uiO" id="aE0-ZV-ldB"/>
                         <outlet property="nationalityTxtF" destination="kOK-Bc-nZJ" id="uE4-Gw-w7H"/>
                         <outlet property="professionTxtF" destination="aDR-QM-dJS" id="Tx6-RC-sDz"/>
+                        <outlet property="saveBtn" destination="zrq-Fj-bXs" id="Gvj-Vz-6ao"/>
                         <outlet property="scrollRegistration3step" destination="pam-MZ-Dez" id="w0o-f9-9qh"/>
                         <outlet property="submitBtn" destination="uHe-gb-Iw3" id="up4-8N-9v1"/>
                         <outlet property="titleLbl" destination="Awk-Hd-DjB" id="ZLT-b0-nbh"/>
-                        <segue destination="iya-ew-NSl" kind="push" identifier="backStep2" id="vav-Uk-7qR"/>
+                        <segue destination="iya-ew-NSl" kind="modal" identifier="backStep2" id="vav-Uk-7qR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ln5-gn-V3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -626,7 +637,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6cF-3Q-l15" kind="push" identifier="languageSelected" id="GlU-tr-8yn"/>
+                                    <segue destination="6cF-3Q-l15" kind="modal" identifier="languageSelected" id="GlU-tr-8yn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -637,28 +648,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="XWJ-Qo-wZ3"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="6cF-3Q-l15" kind="modal" identifier="goBackStep3EditVersion" id="1uH-Aj-kHw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBm-dV-8Ct" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="350" y="2969"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="f0W-Tq-NvE">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F3j-ue-H2P" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kTY-EI-txE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="T8C-xe-dfF" kind="relationship" relationship="rootViewController" id="CyB-iw-qwM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H8F-bF-Tqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1006" y="2220"/>
         </scene>
         <!--Email Not VerifiedVC-->
         <scene sceneID="utr-MV-I8s">
@@ -748,9 +744,10 @@
         <image name="profile" width="210" height="210"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Ii-vM-OLa"/>
-        <segue reference="uP7-Qr-D6o"/>
-        <segue reference="uFD-Vi-Yn8"/>
-        <segue reference="FsR-fq-HSb"/>
+        <segue reference="Usp-KJ-NnL"/>
+        <segue reference="9QV-nj-dbR"/>
+        <segue reference="vav-Uk-7qR"/>
+        <segue reference="GlU-tr-8yn"/>
+        <segue reference="kTI-Jh-WqT"/>
     </inferredMetricsTieBreakers>
 </document>

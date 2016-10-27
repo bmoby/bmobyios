@@ -32,7 +32,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     var resultsController = UITableViewController()
     var langue = language()
     
-
+    
     
 
     // -----------------------------------------------------------------------------------
@@ -68,16 +68,16 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     
     func createLanguages(){
         
-        self.francais.name = "Français"
-        self.francais.flag = UIImage(named: "fr")!
+        self.francais.name = "Francais"
+        self.francais.flag = UIImage(named: "Francais")!
         self.anglais.name = "English"
-        self.anglais.flag = UIImage(named: "en")!
+        self.anglais.flag = UIImage(named: "English")!
         self.russe.name = "Russkiy"
-        self.russe.flag = UIImage(named: "ru")!
+        self.russe.flag = UIImage(named: "Russkiy")!
         self.italien.name = "Italiano"
-        self.italien.flag = UIImage(named: "it")!
+        self.italien.flag = UIImage(named: "Italiano")!
         self.allemand.name = "Deutsch"
-        self.allemand.flag = UIImage(named: "de")!
+        self.allemand.flag = UIImage(named: "Deutsch")!
         self.languages.append(self.francais)
         self.languages.append(self.anglais)
         self.languages.append(self.russe)
@@ -93,7 +93,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         var newArray = [String]()
         for langue in self.userStep3.languages {
             
-            newArray.append(langue.name)
+            newArray.append(langue.name!)
         }
         
         return newArray
@@ -103,7 +103,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         var newArray = [String]()
         for langue in self.languages {
             
-            newArray.append(langue.name)
+            newArray.append(langue.name!)
         }
         
         return newArray
@@ -112,9 +112,9 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
     func langListReset() {
         let myarray = self.resetLanguagesList()
         for lang in self.languages{
-            if myarray.contains(lang.name){
+            if myarray.contains(lang.name!){
                 let myarray2 = self.resetLanguagesList2()
-                let index = myarray2.indexOf(lang.name)
+                let index = myarray2.indexOf(lang.name!)
                 self.languages.removeAtIndex(index!)
             } else {
                 
@@ -133,7 +133,7 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         
         // Filter the array with languages
         self.filteredLanguages = self.languages.filter ({ (language:language) -> Bool in
-            if language.name.containsString(self.searchController.searchBar.text!){
+            if language.name!.containsString(self.searchController.searchBar.text!){
             
                 return true
                 
@@ -179,14 +179,28 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         
         self.langue.name = (tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text)!
         self.langue.flag = (tableView.cellForRowAtIndexPath(indexPath)?.imageView?.image)!
-        if tableView != self.resultsController.tableView {
+        if PFUser.currentUser() == nil {
+            if tableView != self.resultsController.tableView {
             
-            self.performSegueWithIdentifier("languageSelected", sender: nil)
+                self.performSegueWithIdentifier("languageSelected", sender: nil)
             
+            } else {
+            
+                dismissViewControllerAnimated(true, completion: nil)
+                self.performSegueWithIdentifier("languageSelected", sender: nil)
+            }
         } else {
             
-            dismissViewControllerAnimated(true, completion: nil)
-            self.performSegueWithIdentifier("languageSelected", sender: nil)
+            if tableView != self.resultsController.tableView {
+                
+                self.performSegueWithIdentifier("goBackStep3EditVersion", sender: nil)
+                
+            } else {
+                
+                dismissViewControllerAnimated(true, completion: nil)
+                self.performSegueWithIdentifier("goBackStep3EditVersion", sender: nil)
+            }
+
         }
     }
     
@@ -222,6 +236,11 @@ class languageTVC: UITableViewController, UISearchResultsUpdating {
         let registration3step :registration3stepVC = segue.destinationViewController as! registration3stepVC
         self.userStep3.languages.append(self.langue)
         registration3step.userStep3 = self.userStep3
+        } else if segue.identifier == "goBackStep3EditVersion" {
+            let registration3step :registration3stepVC = segue.destinationViewController as! registration3stepVC
+            self.userStep3.languages.append(langue)
+            registration3step.userStep3.languages = self.userStep3.languages
+
         }
     }
 }

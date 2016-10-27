@@ -11,13 +11,18 @@ import Parse
 import ParseFacebookUtilsV4
 
 
+
+
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GMSMapViewDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        GMSServices.provideAPIKey("AIzaSyCIZFHLtJDhYg0i3rhvl0QQPfB7sLpo7BQ")
+        GMSPlacesClient.provideAPIKey("AIzaSyCIZFHLtJDhYg0i3rhvl0QQPfB7sLpo7BQ")
         // CONFIGURATION OF PARSE
         let parseConfig = ParseClientConfiguration { (ParseMutableClientConfiguration) in
             
@@ -29,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.initializeWithConfiguration(parseConfig)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
         
         return true
     }

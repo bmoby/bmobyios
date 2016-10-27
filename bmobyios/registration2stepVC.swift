@@ -22,65 +22,92 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var titleLbl: UILabel!
     
     // First & last names text fields -------------------------
-        @IBOutlet weak var firstNameTxtF: UITextField!
-        @IBOutlet weak var lastNameTxtF: UITextField!
+    @IBOutlet weak var firstNameTxtF: UITextField!
+    @IBOutlet weak var lastNameTxtF: UITextField!
     
     // Avatar outlet ------------------------------------------
-        @IBOutlet weak var avatarImg: UIImageView!
+    @IBOutlet weak var avatarImg: UIImageView!
 
     // Birth date picker & text field -------------------------
-        @IBOutlet weak var birthDateTxtF: UITextField!
+    @IBOutlet weak var birthDateTxtF: UITextField!
     
     // Gender selection buttons & actions ---------------------
-        @IBOutlet weak var manBtn: UIButton!
-        @IBAction func manClicked(sender: AnyObject) {
+    @IBOutlet weak var manBtn: UIButton!
+    @IBAction func manClicked(sender: AnyObject) {
             
-            self.manBtn.backgroundColor = UIColor.cyanColor()
-            self.womanBtn.backgroundColor = UIColor.grayColor()
-            self.userStep2.gender = "man"
-            
-            // ACTION
-        }
+        self.manBtn.backgroundColor = UIColor.cyanColor()
+        self.womanBtn.backgroundColor = UIColor.grayColor()
+        self.userStep2.gender = "man"
+    }
 
-        @IBOutlet weak var womanBtn: UIButton!
-        @IBAction func womanClicked(sender: AnyObject) {
+    @IBOutlet weak var womanBtn: UIButton!
+    @IBAction func womanClicked(sender: AnyObject) {
             
-            self.womanBtn.backgroundColor = UIColor.purpleColor()
-            self.manBtn.backgroundColor = UIColor.grayColor()
-            self.userStep2.gender = "woman"
-        }
+        self.womanBtn.backgroundColor = UIColor.purpleColor()
+        self.manBtn.backgroundColor = UIColor.grayColor()
+        self.userStep2.gender = "woman"
+    }
     
-        @IBOutlet weak var separatorLbl: UILabel!
-    
+    @IBOutlet weak var separatorLbl: UILabel!
     
     
     // Next & back buttons ------------------------------------
-        @IBOutlet weak var nextBtn: UIButton!
-        @IBAction func nextClicked(sender: AnyObject) {
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBAction func nextClicked(sender: AnyObject) {
             
-            if self.firstNameTxtF.text! == "" || self.lastNameTxtF.text! == "" || self.birthDateTxtF.text! == "" {
-                alerter("Empty fields", message: "Pleas fil all fields.")
-            }else if (self.userStep2.gender == nil){
-                alerter("GENDER IS NOT SELECTED", message: "Please select a gender.")
-            } else {
-            
-                self.userStep2.firstName = self.firstNameTxtF.text
-                self.userStep2.lastName = self.lastNameTxtF.text
-                self.userStep2.avatar = self.avatarImg
-                self.userStep2.birthDate = self.birthDateTxtF.text
-                self.performSegueWithIdentifier("goStep3", sender: nil)
-            }
-        }
-    
-        @IBOutlet weak var backBtn: UIButton!
-        @IBAction func backClicked(sender: AnyObject) {
+        if self.firstNameTxtF.text! == "" || self.lastNameTxtF.text! == "" || self.birthDateTxtF.text! == "" {
+            alerter("Empty fields", message: "Pleas fil all fields.")
+        }else if (self.userStep2.gender == nil){
+            alerter("GENDER IS NOT SELECTED", message: "Please select a gender.")
+        } else {
             
             self.userStep2.firstName = self.firstNameTxtF.text
             self.userStep2.lastName = self.lastNameTxtF.text
             self.userStep2.avatar = self.avatarImg
             self.userStep2.birthDate = self.birthDateTxtF.text
-            self.performSegueWithIdentifier("backStep1", sender: nil)
+            self.performSegueWithIdentifier("goStep3", sender: nil)
         }
+    }
+    
+    @IBOutlet weak var backBtn: UIButton!
+    @IBAction func backClicked(sender: AnyObject) {
+            
+        self.userStep2.firstName = self.firstNameTxtF.text
+        self.userStep2.lastName = self.lastNameTxtF.text
+        self.userStep2.avatar = self.avatarImg
+        self.userStep2.birthDate = self.birthDateTxtF.text
+        self.performSegueWithIdentifier("backStep1", sender: nil)
+    }
+    
+    
+    @IBOutlet weak var saveBnt: UIButton!
+    @IBAction func saveBtnClicked(sender: AnyObject) {
+        PFUser.currentUser()?.setValue(self.firstNameTxtF.text , forKey: "firstName")
+        PFUser.currentUser()?.setValue(self.lastNameTxtF.text , forKey: "lastName")
+        PFUser.currentUser()?.setValue(self.birthDateTxtF.text , forKey: "birthDate")
+        PFUser.currentUser()?.setValue(self.userStep2.gender, forKey: "gender")
+        
+        let image = UIImageJPEGRepresentation(self.avatarImg.image!, 0.5)
+        let imageFile = PFFile(name: "img1", data: image!)
+        PFUser.currentUser()?.setValue(imageFile, forKey: "avatar")
+        
+        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+            if success {
+                print("user updated")
+            }
+        })
+        let story = UIStoryboard(name: "profileSB", bundle: nil)
+        let profileInfoEdit = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+        self.presentViewController(profileInfoEdit, animated: true, completion: nil)
+    }
+    
+    
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBAction func cancelBtnClicked(sender: AnyObject) {
+        let story = UIStoryboard(name: "profileSB", bundle: nil)
+        let profileInfoEdit = story.instantiateViewControllerWithIdentifier("editProf") as! editProfile
+        self.presentViewController(profileInfoEdit, animated: true, completion: nil)
+    }
     
     
     
@@ -96,12 +123,25 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         // Avatar picker & photo corner settings
         self.avatarImg.layer.cornerRadius = self.avatarImg.frame.size.width / 2
         self.avatarImg.layer.masksToBounds = true
-        setAvatar()
-        setValuesIfExist()
         self.navigationController?.navigationBar.hidden = true
         
         self.firstNameTxtF.delegate = self
         self.lastNameTxtF.delegate = self
+        
+        if PFUser.currentUser() == nil {
+            self.saveBnt.hidden = true
+            self.cancelBtn.hidden = true
+            self.titleLbl.text = "Profile"
+            setAvatar()
+            setValuesIfExist()
+        } else {
+            self.nextBtn.hidden = true
+            self.backBtn.hidden = true
+            self.titleLbl.text = "Edit profile"
+            setAvatar()
+            setCurrentUserInfo()
+        }
+
         
     }
     
@@ -127,8 +167,8 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         if self.userStep2.lastName != nil {
             self.lastNameTxtF.text = self.userStep2.lastName
         }
-        if self.userStep2.avatar != nil {
-            self.avatarImg.image = self.userStep2.avatar?.image
+        if self.userStep2.avatar.image != nil {
+            self.avatarImg.image = self.userStep2.avatar.image
         }
         if self.userStep2.birthDate != nil {
             self.birthDateTxtF.text = self.userStep2.birthDate
@@ -142,8 +182,31 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
                 self.womanBtn.backgroundColor = UIColor.purpleColor()
                 self.manBtn.backgroundColor = UIColor.grayColor()
                 self.userStep2.gender = "woman"
-
             }
+        }
+    }
+    
+    // Ser current user if he commes here to edit his/her info
+    func setCurrentUserInfo() {
+        self.firstNameTxtF.text = PFUser.currentUser()?.valueForKey("firstName") as? String
+        self.lastNameTxtF.text = PFUser.currentUser()?.valueForKey("lastName") as? String
+        self.birthDateTxtF.text = PFUser.currentUser()?.valueForKey("birthDate") as? String
+        let ava = PFUser.currentUser()!.objectForKey("avatar") as! PFFile
+        ava.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) in
+            if error == nil {
+                self.avatarImg.image = UIImage(data: data!)
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+        if PFUser.currentUser()?.valueForKey("gender") as! String == "man" {
+            self.manBtn.backgroundColor = UIColor.cyanColor()
+            self.womanBtn.backgroundColor = UIColor.grayColor()
+            self.userStep2.gender = "man"
+        } else {
+            self.womanBtn.backgroundColor = UIColor.purpleColor()
+            self.manBtn.backgroundColor = UIColor.grayColor()
+            self.userStep2.gender = "woman"
         }
     }
 
@@ -172,7 +235,6 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
         let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
         alert.addAction(alertAction)
         presentViewController(alert, animated: true, completion: nil)
-        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -249,9 +311,8 @@ class registration2stepVC: UIViewController, UITextFieldDelegate, UIImagePickerC
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         self.avatarImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.dismissViewControllerAnimated(true, completion: nil)
-        self.userStep2.avatar?.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        self.userStep2.avatar.image = info[UIImagePickerControllerEditedImage] as? UIImage
     }
-    
     
     
     

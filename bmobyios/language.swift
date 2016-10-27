@@ -18,6 +18,6 @@ class language{
     
     
     
-    var name:String = ""
-    var flag: UIImage = UIImage()
+    var name:String?
+    var flag: UIImage?
 }
